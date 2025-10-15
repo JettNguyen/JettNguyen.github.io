@@ -23,13 +23,14 @@ body {
     background-color: var(--bg-dark);
     color: var(--text-primary);
     line-height: 1.6;
-    overflow-x: hidden;
-}
-
-.container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 2rem;
+    --accent: rgba(0, 85, 149, 1);
+    --accent-strong: rgba(0, 85, 149, 1);
+    --accent-light: rgba(102, 153, 204, 0.95);
+    --accent-hover: rgba(0, 65, 114, 1);
+    --accent-gradient-start: rgba(0,85,149,1);
+    --accent-gradient-end: rgba(93,155,215,1);
+    --mercari: #5255ee;
+    --mercari-rgb: 82,85,238;
 }
 
 /*nav*/
@@ -41,7 +42,13 @@ nav {
     backdrop-filter: blur(10px);
     border-bottom: 1px solid var(--border);
     z-index: 1100;
-    padding: 1rem 0;
+    padding: 0.5rem 0;
+}
+
+.container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 1rem;
 }
 
 nav .container {
@@ -60,8 +67,8 @@ nav .container {
 }
 
 .logo img {
-    height: 40px;
-    width: 40px;
+    height: 36px;
+    width: 36px;
     border-radius: 50%;
     object-fit: cover;
     vertical-align: middle;
@@ -70,8 +77,18 @@ nav .container {
 
 .nav-links {
     display: flex;
-    gap: 2rem;
+    gap: 1.25rem;
     list-style: none;
+    flex-wrap: wrap;
+    margin-left: auto;
+}
+
+.logo { flex: 0 0 auto; }
+.nav-links { flex: 0 1 auto; justify-content: flex-end; }
+
+@media (max-width: 600px) {
+    .nav-links { gap: 0.6rem; }
+    .nav-links a { font-size: 0.95rem; padding: 0.25rem 0.5rem; }
 }
 
 .nav-links a {
@@ -139,6 +156,58 @@ nav .container {
     box-shadow: none;
     background: transparent;
     transform-origin: center center;
+}
+
+/* scroll indicator */
+.scroll-indicator {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 32px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    color: rgba(255,255,255,0.9);
+    z-index: 1200;
+    pointer-events: none;
+    transition: opacity 300ms ease, transform 300ms ease;
+}
+
+.scroll-indicator.hidden {
+    opacity: 0;
+    transform: translateX(-50%) translateY(12px);
+}
+
+.scroll-indicator .mouse {
+    width: 28px;
+    height: 44px;
+    border-radius: 14px;
+    border: 2px solid rgba(255,255,255,0.9);
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    padding-top: 6px;
+}
+
+.scroll-indicator .wheel {
+    width: 4px;
+    height: 8px;
+    background: rgba(255,255,255,0.9);
+    border-radius: 2px;
+    animation: wheel 1.4s infinite;
+}
+
+@keyframes wheel {
+    0% { transform: translateY(0); opacity: 1; }
+    50% { transform: translateY(6px); opacity: 0.5; }
+    100% { transform: translateY(0); opacity: 1; }
+}
+
+.scroll-indicator .arrow {
+    font-size: 18px;
+    line-height: 1;
+    opacity: 0.9;
 }
 
 .hero-visual .hero-photo-link:hover,
@@ -236,12 +305,12 @@ nav .container {
 
 /*sections*/
 section {
-    padding: 6rem 0;
+    padding: 4rem 0;
 }
 
 #about {
     background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.00)), var(--bg-card);
-    padding-top: 9rem;
+    padding-top: 5rem;
     padding-bottom: 6rem;
     border-top: 1px solid rgba(255,255,255,0.03);
     box-shadow: inset 0 1px 0 rgba(255,255,255,0.01);
@@ -260,9 +329,9 @@ section {
 }
 
 .section-title {
-    font-size: 2.5rem;
+    font-size: 2.25rem;
     font-weight: 700;
-    margin-bottom: 3rem;
+    margin-bottom: 2rem;
     text-align: center;
 }
 
@@ -303,27 +372,33 @@ section {
 /*projects*/
 .projects-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
     gap: 2rem;
+    grid-template-columns: 1fr;
+}
+
+@media (min-width: 900px) {
+    .projects-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
 }
 
 .project-card {
     background: var(--bg-card);
     border-radius: 12px;
     overflow: hidden;
-    border: 1px solid var(--border);
-    transition: all 0.3s;
+    border: 3px solid transparent;
+    transition: transform 0.28s cubic-bezier(.2,.9,.2,1), box-shadow 0.28s ease, border-color 0.28s ease;
 }
 
 .project-card:hover {
-    transform: translateY(-4px);
-    border-color: var(--accent);
-    border-width: 3px;
+    transform: translateY(-6px);
+    border-color: rgba(0,85,149,0.95);
+    box-shadow: 0 12px 30px rgba(0,0,0,0.45);
 }
 
 .project-image {
     width: 100%;
-    height: 200px;
+    height: 320px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -407,9 +482,10 @@ section {
 
 /*ventures*/
 .dual-section {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
+    display: flex;
     gap: 3rem;
+    align-items: stretch;
+    padding-inline: 1.25rem;
 }
 
 .section-block {
@@ -417,6 +493,15 @@ section {
     padding: 2rem;
     border-radius: 12px;
     border: 1px solid var(--border);
+    display: flex;
+    flex-direction: column;
+    flex: 1 1 0;
+    min-height: 0;
+    max-width: 620px;
+}
+
+.dual-section > .section-block {
+    margin-inline: auto;
 }
 
 .section-block h3 {
@@ -475,6 +560,32 @@ section {
     border-radius: 50%;
     background: var(--accent);
     box-shadow: 0 2px 6px rgba(0,85,149,0.18);
+}
+
+.icon-ecom {
+    color: var(--mercari);
+}
+
+#ventures .dual-section .section-block:nth-child(2) ul li:before {
+    box-shadow: 0 0 0 3px rgba(0,0,0,0.12) inset, 0 6px 18px rgba(var(--mercari-rgb),0.06);
+    border: 2px solid rgba(var(--mercari-rgb),0.18);
+    background: rgba(var(--mercari-rgb),0.03);
+}
+
+#ventures .dual-section .section-block:nth-child(2) ul li:after {
+    background: var(--mercari);
+    box-shadow: 0 2px 6px rgba(var(--mercari-rgb),0.18);
+}
+
+#ventures .dual-section .section-block:nth-child(1) ul li:before {
+    box-shadow: 0 0 0 3px rgba(0,0,0,0.06) inset, 0 6px 18px rgba(16,225,32,0.06);
+    border: 2px solid rgba(16,225,32,0.14);
+    background: rgba(16,225,32,0.03);
+}
+
+#ventures .dual-section .section-block:nth-child(1) ul li:after {
+    background: #10E120;
+    box-shadow: 0 2px 6px rgba(16,225,32,0.18);
 }
 
 .spotify-embed {
@@ -550,7 +661,7 @@ img.icon-img {
 }
 
 .icon-ecom {
-    color: var(--accent);
+    color: var(--mercari);
     background: transparent;
     width: 34px;
     height: 34px;
@@ -566,7 +677,7 @@ img.icon-img {
 .icon-linkedin { color: #0A66C2; }
 .icon-spotify { color: #1DB954; }
 .icon-depop { color: #EA0E8A; }
-.icon-mercari { color: #FF5A5F; }
+.icon-mercari { color: var(--mercari); }
 .icon-email { color: #D14836; }
 
 /*project icons*/

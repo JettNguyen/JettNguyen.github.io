@@ -41,6 +41,13 @@
                 </div>
             </div>
         </div>
+        <!-- Scroll indicator -->
+        <div class="scroll-indicator" aria-hidden="true">
+            <div class="mouse">
+                <div class="wheel"></div>
+            </div>
+            <div class="arrow">▾</div>
+        </div>
     </section>
 
     <!--about-->
@@ -138,15 +145,14 @@
                         <li>Sound design & arrangement</li>
                         <li>Collaborative production with artists</li>
                     </ul>
-                    <p style="margin-top: 1.5rem; font-size: 0.95rem; font-style: italic;">Listen to tracks produced and engineered by me:</p>
                     <div class="spotify-embed" id="spotify-container">
                         <iframe style="border-radius:12px" src="https://open.spotify.com/embed/playlist/YOUR_PLAYLIST_ID?utm_source=generator&theme=0" width="100%" height="352" frameBorder="0" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
                     </div>
                 </div>
 
                 <div class="section-block">
-                        <h3><i class="fa-solid fa-bag-shopping icon-img icon-ecom" aria-hidden="true"></i> E-Commerce Ventures</h3>
-                    <p>Running multiple online businesses specializing in vintage clothing resale, trading cards, and curated collectibles across platforms.</p>
+                        <h3><i class="fa-solid fa-bag-shopping icon-img icon-ecom" aria-hidden="true"></i> E-Commerce</h3>
+                    <p>Running multiple online businesses specializing in vintage clothing resale, trading cards, and curated collectibles across various platforms.</p>
                     <ul>
                         <li>Vintage clothing curation & resale</li>
                         <li>Trading cards & collectibles</li>
@@ -154,11 +160,11 @@
                         <li>Customer experience optimization</li>
                     </ul>
                     <div style="margin-top: 1.5rem; display: flex; gap: 1rem; flex-wrap: wrap;">
-                        <a href="#" id="depop-link" class="btn btn-secondary" style="display: inline-flex; align-items: center; gap: 0.5rem;" target="_blank" rel="noopener noreferrer">
-                                <img src="assets/depop.png" alt="Depop" class="icon-img depop"> Depop Store
-                        </a>
                         <a href="#" id="mercari-link" class="btn btn-secondary" style="display: inline-flex; align-items: center; gap: 0.5rem;" target="_blank" rel="noopener noreferrer">
                             <img src="assets/mercari.jpeg" alt="Mercari" class="icon-img"> Mercari Shop
+                        </a>
+                        <a href="#" id="depop-link" class="btn btn-secondary" style="display: inline-flex; align-items: center; gap: 0.5rem;" target="_blank" rel="noopener noreferrer">
+                                <img src="assets/depop.png" alt="Depop" class="icon-img depop"> Depop Store
                         </a>
                     </div>
                 </div>
@@ -186,11 +192,11 @@
                     <a href="https://open.spotify.com/playlist/3A7pDOj3iWVYk1KKR8LjWJ" target="_blank" class="social-link">
                         <i class="fa-brands fa-spotify icon-img icon-spotify" aria-hidden="true"></i> Production Portfolio
                     </a>
-                    <a href="https://www.depop.com/allweknowisbangers" target="_blank" class="social-link">
-                        <img src="assets/depop.png" alt="Depop" class="icon-img depop"> Depop
-                    </a>
                     <a href="https://www.mercari.com/u/7jettster7" target="_blank" class="social-link">
                         <img src="assets/mercari.jpeg" alt="Mercari" class="icon-img"> Mercari
+                    </a>
+                    <a href="https://www.depop.com/allweknowisbangers" target="_blank" class="social-link">
+                        <img src="assets/depop.png" alt="Depop" class="icon-img depop"> Depop
                     </a>
                 </div>
             </div>
@@ -331,7 +337,7 @@
                     })();
 
                     return `
-                        <div class="project-card">
+                        <div class="project-card clickable" data-href="${repo.html_url}" role="link" tabindex="0">
                             <div class="project-image">${imageHtml}</div>
                             <div class="project-content">
                                 <h3>${data.displayName}</h3>
@@ -345,13 +351,32 @@
                                     <span class="project-stat"><i class="fa-solid fa-code-merge stat-icon stat-fork" aria-hidden="true"></i> ${repo.forks_count}</span>
                                 </div>
                                 <div class="project-links">
-                                    <a href="${repo.html_url}" target="_blank" rel="noopener noreferrer">View Code →</a>
-                                    ${data.homepage ? `<a href="${data.homepage}" target="_blank" rel="noopener noreferrer">Live Demo →</a>` : ''}
+                                    ${data.homepage ? `<a class="project-link-home" href="${data.homepage}" target="_blank" rel="noopener noreferrer">Live Demo →</a>` : ''}
                                 </div>
                             </div>
                         </div>
                     `;
                 }).join('');
+
+                Array.from(container.querySelectorAll('.project-card.clickable')).forEach(card => {
+                    const href = card.getAttribute('data-href');
+                    if (!href) return;
+                    card.style.cursor = 'pointer';
+
+                    card.addEventListener('click', (e) => {
+                        if (e.target.closest('a')) return;
+                        window.open(href, '_blank', 'noopener');
+                    });
+
+                    card.addEventListener('keydown', (e) => {
+                        if (e.key === 'Enter' || e.key === ' ') {
+                            e.preventDefault();
+                            window.open(href, '_blank', 'noopener');
+                        }
+                    });
+
+                    Array.from(card.querySelectorAll('a')).forEach(a => a.addEventListener('click', ev => ev.stopPropagation()));
+                });
                 
             } catch (error) {
                 console.error('Error fetching GitHub repos:', error);
@@ -464,6 +489,36 @@
                     return original(keySystem, supportedConfigurations);
                 }
             };
+        })();
+    </script>
+    <script>
+        (function () {
+            const indicator = document.querySelector('.scroll-indicator');
+            if (!indicator) return;
+
+            function hideOnce() {
+                indicator.classList.add('hidden');
+                window.removeEventListener('scroll', hideOnce);
+                window.removeEventListener('wheel', hideOnce);
+                window.removeEventListener('touchstart', hideOnce);
+                window.removeEventListener('keydown', hideOnce);
+                indicator.removeEventListener('click', hideOnce);
+            }
+
+            const timeoutId = setTimeout(() => {
+                indicator.classList.add('hidden');
+            }, 8000);
+
+            function clearAndHide() {
+                clearTimeout(timeoutId);
+                hideOnce();
+            }
+
+            window.addEventListener('scroll', clearAndHide, { passive: true });
+            window.addEventListener('wheel', clearAndHide, { passive: true });
+            window.addEventListener('touchstart', clearAndHide, { passive: true });
+            window.addEventListener('keydown', clearAndHide);
+            indicator.addEventListener('click', clearAndHide);
         })();
     </script>
 </body>
