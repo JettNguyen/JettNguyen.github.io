@@ -287,11 +287,25 @@
                 const repos = await response.json();
                 
                 const filteredRepos = repos
-                    .filter(repo => !repo.fork && !CONFIG.github.excludeRepos.includes(repo.name))
-                    .sort((a, b) => b.stargazers_count - a.stargazers_count)
-                    .slice(0, CONFIG.github.maxRepos);
+                    .filter(repo => !repo.fork && !CONFIG.github.excludeRepos.includes(repo.name));
                 
-                const cardData = filteredRepos.map(repo => {
+                // separate repos
+                const configRepos = [];
+                const otherRepos = [];
+                
+                filteredRepos.forEach(repo => {
+                    if (CONFIG.projects && CONFIG.projects[repo.name]) {
+                        configRepos.push(repo);
+                    } else {
+                        otherRepos.push(repo);
+                    }
+                });
+            
+                otherRepos.sort((a, b) => b.stargazers_count - a.stargazers_count);
+                
+                const selectedRepos = [...configRepos, ...otherRepos.slice(0, CONFIG.github.maxRepos - configRepos.length)];
+                
+                const cardData = selectedRepos.map(repo => {
                     const override = (CONFIG.projects && CONFIG.projects[repo.name]) || {};
 
                     if (override.enabled === false) return null;
