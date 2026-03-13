@@ -1,0 +1,193 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: dark;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+@layer base {
+  a,
+  button,
+  [role="button"],
+  summary {
+    transition-property: color, background-color, border-color, box-shadow, transform, opacity, filter;
+    transition-duration: 220ms;
+    transition-timing-function: cubic-bezier(0.2, 0.9, 0.2, 1);
+  }
+
+  [class*="hover:"],
+  [class*="group-hover:"] {
+    transition-property: color, background-color, border-color, box-shadow, transform, opacity, filter;
+    transition-duration: 220ms;
+    transition-timing-function: cubic-bezier(0.2, 0.9, 0.2, 1);
+  }
+
+  img,
+  video,
+  canvas,
+  svg {
+    max-width: 100%;
+    height: auto;
+  }
+}
+
+body {
+  @apply bg-ink text-text antialiased;
+  min-height: 100vh;
+  letter-spacing: 0.01em;
+  background-image: theme("backgroundImage.lab-glow");
+  overflow-x: clip;
+}
+
+main {
+  @apply min-h-screen overflow-x-clip;
+}
+
+.lab-grid {
+  background-image: theme("backgroundImage.lab-grid");
+  background-size: 28px 28px;
+}
+
+.container-shell {
+  @apply mx-auto w-full max-w-6xl px-5 sm:px-8;
+}
+
+@media (max-width: 640px) {
+  .container-shell {
+    max-width: 100%;
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  .section-title {
+    font-size: 1.5rem;
+  }
+}
+
+@media (min-width: 641px) and (max-width: 1024px) {
+  .container-shell {
+    max-width: 56rem;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+}
+
+@media (min-width: 1025px) {
+  .container-shell {
+    max-width: 74rem;
+  }
+}
+
+.section-title {
+  @apply text-2xl font-semibold tracking-tight text-text sm:text-3xl;
+}
+
+.section-subtitle {
+  @apply mt-2 max-w-2xl text-sm text-muted sm:text-base;
+}
+
+.card {
+  @apply rounded-2xl border border-line/90 bg-panel/75 p-5 backdrop-blur transition duration-300;
+  transition-property: transform, border-color, box-shadow, background-color, color, opacity;
+  box-shadow: 0 14px 40px rgba(0, 0, 0, 0.28);
+  padding: 20px;
+}
+
+.section-title {
+  text-wrap: balance;
+}
+
+.section-subtitle {
+  text-wrap: pretty;
+}
+
+.prose-lab {
+  @apply max-w-none;
+}
+
+.prose-lab pre {
+  @apply rounded-xl border border-line bg-black/40 p-4;
+}
+
+.prose-lab code {
+  @apply rounded bg-black/40 px-1 py-0.5;
+}
+
+.prose-lab h1,
+.prose-lab h2,
+.prose-lab h3,
+.prose-lab h4 {
+  @apply mt-8 scroll-mt-24 text-text;
+}
+
+.prose-lab p,
+.prose-lab li {
+  @apply mt-3 leading-7 text-[#c7c8d1];
+}
+
+.prose-lab a {
+  @apply text-accent-soft underline decoration-accent/50 underline-offset-4;
+}
+
+.prose-lab strong {
+  @apply text-text;
+}
+
+.dropdown-summary {
+  display: block;
+  width: 100%;
+  transition-property: background-color, border-color, color, box-shadow;
+  transition-duration: 200ms;
+  transition-timing-function: cubic-bezier(0.2, 0.9, 0.2, 1);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .dropdown-item:hover {
+    background-color: rgba(255, 255, 255, 0.03);
+  }
+
+  .dropdown-item:hover > .dropdown-summary .dropdown-caret {
+    color: #f87171;
+  }
+}
+
+details.dropdown-item[open] {
+  background-color: rgba(255, 255, 255, 0.02);
+}
+
+@keyframes dropdown-reveal {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+details[open] > .dropdown-panel {
+  animation: dropdown-reveal 220ms cubic-bezier(0.2, 0.9, 0.2, 1);
+}
+
+a:focus-visible,
+button:focus-visible,
+[role="button"]:focus-visible {
+  @apply outline-none ring-2 ring-accent ring-offset-2 ring-offset-ink;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

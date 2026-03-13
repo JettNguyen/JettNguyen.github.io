@@ -1,0 +1,31 @@
+{
+  "name": "jettnguyen-portfolio",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "clean": "node -e \"require('fs').rmSync('.next-cache', { recursive: true, force: true }); require('fs').rmSync('.next', { recursive: true, force: true }); require('fs').rmSync('out', { recursive: true, force: true });\"",
+    "dev:clean": "npm run clean && next dev",
+    "build": "next build",
+    "start": "npm run build && serve out",
+    "lint": "next lint",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "clsx": "^2.1.1",
+    "framer-motion": "^11.18.2",
+    "next": "^14.2.35",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  },
+  "devDependencies": {
+    "@types/node": "^20.19.35",
+    "@types/react": "^18.3.28",
+    "@types/react-dom": "^18.3.7",
+    "autoprefixer": "^10.4.19",
+    "postcss": "^8.4.39",
+    "serve": "^14.2.5",
+    "tailwindcss": "^3.4.19",
+    "typescript": "^5.5.3"
+  }
+}
