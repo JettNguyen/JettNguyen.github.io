@@ -1,0 +1,2426 @@
+{
+  "generatedAt": "2026-03-20T03:14:09.666Z",
+  "source": {
+    "repo": "JettNguyen.github.io",
+    "branch": "main"
+  },
+  "site": {
+    "metadata": {
+      "layoutMetadataSource": "app/layout.tsx",
+      "homeMetadataSource": "app/page.tsx",
+      "layoutMetadataPreview": "export const metadata: Metadata = {\n  metadataBase: new URL(\"https://jettnguyen.github.io\"),\n  title: {\n    default: \"Jett Nguyen · Digital Lab\",\n    template: \"%s · Jett Nguyen\"\n  },\n  icons: {\n    icon: \"/assets/jett.png\",\n    apple: \"/assets/jett.png\",\n    shortcut: \"/assets/jett.png\"\n  },\n  description: \"A digital lab of experiments: systems, writing, presentations, and product-minded engineering work.\",\n  openGraph: {\n    title: \"Jett Nguyen · Digital Lab\",\n    description: \"Designing systems that shape behavior.\",\n    type: \"website\"\n  }\n};",
+      "homeMetadataPreview": "export const metadata: Metadata = {\n  title: \"Home · Jett Nguyen\",\n  description: \"Portfolio home with projects, coursework, reports, presentations, and resume.\"\n};"
+    }
+  },
+  "content": {
+    "projects": [
+      {
+        "slug": "sideline",
+        "title": "Sideline",
+        "dateLabel": "2026–Ongoing",
+        "logoUrl": "/assets/sideline.png",
+        "categories": [
+          "Mobile-First Web App",
+          "Sports Media",
+          "Video Collaboration"
+        ],
+        "summary": "Sideline is an in-progress, user-centered web app for youth soccer families to upload, organize, share, and collaboratively tag game clips.",
+        "shortSummaryRecruiter": "A collaborative youth sports platform focused on clear workflows, family coordination, and scalable product direction.",
+        "shortSummaryEngineer": "A MERN architecture with JWT auth, media pipelines, and team-oriented clip metadata flows for scalable implementation.",
+        "shortSummaryNonTechnical": "An easier way for youth soccer families to upload game videos and find the moments that matter.",
+        "problem": "At the top of the funnel are parents recording youth soccer games for memory keeping, sharing, and review, but current workflows are fragmented and existing tools do not fit their specific needs.",
+        "observation": "Research indicates this audience is primarily white millennial mothers who need a simple, mobile-first flow for team coordination, game uploads, and finding meaningful moments inside large video sets.",
+        "hypothesis": "A minimal, familiar interface paired with team-based video workflows and key-moment tagging will reduce friction from recording to replay while improving collaboration among families.",
+        "experiment": "Defined a MERN architecture where React frontend and Node/Express backend communicate via JWT-authenticated requests, MongoDB stores application metadata, S3 stores video assets, and AWS Lambda handles video manipulation pipelines before returning processed clips to users. Current implemented scope includes wireframe/wireflow, mobile-first frontend layout, secure login/user creation, and initial backend video-query foundations; next steps are deeper frontend playback integration and expanded backend video systems.",
+        "outcome": "The project is still in active development, so there is no final product outcome yet. Current progress establishes validated UX direction, core account flows, and foundational data/video architecture for iterative testing.",
+        "reflection": "The strongest early learning is that this product succeeds only when complexity stays behind the scenes: login, dashboard, team/game navigation, invite flow (QR/join code), and crowdsourced clip tagging must feel effortless for non-technical parents.",
+        "techStack": [
+          "React",
+          "Node.js",
+          "Express.js",
+          "MongoDB",
+          "JWT",
+          "AWS S3",
+          "AWS Lambda",
+          "MERN"
+        ],
+        "githubUrl": "https://github.com/JettNguyen/cis4914-senior-design"
+      },
+      {
+        "slug": "stackd",
+        "title": "Stackd",
+        "dateLabel": "2026-Ongoing",
+        "logoUrl": "/assets/stackd.png",
+        "categories": [
+          "Web App",
+          "Education",
+          "Spaced Repetition"
+        ],
+        "summary": "A mobile-first web-based flashcard app with custom decks, no screen clutter, UF-specific features, and Quizlet migration assistance.",
+        "shortSummaryRecruiter": "A focused ed-tech app aimed at reducing study friction and improving retention for University of Florida students.",
+        "shortSummaryEngineer": "A MERN flashcard product with JWT auth, structured deck models, and low-friction review workflows.",
+        "shortSummaryNonTechnical": "A simple flashcard app that helps students study faster without clutter or confusion.",
+        "problem": "Existing flashcard apps are designed for everybody rather than specific user needs, which can be overwhelming and often lack flexibility in deck creation and organization.",
+        "observation": "UF students in memorization-heavy courses want a simple way to create and review flashcards without being forced into complex features or rigid structures.",
+        "hypothesis": "A minimalist flashcard app with intuitive deck management that can improve their study experience.",
+        "experiment": "Building a MERN stack web app with React frontend, Node/Express backend, MongoDB for storage, and JWT authentication. Features include deck creation, card editing, marking cards, and course-based organization.",
+        "outcome": "Future delivery of a functional flashcard app that balances simplicity with effective study techniques, allowing users to focus on learning rather than app management.",
+        "reflection": "Educational tools succeed when they minimize friction and cognitive load, letting users engage with the learning material directly.",
+        "techStack": [
+          "React",
+          "Node.js",
+          "Express",
+          "MongoDB",
+          "JWT",
+          "MERN"
+        ],
+        "githubUrl": "https://github.com/JettNguyen/Stackd"
+      },
+      {
+        "slug": "networks",
+        "title": "P2P File Sharing Application",
+        "dateLabel": "2026-Ongoing",
+        "logoUrl": "/assets/p2p.png",
+        "categories": [
+          "Networking",
+          "File Sharing"
+        ],
+        "summary": "A peer-to-peer file sharing application built with a custom TCP protocol, supporting direct transfers without central servers.",
+        "shortSummaryRecruiter": "A networking-focused build demonstrating distributed systems thinking and protocol design.",
+        "shortSummaryEngineer": "A custom TCP-based peer protocol for decentralized direct file transfer with no central relay dependency.",
+        "shortSummaryNonTechnical": "A tool that lets people send files directly to each other without a middle server.",
+        "problem": "Existing file sharing apps are often complex and require a central server for management and distribution.",
+        "observation": "Users want a simple and efficient way to share files directly without relying on central servers.",
+        "hypothesis": "A peer-to-peer file sharing application with a custom TCP protocol can provide a more efficient and decentralized solution.",
+        "experiment": "Building a P2P file sharing application with a custom TCP protocol, supporting direct transfers between users without central servers.",
+        "outcome": "Future delivery of a functional P2P file sharing application that simplifies file sharing and reduces dependency on central servers.",
+        "reflection": "Decentralized applications can offer more control and efficiency for users, reducing reliance on central infrastructure.",
+        "techStack": [
+          "TCP",
+          "Peer-to-Peer Networking",
+          "File Sharing"
+        ],
+        "githubUrl": "https://github.com/JettNguyen/networks-project"
+      },
+      {
+        "slug": "nightlink",
+        "title": "NightLink",
+        "dateLabel": "2025–Ongoing",
+        "logoUrl": "/assets/favicon.svg",
+        "categories": [
+          "Web App",
+          "Social Network",
+          "AI-Integration"
+        ],
+        "summary": "Dream journal and social network with AI-generated dream titles/summaries, privacy controls, and social interactions.",
+        "shortSummaryRecruiter": "A differentiated social product balancing retention mechanics with explicit privacy controls.",
+        "shortSummaryEngineer": "React + Firebase social journaling stack with AI proxy integration and granular visibility states.",
+        "shortSummaryNonTechnical": "A dream journal where you can keep entries private or share them with others.",
+        "problem": "Most dream journals are private-only and low-retention, while social apps are not designed for reflective dream logging.",
+        "observation": "People want to keep some dreams private, share others selectively, and still get meaningful interpretation support.",
+        "hypothesis": "A hybrid product combining private journaling, social feed controls, and lightweight AI analysis increases long-term journaling consistency.",
+        "experiment": "Built with React 18 + Vite, Firebase Auth/Firestore, and an AI proxy endpoint. Added private/public visibility, tagging, following, profiles, comments, reactions, and CI/CD with GitHub Actions + CodeQL.",
+        "outcome": "Delivered an end-to-end journaling platform with social mechanics and maintainable quality gates (lint/build matrix + security scans), ready for iterative UX experiments.",
+        "reflection": "NightLink validated that privacy granularity and social features can coexist when visibility and identity controls are explicit in the product model.",
+        "techStack": [
+          "React 18",
+          "Vite",
+          "Firebase Auth",
+          "Firestore",
+          "Node.js",
+          "GitHub Actions",
+          "CodeQL",
+          "Vercel"
+        ],
+        "githubUrl": "https://github.com/JettNguyen/NightLink",
+        "demoUrl": "https://nightlink.dev"
+      },
+      {
+        "slug": "frequify",
+        "title": "Frequify",
+        "dateLabel": "2026–Ongoing",
+        "logoUrl": "/assets/FrequifySquare.png",
+        "categories": [
+          "Desktop App",
+          "Audio",
+          "DSP"
+        ],
+        "summary": "Windows desktop mastering tool for transparent, adjustable audio processing with local offline workflows.",
+        "shortSummaryRecruiter": "A creator tool emphasizing trust, clarity, and offline reliability for independent audio workflows.",
+        "shortSummaryEngineer": "A .NET desktop DSP pipeline with analyzers, configurable mastering chain controls, A/B playback, and WAV export.",
+        "shortSummaryNonTechnical": "An offline audio app that helps creators master their tracks with easy controls.",
+        "problem": "Independent creators often need mastering improvements without opaque black-box tools or online-only processing.",
+        "observation": "Users care about understandable controls, A/B comparison, and dependable local exports more than novelty presets alone.",
+        "hypothesis": "A desktop-first mastering workflow with analysis metrics and explicit chain controls improves trust and practical output quality.",
+        "experiment": "Implemented WAV/MP3 loading, loudness/peak analysis, mastering chain controls (EQ, compression, saturation, stereo, limiter), original/mastered A/B playback, and WAV export in a portable Windows build.",
+        "outcome": "Shipped a fully local app with straightforward install/run flow, offline operation, and clear troubleshooting for common audio and export failures.",
+        "reflection": "For creative tools, controllability and transparency are as important as DSP quality—users need to hear and understand each adjustment.",
+        "techStack": [
+          "Windows Desktop",
+          ".NET 8",
+          "Audio DSP",
+          "WAV/MP3 Processing",
+          "Local Offline Pipeline"
+        ],
+        "githubUrl": "https://github.com/JettNguyen/Frequify"
+      },
+      {
+        "slug": "nexel",
+        "title": "Nexel",
+        "dateLabel": "2026",
+        "logoUrl": "/assets/Nexel.png",
+        "categories": [
+          "Web Game",
+          "Puzzle",
+          "Algorithms"
+        ],
+        "summary": "Strategic 9x9 block placement puzzle with solver mode, combo scoring, drag-and-drop UX, and local high-score persistence.",
+        "shortSummaryRecruiter": "A polished game product that combines replayability, strategy depth, and educational AI-assisted modes.",
+        "shortSummaryEngineer": "A React/Vite game loop with stateful board logic, solver strategies, move validation, and local persistence.",
+        "shortSummaryNonTechnical": "A Block-Blast-like puzzle game where you place blocks, score combos, and can compare your moves to AI.",
+        "problem": "Many puzzle implementations lack strategic depth visibility and do not expose decision quality beyond final score.",
+        "observation": "Players benefit when game feedback explains placement validity, combo opportunities, and survivability trade-offs.",
+        "hypothesis": "Adding solver strategies and real-time placement cues can make a minimalist puzzle feel deeper without adding UI clutter.",
+        "experiment": "Built a React + Vite game with 30+ shape patterns, row/column/3x3 clearing, combo multipliers, move validation highlights, game-over detection, localStorage highscores, and Greedy/Survival/Hybrid solver autoplay modes.",
+        "outcome": "Created a fast, dependency-light strategy loop where users can both play manually and inspect AI decision styles for learning and replay value.",
+        "reflection": "Simple mechanics become compelling when feedback loops are immediate and strategy trade-offs are surfaced clearly.",
+        "techStack": [
+          "React 18",
+          "Vite",
+          "JavaScript",
+          "CSS",
+          "LocalStorage"
+        ],
+        "githubUrl": "https://github.com/JettNguyen/Nexel",
+        "demoUrl": "https://jettnguyen.github.io/Nexel/"
+      },
+      {
+        "slug": "pulse-gear",
+        "title": "Pulse Gear",
+        "dateLabel": "2025",
+        "logoUrl": "/assets/pulsegear.png",
+        "categories": [
+          "Unity Game",
+          "Puzzle",
+          "Third-Person"
+        ],
+        "summary": "Third-person Unity puzzle game where you play a sentient bulldozer in an abandoned factory, and the only way out is to use your pulse mechanic to blast obstacles out of the way.",
+        "shortSummaryRecruiter": "A playable Unity prototype showing strong mechanic iteration and player-feedback driven tuning.",
+        "shortSummaryEngineer": "A C#/Unity physics puzzle prototype centered on pulse-force systems, cooldown tuning, and staged level progression.",
+        "shortSummaryNonTechnical": "A game where you control a bulldozer and solve factory puzzles using a pulse blast ability.",
+        "problem": "Many puzzle games lack a satisfying tactile interaction model and do not provide insight into solution strategies.",
+        "observation": "Playtesting showed players responded most to the heavy movement feel of the bulldozer and the instant environmental response when pulse force hit debris, but they struggled when feedback on pulse range and timing was unclear.",
+        "hypothesis": "If traversal, pulse charge, and obstacle reactions are tightly telegraphed through camera framing, VFX, and audio cues, players can solve spaces through experimentation without needing text-heavy instructions.",
+        "experiment": "Built the game in Unity with a third-person controller, physics-driven obstacle interactions and a staged factory room that increases puzzle complexity throughout the level. Iterated on pulse cooldown, knockback force, and obstacle mass tuning to keep challenge high while reducing dead-end frustration.",
+        "outcome": "Shipped a playable vertical slice where players navigate the factory, charge their pulse, use pulse it to clear routes, and experience a cohesive movement-combat-puzzle loop with clear progression and retry flow.",
+        "reflection": "The biggest lesson was that puzzle difficulty should come from decision-making, not control ambiguity. In Unity projects like this, readable feedback loops (charge state, impact direction, and cooldown clarity) are what make a mechanic feel both satisfying and fair.",
+        "techStack": [
+          "Unity",
+          "C#",
+          "Unity Physics"
+        ]
+      },
+      {
+        "slug": "splitsy",
+        "title": "Splitsy",
+        "dateLabel": "2025",
+        "logoUrl": "/assets/splitsy.jpg",
+        "categories": [
+          "Mobile App",
+          "FinTech",
+          "OCR"
+        ],
+        "summary": "React Native expense-splitting app with OCR receipt scanning, group management, and cross-platform workflows.",
+        "shortSummaryRecruiter": "A practical fintech collaboration app validated with user testing and measurable task-time improvement.",
+        "shortSummaryEngineer": "A React Native + Node/Mongo architecture with JWT auth and OCR microservice integration for receipt parsing.",
+        "shortSummaryNonTechnical": "A mobile app that scans receipts and helps groups split bills fairly automatically.",
+        "problem": "Manual bill splitting is slow and error-prone, especially for recurring group expenses and itemized receipts.",
+        "observation": "Users need one flow spanning scan → assign → split → track, rather than disconnected calculators and chat messages.",
+        "hypothesis": "OCR-assisted input with shared group context reduces completion time and improves perceived ease versus manual splitting.",
+        "experiment": "Built mobile app (React Native + Expo) with Node/Express + MongoDB backend, JWT auth, friend/group management, transaction CRUD, and Python Tesseract OCR microservice. Conducted a 10-participant within-subject evaluation.",
+        "outcome": "Study results in project documentation showed task time reduction (~33 seconds) and higher satisfaction (~88.3/100) compared to manual methods.",
+        "reflection": "Cross-platform collaboration apps succeed when technical complexity (OCR, auth, multi-service setup) is hidden behind a tight user flow.",
+        "techStack": [
+          "React Native",
+          "Expo",
+          "Node.js",
+          "Express",
+          "MongoDB",
+          "JWT",
+          "Python",
+          "Tesseract OCR"
+        ],
+        "githubUrl": "https://github.com/JettNguyen/Splitsy"
+      },
+      {
+        "slug": "producer-fingerprint",
+        "title": "ProducerFingerprint",
+        "dateLabel": "2025",
+        "logoUrl": "/assets/ProducerFingerprint.png",
+        "categories": [
+          "Desktop App",
+          "Music Tech",
+          "Data Analysis"
+        ],
+        "summary": "Local-first producer style analysis app that extracts harmonic, rhythmic, spectral, and microtiming fingerprints from multiple tracks.",
+        "shortSummaryRecruiter": "A creative analytics tool translating complex audio signals into understandable producer-style reports.",
+        "shortSummaryEngineer": "An Electron + Python signal analysis stack using Librosa/music21 for multi-track feature extraction and reporting.",
+        "shortSummaryNonTechnical": "An app that analyzes songs and explains the production style behind them.",
+        "problem": "Producer identity is usually discussed qualitatively, making style comparison difficult to reproduce and test.",
+        "observation": "Creators want a practical report that blends measurable DSP features with human-readable interpretation.",
+        "hypothesis": "An Electron + Python hybrid can combine a lightweight desktop UX with strong audio-analysis tooling to produce actionable fingerprint reports.",
+        "experiment": "Implemented drag-and-drop multi-track import, chromagram/key/chord extraction, BPM/rhythmic density metrics, spectral tilt analysis, microtiming detection, dashboard visualizations, and JSON export with configurable analysis parameters.",
+        "outcome": "Produced an offline-capable analysis workflow that turns raw audio batches into structured, explainable style profiles.",
+        "reflection": "Creative analytics products work best when advanced processing is configurable but the default path remains one-click clear.",
+        "techStack": [
+          "Electron",
+          "JavaScript",
+          "Python",
+          "Librosa",
+          "NumPy",
+          "SciPy",
+          "music21"
+        ],
+        "githubUrl": "https://github.com/JettNguyen/ProducerFingerprint"
+      },
+      {
+        "slug": "slide15-puzzle",
+        "title": "15 Slide Puzzle",
+        "dateLabel": "2025",
+        "logoUrl": "/assets/SlidePuzzle.png",
+        "categories": [
+          "Web Game",
+          "Puzzle",
+          "Pathfinding"
+        ],
+        "summary": "Web-based 4x4 sliding puzzle with multi-tile movement, animations, and optimal-path A* solver mode.",
+        "shortSummaryRecruiter": "A dual-purpose game and learning experience that increases engagement through transparent algorithmic feedback.",
+        "shortSummaryEngineer": "A browser puzzle implementation with state validation, A* search, and step-by-step solution playback controls.",
+        "shortSummaryNonTechnical": "A slide puzzle game that can also show the best solution path step by step.",
+        "problem": "Most slide puzzle demos focus only on gameplay and do not expose solver reasoning or state navigation for learning.",
+        "observation": "Users enjoy experimentation when they can test custom board states and inspect each solution step.",
+        "hypothesis": "A solver UX with validation, step-by-step playback, and jump navigation increases educational value and replayability.",
+        "experiment": "Built drag interactions for single/multi-tile moves, solvability validation, A* pathfinding, step timeline controls (prev/next/play), and direct step-jump state inspection.",
+        "outcome": "Shipped a puzzle experience that works as both a game and an algorithm visualization tool for search strategy understanding.",
+        "reflection": "When algorithm output is made interactive, users trust and learn from it more than from static result text.",
+        "techStack": [
+          "JavaScript",
+          "HTML",
+          "CSS",
+          "A*",
+          "Pathfinding"
+        ],
+        "githubUrl": "https://github.com/JettNguyen/Slide15",
+        "demoUrl": "https://jettnguyen.github.io/Slide15/"
+      },
+      {
+        "slug": "gatorfound",
+        "title": "GatorFound",
+        "dateLabel": "2024",
+        "logoUrl": "/assets/gatorfound.png",
+        "categories": [
+          "Web App",
+          "Campus Platform",
+          "Community"
+        ],
+        "summary": "University-focused lost-and-found platform for secure, private item recovery with authenticated campus users.",
+        "shortSummaryRecruiter": "A campus trust-focused platform addressing real community coordination and safety needs.",
+        "shortSummaryEngineer": "A React web app with authenticated posting/comment workflows tailored to university identity constraints.",
+        "shortSummaryNonTechnical": "A secure campus app for reporting lost and found items and connecting with owners.",
+        "problem": "Campus lost-and-found communication across social media is fragmented, public, and inefficient for matching rightful owners.",
+        "observation": "Users need a trusted centralized channel with identity checks and direct communication around item claims.",
+        "hypothesis": "Restricting access to verified UFL email accounts and consolidating lost/found posting improves trust and recovery outcomes.",
+        "experiment": "Built a CRA-based web app with authenticated posting for lost/found items, comments for coordination, and campus-specific onboarding via UFL email requirements.",
+        "outcome": "Established a privacy-focused hub with core recovery workflows and a clear roadmap (admin tools, filtered search, notifications, user dashboards).",
+        "reflection": "Community trust features (who can join, who can post) are foundational product decisions, not post-launch add-ons.",
+        "techStack": [
+          "React",
+          "Create React App",
+          "JavaScript",
+          "Authentication",
+          "Campus Platform UX"
+        ],
+        "githubUrl": "https://github.com/JettNguyen/GatorFound"
+      },
+      {
+        "slug": "gridiron-guru",
+        "title": "Gridiron Guru",
+        "dateLabel": "2024",
+        "logoUrl": "/assets/gridironguru.png",
+        "categories": [
+          "Data Analytics",
+          "Sports Tech",
+          "Algorithms"
+        ],
+        "summary": "NFL situational recommendation system over 538,745 play-by-play snaps (2013–2024), available as web dashboard and C++ console app.",
+        "shortSummaryRecruiter": "A large-scale analytics product combining systems performance and approachable decision-support UX.",
+        "shortSummaryEngineer": "A dual-interface analytics stack using C++ data structures and later integrated with React/TS over a shared 500k+ play dataset.",
+        "shortSummaryNonTechnical": "A football analytics tool that helps choose better plays using a huge historical dataset.",
+        "problem": "Raw play-by-play data is too dense for fast, situational decision support without structured analytics and retrieval.",
+        "observation": "Different users prefer different interfaces: interactive visuals for exploration, terminal tools for direct repeatable queries.",
+        "hypothesis": "Combining modern frontend exploration with performant core data structures improves both accessibility and analytical control.",
+        "experiment": "Implemented React + Vite dashboard, TypeScript CSV parsing/analytics utilities, and C++ max-heap/hash-table console mode operating over a unified dataset pipeline.",
+        "outcome": "Delivered dual-mode analysis workflow with a shared data source that supports rapid exploration and deeper systems-oriented experimentation.",
+        "reflection": "Data tooling reaches more people when UX and systems performance are treated as complementary, not competing goals.",
+        "techStack": [
+          "React",
+          "Vite",
+          "TypeScript",
+          "C++",
+          "CSV Analytics",
+          "Data Structures"
+        ],
+        "githubUrl": "https://github.com/JettNguyen/GridironGuru",
+        "demoUrl": "https://jettnguyen.github.io/GridironGuru/"
+      }
+    ],
+    "about": {
+      "personalLiveSignals": {
+        "currentlyListening": "",
+        "recentlyWatched": "Raising Arizona - ★★★½",
+        "currentlyInto": "Human behavior systems, interactive storytelling, and audio tooling"
+      },
+      "personalInterestSections": [
+        {
+          "key": "music",
+          "title": "Music",
+          "intro": "Production and tracks that influence how I design rhythm in interfaces.",
+          "items": [
+            {
+              "section": "music",
+              "slug": "house-of-balloons",
+              "title": "House of Balloons",
+              "subtitle": "The Weeknd (2011)",
+              "publicMediaLookup": {
+                "provider": "itunes",
+                "entity": "album",
+                "term": "The Weeknd House of Balloons",
+                "expectedTitle": "House of Balloons",
+                "expectedArtist": "The Weeknd"
+              },
+              "imageFit": "cover",
+              "tags": [
+                "Album",
+                "Favorite"
+              ],
+              "description": "The realest project in popular music in my opinion.",
+              "details": [
+                "I wish I could have been around to experience the mystery when this came out."
+              ]
+            },
+            {
+              "section": "music",
+              "slug": "thursday",
+              "title": "Thursday",
+              "subtitle": "The Weeknd (2011)",
+              "publicMediaLookup": {
+                "provider": "itunes",
+                "entity": "album",
+                "term": "The Weeknd Thursday",
+                "expectedTitle": "Thursday",
+                "expectedArtist": "The Weeknd"
+              },
+              "imageFit": "cover",
+              "tags": [
+                "Album",
+                "Favorite"
+              ],
+              "description": "Another Trilogy project I replay a lot.",
+              "details": [
+                "Fits perfectly when I want a darker sound palette."
+              ]
+            },
+            {
+              "section": "music",
+              "slug": "echoes-of-silence",
+              "title": "Echoes of Silence",
+              "subtitle": "The Weeknd (2011)",
+              "publicMediaLookup": {
+                "provider": "itunes",
+                "entity": "album",
+                "term": "The Weeknd Echoes of Silence",
+                "expectedTitle": "Echoes of Silence",
+                "expectedArtist": "The Weeknd"
+              },
+              "imageFit": "cover",
+              "tags": [
+                "Album",
+                "Favorite"
+              ],
+              "description": "Immaculate production all the way through.",
+              "details": [
+                "This is reserved for when I want a more emotional vibe. "
+              ]
+            },
+            {
+              "section": "music",
+              "slug": "kiss-land",
+              "title": "Kiss Land",
+              "subtitle": "The Weeknd (2013)",
+              "publicMediaLookup": {
+                "provider": "itunes",
+                "entity": "album",
+                "term": "The Weeknd Kiss Land",
+                "expectedTitle": "Kiss Land",
+                "expectedArtist": "The Weeknd"
+              },
+              "imageFit": "cover",
+              "tags": [
+                "Album",
+                "Favorite"
+              ],
+              "description": "This is one of my top Weeknd albums.",
+              "details": [
+                "A project I always circle back to."
+              ]
+            },
+            {
+              "section": "music",
+              "slug": "hurry-up-tomorrow",
+              "title": "Hurry Up Tomorrow",
+              "subtitle": "The Weeknd (2025)",
+              "publicMediaLookup": {
+                "provider": "itunes",
+                "entity": "album",
+                "term": "The Weeknd Hurry Up Tomorrow",
+                "expectedTitle": "Hurry Up Tomorrow",
+                "expectedArtist": "The Weeknd"
+              },
+              "imageFit": "cover",
+              "tags": [
+                "Album",
+                "Current"
+              ],
+              "description": "The movie wasn't as good as the album.",
+              "details": [
+                "I listened to this on repeat for a month straight."
+              ]
+            },
+            {
+              "section": "music",
+              "slug": "breakfast-in-america",
+              "title": "Breakfast in America",
+              "subtitle": "Supertramp (1979)",
+              "publicMediaLookup": {
+                "provider": "itunes",
+                "entity": "album",
+                "term": "Supertramp Breakfast in America",
+                "expectedTitle": "Breakfast in America",
+                "expectedArtist": "Supertramp"
+              },
+              "imageFit": "cover",
+              "tags": [
+                "Album",
+                "Classic"
+              ],
+              "description": "Songwriting skills that I aspire to have.",
+              "details": [
+                "An album I rediscovered and now listen to regularly."
+              ]
+            },
+            {
+              "section": "music",
+              "slug": "the-perfect-luv-tape",
+              "title": "The Perfect LUV Tape",
+              "subtitle": "Lil Uzi Vert (2016)",
+              "publicMediaLookup": {
+                "provider": "itunes",
+                "entity": "album",
+                "term": "Lil Uzi Vert The Perfect LUV Tape",
+                "expectedTitle": "The Perfect LUV Tape",
+                "expectedArtist": "Lil Uzi Vert"
+              },
+              "imageFit": "cover",
+              "tags": [
+                "Album",
+                "Replay"
+              ],
+              "description": "Uzi at his most melodic and versatile in my opinion.",
+              "details": [
+                "Underrated."
+              ]
+            },
+            {
+              "section": "music",
+              "slug": "audioslave-self-titled",
+              "title": "Audioslave",
+              "subtitle": "Audioslave (2002)",
+              "publicMediaLookup": {
+                "provider": "itunes",
+                "entity": "album",
+                "term": "Audioslave Audioslave",
+                "expectedTitle": "Audioslave",
+                "expectedArtist": "Audioslave"
+              },
+              "imageFit": "cover",
+              "tags": [
+                "Album",
+                "Rock"
+              ],
+              "description": "Chris Cornell + Rage Against the Machine = perfection.",
+              "details": [
+                "My favorite rock album of all time."
+              ]
+            },
+            {
+              "section": "music",
+              "slug": "minecraft-volume-alpha",
+              "title": "Minecraft - Volume Alpha",
+              "subtitle": "C418 (2011)",
+              "publicMediaLookup": {
+                "provider": "itunes",
+                "entity": "album",
+                "term": "C418 Minecraft Volume Alpha",
+                "expectedTitle": "Minecraft - Volume Alpha",
+                "expectedArtist": "C418"
+              },
+              "imageFit": "cover",
+              "tags": [
+                "Album",
+                "Ambient"
+              ],
+              "description": "Unbelievable writing and production.",
+              "details": [
+                "/give C418 minecraft:flowers"
+              ]
+            },
+            {
+              "section": "music",
+              "slug": "minecraft-volume-beta",
+              "title": "Minecraft - Volume Beta",
+              "subtitle": "C418 (2013)",
+              "publicMediaLookup": {
+                "provider": "itunes",
+                "entity": "album",
+                "term": "C418 Minecraft Volume Beta",
+                "expectedTitle": "Minecraft - Volume Beta",
+                "expectedArtist": "C418"
+              },
+              "imageFit": "cover",
+              "tags": [
+                "Album",
+                "Ambient"
+              ],
+              "description": "Evil twin to Volume Alpha.",
+              "details": [
+                "Late night coding sessions are not the same without this."
+              ]
+            },
+            {
+              "section": "music",
+              "slug": "diamond-life",
+              "title": "Diamond Life",
+              "subtitle": "Sade (1984)",
+              "publicMediaLookup": {
+                "provider": "itunes",
+                "entity": "album",
+                "term": "Sade Diamond Life",
+                "expectedTitle": "Diamond Life",
+                "expectedArtist": "Sade"
+              },
+              "imageFit": "cover",
+              "tags": [
+                "Album",
+                "Classic"
+              ],
+              "description": "Sade is in my top two.",
+              "details": [
+                "When Sade was finding their niche and vibe."
+              ]
+            },
+            {
+              "section": "music",
+              "slug": "promise",
+              "title": "Promise",
+              "subtitle": "Sade (1985)",
+              "publicMediaLookup": {
+                "provider": "itunes",
+                "entity": "album",
+                "term": "Sade Promise",
+                "expectedTitle": "Promise",
+                "expectedArtist": "Sade"
+              },
+              "imageFit": "cover",
+              "tags": [
+                "Album",
+                "Classic"
+              ],
+              "description": "Darker Diamond Life.",
+              "details": [
+                "When Sade found their best sound in my opinion."
+              ]
+            },
+            {
+              "section": "music",
+              "slug": "infinite",
+              "title": "Infinite",
+              "subtitle": "Black Atlass (2022)",
+              "publicMediaLookup": {
+                "provider": "itunes",
+                "entity": "album",
+                "term": "Black Atlass Infinite",
+                "expectedTitle": "Infinite",
+                "expectedArtist": "Black Atlass"
+              },
+              "imageFit": "cover",
+              "tags": [
+                "Album",
+                "Moody"
+              ],
+              "description": "A feel good cinematic vibe.",
+              "details": [
+                "Black Atlass is way too slept on."
+              ]
+            },
+            {
+              "section": "music",
+              "slug": "recess",
+              "title": "Recess",
+              "subtitle": "Skrillex (2014)",
+              "publicMediaLookup": {
+                "provider": "itunes",
+                "entity": "album",
+                "term": "Skrillex Recess",
+                "expectedTitle": "Recess",
+                "expectedArtist": "Skrillex"
+              },
+              "imageFit": "cover",
+              "tags": [
+                "Album",
+                "Dubstep",
+                "Electronic"
+              ],
+              "description": "The most complete Skrillex project.",
+              "details": [
+                "Been listening since elementary school and it still bangs."
+              ]
+            },
+            {
+              "section": "music",
+              "slug": "willow-1973",
+              "title": "Willow",
+              "subtitle": "Willow (1973)",
+              "imageUrl": "https://is1-ssl.mzstatic.com/image/thumb/Music116/v4/1c/78/fb/1c78fbda-9575-a6a3-df40-9e764544115c/artwork.jpg/600x600bb.jpg",
+              "imageAlt": "Willow album artwork",
+              "links": [
+                {
+                  "label": "Apple Music",
+                  "href": "https://music.apple.com/us/album/willow/1611609948"
+                }
+              ],
+              "publicMediaLookup": {
+                "provider": "itunes",
+                "entity": "album",
+                "term": "Willow 1973 album",
+                "expectedTitle": "Willow"
+              },
+              "imageFit": "cover",
+              "tags": [
+                "Album",
+                "70s"
+              ],
+              "description": "Super chill 70s collection of songs.",
+              "details": [
+                "Something I can gatekeep but share here."
+              ]
+            },
+            {
+              "section": "music",
+              "slug": "telstar-ponies-space",
+              "title": "In the Space of a Few Minutes",
+              "subtitle": "Telstar Ponies (1995)",
+              "publicMediaLookup": {
+                "provider": "itunes",
+                "entity": "album",
+                "term": "Telstar Ponies In the Space of a Few Minutes",
+                "expectedTitle": "In the Space of a Few Minutes",
+                "expectedArtist": "Telstar Ponies"
+              },
+              "imageFit": "cover",
+              "tags": [
+                "Album",
+                "Niche"
+              ],
+              "description": "One of those albums I'm glad I discovered.",
+              "details": [
+                "A unique pick in my rotation."
+              ]
+            },
+            {
+              "section": "music",
+              "slug": "reaper",
+              "title": "Reaper",
+              "subtitle": "No Vacation (2017)",
+              "publicMediaLookup": {
+                "provider": "itunes",
+                "entity": "song",
+                "term": "No Vacation Reaper",
+                "expectedTitle": "Reaper",
+                "expectedArtist": "No Vacation"
+              },
+              "imageFit": "cover",
+              "tags": [
+                "Song",
+                "Indie"
+              ],
+              "description": "A standout track from No Vacation.",
+              "details": [
+                "It feels like a warm hug."
+              ]
+            },
+            {
+              "section": "music",
+              "slug": "shorty",
+              "title": "Shorty (Got Her Eyes on Me)",
+              "subtitle": "Donell Jones (1999)",
+              "publicMediaLookup": {
+                "provider": "itunes",
+                "entity": "song",
+                "term": "Donell Jones Shorty",
+                "expectedTitle": "Shorty (Got Her Eyes on Me)",
+                "expectedArtist": "Donell Jones"
+              },
+              "imageFit": "cover",
+              "tags": [
+                "Song",
+                "R&B"
+              ],
+              "description": "An addictively smooth R&B track.",
+              "details": [
+                "A song I can listen to on repeat without getting tired of it."
+              ]
+            }
+          ]
+        },
+        {
+          "key": "films",
+          "title": "Films",
+          "intro": "Stories and visuals that shape how I think about design, framing, and product narrative.",
+          "items": [
+            {
+              "section": "films",
+              "slug": "whiplash",
+              "title": "Whiplash (2014)",
+              "subtitle": "★★★★★",
+              "publicMediaLookup": {
+                "provider": "wikipedia",
+                "entity": "movie",
+                "term": "Whiplash 2014 film",
+                "expectedTitle": "Whiplash",
+                "wikipediaPageTitle": "Whiplash (2014 film)"
+              },
+              "imageFit": "cover",
+              "tags": [
+                "Film",
+                "Favorite"
+              ],
+              "description": "My favorite film ever.",
+              "details": [
+                "Who won the final battle is still up for debate in my mind."
+              ]
+            },
+            {
+              "section": "films",
+              "slug": "la-la-land",
+              "title": "La La Land (2016)",
+              "subtitle": "★★★★★",
+              "publicMediaLookup": {
+                "provider": "wikipedia",
+                "entity": "movie",
+                "term": "La La Land",
+                "expectedTitle": "La La Land",
+                "wikipediaPageTitle": "La La Land"
+              },
+              "imageFit": "cover",
+              "tags": [
+                "Film",
+                "Favorite"
+              ],
+              "description": "Just an amazing story accompanied by stunning visuals.",
+              "details": [
+                "I am a combination of Sebastian and Mia; the realist and the dreamer."
+              ]
+            },
+            {
+              "section": "films",
+              "slug": "singin-in-the-rain",
+              "title": "Singin' in the Rain (1952)",
+              "subtitle": "★★★★★",
+              "publicMediaLookup": {
+                "provider": "wikipedia",
+                "entity": "movie",
+                "term": "Singin in the Rain",
+                "expectedTitle": "Singin' in the Rain",
+                "wikipediaPageTitle": "Singin' in the Rain"
+              },
+              "imageFit": "cover",
+              "tags": [
+                "Film",
+                "Classic",
+                "Musical"
+              ],
+              "description": "Also see Babylon.",
+              "details": [
+                "One of my favorite classics."
+              ]
+            },
+            {
+              "section": "films",
+              "slug": "major-payne",
+              "title": "Major Payne (1995)",
+              "subtitle": "★★★★",
+              "publicMediaLookup": {
+                "provider": "wikipedia",
+                "entity": "movie",
+                "term": "Major Payne",
+                "expectedTitle": "Major Payne",
+                "wikipediaPageTitle": "Major Payne"
+              },
+              "imageFit": "cover",
+              "tags": [
+                "Film",
+                "Comedy"
+              ],
+              "description": "I can probably recite this movie line for line.",
+              "details": [
+                "A personal throwback favorite."
+              ]
+            },
+            {
+              "section": "films",
+              "slug": "social-network",
+              "title": "The Social Network (2010)",
+              "subtitle": "★★★★½",
+              "imageUrl": "https://upload.wikimedia.org/wikipedia/en/thumb/8/8c/The_Social_Network_film_poster.png/500px-The_Social_Network_film_poster.png",
+              "imageAlt": "The Social Network poster",
+              "publicMediaLookup": {
+                "provider": "wikipedia",
+                "entity": "movie",
+                "term": "The Social Network",
+                "expectedTitle": "The Social Network",
+                "wikipediaPageTitle": "The Social Network"
+              },
+              "imageFit": "cover",
+              "tags": [
+                "Film",
+                "Rewatch"
+              ],
+              "description": "I just think it's a really strong rewatch.",
+              "details": [
+                "The pacing is my favorite part."
+              ]
+            }
+          ]
+        },
+        {
+          "key": "objects",
+          "title": "Objects & Tech",
+          "intro": "Tools and physical systems that influence how I evaluate product quality and craft.",
+          "items": [
+            {
+              "section": "objects",
+              "slug": "omnisphere-fl-studio",
+              "title": "Omnisphere in FL Studio",
+              "subtitle": "Sound Design Plugin",
+              "imageUrl": "https://images.musicstore.de/images/1280/spectrasonics-omnisphere-2-_1_PCM0013600-000.jpg",
+              "imageAlt": "Omnisphere in FL Studio setup",
+              "imageFit": "cover",
+              "tags": [
+                "Audio",
+                "Production"
+              ],
+              "description": "Has everything anyone could need for music production.",
+              "details": [
+                "A core part of my music workflow."
+              ]
+            },
+            {
+              "section": "objects",
+              "slug": "unicomp-model-m-2006",
+              "title": "Unicomp Model M",
+              "subtitle": "Buckling Spring Keyboard",
+              "imageUrl": "https://static.mercdn.net/item/detail/orig/photos/m82763767793_1.jpg?1692341160",
+              "imageAlt": "Unicomp Model M keyboard",
+              "imageFit": "cover",
+              "tags": [
+                "Keyboard",
+                "Hardware"
+              ],
+              "description": "Vintage design. Timeless experience.",
+              "details": [
+                "Great feel and reliability for everyday use."
+              ]
+            },
+            {
+              "section": "objects",
+              "slug": "bic-clear-mechanical-pencils",
+              "title": "BIC Mechanical Pencils (clear case)",
+              "subtitle": "Simple Daily Writing Tool",
+              "imageUrl": "https://m.media-amazon.com/images/I/51OYgSP+1FL.jpg",
+              "imageAlt": "Clear-case BIC mechanical pencils",
+              "imageFit": "cover",
+              "tags": [
+                "Stationery",
+                "Daily"
+              ],
+              "description": "The best mechanical pencils I've ever used.",
+              "details": [
+                "Always in my bag or on my desk."
+              ]
+            }
+          ]
+        },
+        {
+          "key": "vintage",
+          "title": "Vintage Clothing Pieces",
+          "intro": "A collection of my favorite vintage pieces and finds I own.",
+          "items": [
+            {
+              "section": "vintage",
+              "slug": "number-nine-tee",
+              "title": "Number (N)ineCharles Manson Skull Tee",
+              "subtitle": "2006 [~$200]",
+              "imageUrl": "https://image.reversible.com/offer/641d15915fdf03c36fd370b9caedc6fe",
+              "imageAlt": "Charles Manson Skull Tee",
+              "imageFit": "cover",
+              "tags": [
+                "Number (N)ine",
+                "2000s",
+                "Vintage"
+              ],
+              "description": "A standout piece from Number (N)ine's S/S 2006 collection.",
+              "details": [
+                "A replacement piece for my original 1993 tee I sold."
+              ]
+            },
+            {
+              "section": "vintage",
+              "slug": "led-zeppelin-wizard-tee",
+              "title": "Led Zeppelin Wizard Tee",
+              "subtitle": "1992 [~$200]",
+              "imageUrl": "https://media.karousell.com/media/photos/products/2024/8/28/1992_led_zeppelin_wizard_aop_v_1724840858_2dd9a29d_progressive.jpg",
+              "imageAlt": "Led Zeppelin Wizard Tee",
+              "imageFit": "cover",
+              "tags": [
+                "Led Zeppelin",
+                "90s",
+                "Vintage"
+              ],
+              "description": "The most unique and detailed Led Zeppelin tee I've seen.",
+              "details": [
+                "One of my five Led Zeppelin tees, but the only one I will keep forever."
+              ]
+            },
+            {
+              "section": "vintage",
+              "slug": "liquid-blue-dragon-tee",
+              "title": "Liquid Blue AOP Dragon vs. Knight Tee",
+              "subtitle": "1993 [~$150]",
+              "imageUrl": "https://image.reversible.com/offer/7486decfe16ff4b331b19be3691c3b899fb7b68c86b9b61035cf33d3e27866e4",
+              "imageAlt": "Liquid Blue Dragon Tee",
+              "imageFit": "cover",
+              "tags": [
+                "Liquid Blue",
+                "90s",
+                "Vintage"
+              ],
+              "description": "When print and material quality were at their peak.",
+              "details": [
+                "My second one of these after selling my thrashed one in 2021."
+              ]
+            }
+          ]
+        },
+        {
+          "key": "curiosities",
+          "title": "Curiosities",
+          "intro": "Themes I keep coming back to across creation, interaction design, systems, and human behavior.",
+          "items": [
+            {
+              "section": "curiosities",
+              "slug": "music-creative-interfaces",
+              "title": "Music & Creative Interfaces",
+              "subtitle": "Creation, agency, and flow over passive consumption",
+              "icon": "faMusic",
+              "imageAlt": "Music and creative interface curiosity placeholder",
+              "imageFit": "cover",
+              "tags": [
+                "Creative Systems",
+                "Interaction"
+              ],
+              "description": "I enjoy how music creation feels active and immersive compared to passive listening.",
+              "details": [
+                "I keep studying how agency and flow state change the experience of making something.",
+                "I care a lot about making creative tools intuitive and fun."
+              ]
+            },
+            {
+              "section": "curiosities",
+              "slug": "experimental-interaction-ux",
+              "title": "Experimental Interaction & UX",
+              "subtitle": "Memorable interfaces, tactile patterns, and perspective-aware design",
+              "icon": "faFlask",
+              "imageAlt": "Experimental UX curiosity placeholder",
+              "imageFit": "cover",
+              "tags": [
+                "UX",
+                "Interaction"
+              ],
+              "description": "I care about experiences that feel fun and stick in memory.",
+              "details": [
+                "I'm constantly exploring where to balance simplicity and depth.",
+                "I'm especially interested in personalization and how it changes perception."
+              ]
+            },
+            {
+              "section": "curiosities",
+              "slug": "nostalgic-physical-vintage-tech",
+              "title": "Nostalgic / Physical / Vintage Tech",
+              "subtitle": "Why older tactile devices feel more satisfying",
+              "icon": "faMicrochip",
+              "imageAlt": "Vintage tech curiosity placeholder",
+              "imageFit": "cover",
+              "tags": [
+                "Vintage Tech",
+                "Tactile"
+              ],
+              "description": "I really like old tech that feels physical and real to use.",
+              "details": [
+                "I care about how texture, feedback, and physicality shape user emotion.",
+                "I see tech as expression, not only utility."
+              ]
+            },
+            {
+              "section": "curiosities",
+              "slug": "systems-thinking-optimization",
+              "title": "Systems Thinking & Optimization",
+              "subtitle": "Modeling real systems and finding inefficiencies",
+              "icon": "faDiagramProject",
+              "imageAlt": "Systems optimization curiosity placeholder",
+              "imageFit": "cover",
+              "tags": [
+                "Systems",
+                "Optimization"
+              ],
+              "description": "I like finding weak points in systems and figuring out better ways to run them.",
+              "details": [
+                "I'm curious about the relationship between individual agency and system constraints.",
+                "I'm drawn to problems where better coordination creates large gains."
+              ]
+            },
+            {
+              "section": "curiosities",
+              "slug": "psychology-human-behavior",
+              "title": "Psychology & Human Behavior",
+              "subtitle": "Perspective, memory, authenticity, and cognitive limits",
+              "icon": "faBrain",
+              "imageAlt": "Psychology and behavior curiosity placeholder",
+              "imageFit": "cover",
+              "tags": [
+                "Psychology",
+                "Behavior"
+              ],
+              "description": "I'm interested in what makes experiences feel personal and authentic.",
+              "details": [
+                "I often think about nature vs nurture and where human limits come from.",
+                "I keep exploring why creation feels fundamentally different from passive consumption."
+              ]
+            },
+            {
+              "section": "curiosities",
+              "slug": "media-personal-interests",
+              "title": "Media & Personal Interests",
+              "subtitle": "Music, films, collectibles, and rotating obsessions",
+              "icon": "faPhotoFilm",
+              "imageAlt": "Media and personal interests curiosity placeholder",
+              "imageFit": "cover",
+              "tags": [
+                "Media",
+                "Collecting"
+              ],
+              "description": "I like curating music, movies, vintage clothing, and whatever I'm currently into.",
+              "details": [
+                "This section rotates over time as new interests become recurring themes.",
+                "Right now the strongest overlap is between AI, UX, and creative tooling."
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "resume": {
+      "hero": {
+        "name": "Jett Nguyen",
+        "role": "UX-Focused Frontend Developer · Product Experience Builder",
+        "shortSummaryRecruiter": "I design and ship product experiences that connect technical execution with clear user impact.",
+        "shortSummaryEngineer": "I build interaction-heavy interfaces with strong architecture, maintainable patterns, and measurable UX outcomes.",
+        "shortSummaryNonTechnical": "I create digital products that are easier to use, clearer to understand, and more enjoyable for people.",
+        "location": "Gainesville, FL",
+        "email": "jettcameronnguyen@gmail.com"
+      },
+      "skills": [
+        "TypeScript",
+        "React",
+        "Next.js",
+        "Node.js",
+        "Python",
+        "C/C++",
+        "MongoDB",
+        "SQL",
+        "Framer Motion",
+        "Tailwind CSS",
+        "Public Relations",
+        "Audio Engineering"
+      ],
+      "experience": [
+        {
+          "company": "MARA",
+          "role": "Software Engineer Intern",
+          "date": "Jun 2025 – Dec 2025",
+          "highlights": [
+            "Built and maintained internal software tools supporting operational workflows.",
+            "Collaborated across teams to ship practical, human-centered solutions."
+          ]
+        },
+        {
+          "company": "Weichert Realtors Equity",
+          "role": "Assistant Accountant",
+          "date": "Aug 2021 – May 2022",
+          "highlights": [
+            "Managed property expense and income records with highly structured spreadsheets.",
+            "Supported internal team coordination and communication processes."
+          ]
+        }
+      ],
+      "education": {
+        "institution": "University of Florida",
+        "degree": "B.S. Computer Science, Minor in Public Relations",
+        "date": "Expected May 2026"
+      },
+      "pdf": "/assets/Jett_Nguyen_Resume_2026.pdf"
+    },
+    "coursework": {
+      "courseworkGpa": {
+        "overallGpa": "3.63"
+      },
+      "coursesByYear": [
+        {
+          "year": 2026,
+          "semesters": [
+            {
+              "term": "Spring",
+              "termGpa": "TBA",
+              "classes": [
+                {
+                  "courseCode": "CIS4914",
+                  "course": "Senior Project",
+                  "grade": {
+                    "letter": "TBA",
+                    "symbol": ""
+                  },
+                  "theme": "Product development: requirements, architecture, and iterative delivery in a team setting.",
+                  "artifacts": [
+                    {
+                      "type": "project",
+                      "title": "Sideline",
+                      "href": "/projects/sideline",
+                      "note": "MERN stack mobile-first web application for youth soccer match video management."
+                    },
+                    {
+                      "type": "presentation",
+                      "title": "Sideline Presentation 1",
+                      "href": "/presentations/sideline-1",
+                      "note": "Problem framing, architecture, high-fidelity wireframes, user flow, and next steps."
+                    },
+                    {
+                      "type": "presentation",
+                      "title": "Sideline Presentation 2",
+                      "href": "/presentations/sideline-2",
+                      "note": "Project progress, tech demo, testing plan, and next steps."
+                    }
+                  ]
+                },
+                {
+                  "courseCode": "CIS4930",
+                  "course": "Internet Programming",
+                  "grade": {
+                    "letter": "TBA",
+                    "symbol": ""
+                  },
+                  "theme": "Modern web application design across frontend, backend, authentication, and deployment workflows.",
+                  "artifacts": [
+                    {
+                      "type": "project",
+                      "title": "Stackd",
+                      "href": "/projects/stackd",
+                      "note": "MERN stack web application for flashcard studying."
+                    }
+                  ]
+                },
+                {
+                  "courseCode": "CNT4007",
+                  "course": "Computer Network Fundamentals",
+                  "grade": {
+                    "letter": "TBA",
+                    "symbol": ""
+                  },
+                  "theme": "Network-layer behavior, reliability, and performance tradeoffs in distributed systems.",
+                  "artifacts": [
+                    {
+                      "type": "project",
+                      "title": "P2P File Sharing",
+                      "href": "/projects/networks-project",
+                      "note": "In-progress P2P file sharing application with focus on network protocols and data consistency."
+                    }
+                  ]
+                },
+                {
+                  "courseCode": "PUR3211",
+                  "course": "Diverse Voices",
+                  "grade": {
+                    "letter": "TBA",
+                    "symbol": ""
+                  },
+                  "theme": "Audience-centered communication, representation, and message design across different communities.",
+                  "artifacts": [
+                    {
+                      "type": "presentation",
+                      "title": "Apple DEI Assessment",
+                      "href": "/presentations",
+                      "note": "In-progress presentation assessing diversity, equity, and inclusion implementation at Apple."
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "year": 2025,
+          "semesters": [
+            {
+              "term": "Fall",
+              "termGpa": "3.92",
+              "classes": [
+                {
+                  "courseCode": "CAP3027",
+                  "course": "Introduction to Computational Media",
+                  "grade": {
+                    "letter": "A",
+                    "symbol": "-"
+                  },
+                  "theme": "Interactive media systems, game mechanics, and computational creativity.",
+                  "artifacts": [
+                    {
+                      "type": "project",
+                      "title": "Pulse Gear",
+                      "href": "/projects/pulse-gear",
+                      "note": "Interactive puzzle mechanics and solver strategies."
+                    }
+                  ]
+                },
+                {
+                  "courseCode": "CEN4721",
+                  "course": "Human-Computer Interaction",
+                  "grade": {
+                    "letter": "A",
+                    "symbol": ""
+                  },
+                  "theme": "User-centered design, usability evaluation, and interaction flow optimization.",
+                  "artifacts": [
+                    {
+                      "type": "project",
+                      "title": "Splitsy",
+                      "href": "/projects/splitsy",
+                      "note": "Mobile app built on the principles of user-centered design for easy and fair splitting of shared expenses."
+                    },
+                    {
+                      "type": "presentation",
+                      "title": "Splitsy Product Demo",
+                      "href": "/presentations/splitsy-demo",
+                      "note": "An infomercial style presentation telling the story from why, how, and what of the product, including a situational demo."
+                    },
+                    {
+                      "type": "report",
+                      "title": "Splitsy Final Report",
+                      "href": "/projects/splitsy",
+                      "note": "Final report covering user testing results, design decisions, and technical implementation."
+                    },
+                    {
+                      "type": "report",
+                      "title": "Splitsy Implementation Report",
+                      "href": "/projects/splitsy",
+                      "note": "Detailed implementation report covering solution vision, design decisions, and technical implementation."
+                    },
+                    {
+                      "type": "report",
+                      "title": "Splitsy Project Proposal",
+                      "href": "/projects/splitsy",
+                      "note": "Propose user-research methods, problem framing, and solution architecture."
+                    }
+                  ]
+                },
+                {
+                  "courseCode": "CIS4930",
+                  "course": "Enterprise Software Engineering",
+                  "grade": {
+                    "letter": "A",
+                    "symbol": ""
+                  },
+                  "theme": "Scalable architecture, code quality, CI/CD, and collaborative engineering process.",
+                  "artifacts": []
+                },
+                {
+                  "courseCode": "GEO2500",
+                  "course": "Global/Regional Economies",
+                  "grade": {
+                    "letter": "A",
+                    "symbol": ""
+                  },
+                  "theme": "Economic systems, macro trends, and regional market interpretation.",
+                  "artifacts": [
+                    {
+                      "type": "report",
+                      "title": "The Gap in Artificial Intelligence Adoption and the Core-Periphery Model",
+                      "href": "/reports/Nguyen_Jett_Final_Paper.pdf",
+                      "note": "Final Paper describing the adoption curve of AI based on global economic structures and its implications."
+                    },
+                    {
+                      "type": "report",
+                      "title": "The Coffee Commodity Chain in the Global Economy",
+                      "href": "/reports/Nguyen_Jett_Module_8_Essay.pdf",
+                      "note": "Essay explaining the coffee commodity chain, Guatemala's role, and the trade's impact on the global economy."
+                    },
+                    {
+                      "type": "report",
+                      "title": "Cumulative Causation & the Core-Periphery Relationships",
+                      "href": "/reports/Nguyen_Jett_Module_6_Essay.pdf",
+                      "note": "Essay describing the phenomenon of cumulative causation and how it can foster growth, but also lead to peripheralization."
+                    },
+                    {
+                      "type": "report",
+                      "title": "The Economy Shaped by Core-Periphery Relationships",
+                      "href": "/reports/Nguyen_Jett_Module_4_Essay.pdf",
+                      "note": "Essay analyzing how core-periphery relationships influence and reaffirm economic structures and development."
+                    },
+                    {
+                      "type": "report",
+                      "title": "GDP vs. HDI as a Measurement of Economic Development",
+                      "href": "/reports/Nguyen_Jett_Module_2_Essay.pdf",
+                      "note": "Essay comparing GDP and HDI as metrics for assessing economic development."
+                    }
+                  ]
+                },
+                {
+                  "courseCode": "PUR4243",
+                  "course": "Artificial Intelligence in Public Relations",
+                  "grade": {
+                    "letter": "A",
+                    "symbol": ""
+                  },
+                  "theme": "AI-assisted communication strategy, ethics, and practical PR deployment.",
+                  "artifacts": []
+                }
+              ]
+            },
+            {
+              "term": "Summer",
+              "termGpa": "3.71",
+              "classes": [
+                {
+                  "courseCode": "EIN3354",
+                  "course": "Engineering Economy",
+                  "grade": {
+                    "letter": "B",
+                    "symbol": "+"
+                  },
+                  "theme": "Cost-benefit modeling, economic decision analysis, and engineering tradeoff evaluation.",
+                  "artifacts": [
+                    {
+                      "type": "homework",
+                      "title": "Homeworks 1-5",
+                      "note": "Homework sets covering engineering economy calculations and decision analysis. Unable to share because the homeworks are trivial and due to student confidentiality."
+                    }
+                  ]
+                },
+                {
+                  "courseCode": "PUR4243",
+                  "course": "Innovation Communications",
+                  "grade": {
+                    "letter": "A",
+                    "symbol": ""
+                  },
+                  "theme": "Communicating new product concepts through strategy, storytelling, and audience positioning.",
+                  "artifacts": [
+                    {
+                      "type": "presentation",
+                      "title": "Whisp Product Pitch",
+                      "href": "/presentations/whisp",
+                      "note": "Innovation communication framing in hypothetical product context."
+                    }
+                  ]
+                },
+                {
+                  "courseCode": "PUR4400C",
+                  "course": "Crisis Communications",
+                  "grade": {
+                    "letter": "A",
+                    "symbol": ""
+                  },
+                  "theme": "Crisis response frameworks, message control, and stakeholder trust recovery.",
+                  "artifacts": [
+                    {
+                      "type": "presentation",
+                      "title": "\"Heart On My Sleeve\" Crisis Case Study",
+                      "href": "/presentations/crisis-case-study",
+                      "note": "Crisis communication analysis for the AI-generated song \"Heart On My Sleeve\""
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "term": "Spring",
+              "termGpa": "3.83",
+              "classes": [
+                {
+                  "courseCode": "CIS4301",
+                  "course": "Information and Database Systems",
+                  "grade": {
+                    "letter": "B",
+                    "symbol": "+"
+                  },
+                  "theme": "Data modeling, database querying, and information system design for application workflows.",
+                  "artifacts": [
+                    {
+                      "type": "homework",
+                      "title": "Homeworks 1-7",
+                      "note": "Homework sets focused on relational modeling, SQL, and database concepts. Unable to share because the homeworks are trivial and due to student confidentiality."
+                    }
+                  ]
+                },
+                {
+                  "courseCode": "COP4020",
+                  "course": "Programming Language Concepts",
+                  "grade": {
+                    "letter": "A",
+                    "symbol": ""
+                  },
+                  "theme": "Programming language design principles and implementation.",
+                  "artifacts": [
+                    {
+                      "type": "project",
+                      "title": "Programming Language Implementation",
+                      "note": "A semester-long project building a programming language from the ground up, involving creating a lexer, parser, evaluator, analyzer, and generator in JavaScript. (Unable to share due to student confidentiality.)"
+                    }
+                  ]
+                },
+                {
+                  "courseCode": "COP4533",
+                  "course": "Algorithm Abstraction & Design",
+                  "grade": {
+                    "letter": "A",
+                    "symbol": ""
+                  },
+                  "theme": "Algorithm design patterns, asymptotic analysis, and optimization tradeoffs.",
+                  "artifacts": [
+                    {
+                      "type": "presentation",
+                      "title": "Vertex Cover Presentation",
+                      "href": "/presentations/np-completeness",
+                      "note": "Presentation covering NP-completeness and NP-hardness of vertex cover."
+                    }
+                  ]
+                },
+                {
+                  "courseCode": "PHI3681",
+                  "course": "Ethics, Data & Technology",
+                  "grade": {
+                    "letter": "A",
+                    "symbol": ""
+                  },
+                  "theme": "Ethical analysis of data systems, responsible AI, and technology impact on society.",
+                  "artifacts": [
+                    {
+                      "type": "report",
+                      "title": "AI Ethics Issue Briefs 1-5",
+                      "note": "Case study reports analyzing ethical considerations and implications of AI. (Unable to share due to student confidentiality.)"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "year": 2024,
+          "semesters": [
+            {
+              "term": "Fall",
+              "termGpa": "3.83",
+              "classes": [
+                {
+                  "courseCode": "CEN3031",
+                  "course": "Introduction to Software Engineering",
+                  "grade": {
+                    "letter": "",
+                    "symbol": ""
+                  },
+                  "theme": "Software lifecycle fundamentals, team collaboration, and maintainable project structure.",
+                  "artifacts": [
+                    {
+                      "type": "presentation",
+                      "title": "Cloud-Based Architecture",
+                      "href": "/presentations/cloud-architecture",
+                      "note": "Analysis of cloud-based architecture."
+                    },
+                    {
+                      "type": "presentation",
+                      "title": "GatorFound Final Presentation",
+                      "note": "Final presentation for GatorFound (link unavailable)."
+                    }
+                  ]
+                },
+                {
+                  "courseCode": "COP4600",
+                  "course": "Operating Systems",
+                  "grade": {
+                    "letter": "B",
+                    "symbol": "+"
+                  },
+                  "theme": "Processes, memory, scheduling, and systems-level performance reasoning.",
+                  "artifacts": [
+                    {
+                      "type": "project",
+                      "title": "Projects 1-3",
+                      "note": "Unable to share due to student confidentiality."
+                    }
+                  ]
+                },
+                {
+                  "courseCode": "ENC3246",
+                  "course": "Professional Communication for Engineers",
+                  "grade": {
+                    "letter": "A",
+                    "symbol": ""
+                  },
+                  "theme": "Technical writing, audience adaptation, and professional documentation practices.",
+                  "artifacts": [
+                    {
+                      "type": "report",
+                      "title": "Therac-25 Failure Analysis Paper",
+                      "href": "/reports/JettNguyen_FailureAnalysisPaper.pdf",
+                      "note": "Final paper on the failure analysis of the Therac-25 radiation therapy machine."
+                    },
+                    {
+                      "type": "report",
+                      "title": "AI-Powered Traffic Systems Research Report",
+                      "href": "/reports/JettNguyen_ResearchReport.pdf",
+                      "note": "Proposition of AI-powered traffic systems in Gainesville, FL using research gathered from residents."
+                    }
+                  ]
+                },
+                {
+                  "courseCode": "PUR4442",
+                  "course": "Public Interest Communications",
+                  "grade": {
+                    "letter": "A",
+                    "symbol": ""
+                  },
+                  "theme": "Campaign communication for public-good outcomes and stakeholder-centered messaging.",
+                  "artifacts": [
+                    {
+                      "type": "presentation",
+                      "title": "Opioid Crisis Communications",
+                      "href": "/presentations/opioid-crisis",
+                      "note": "A partnering campaign with Project Opioid for the opioid crisis in Florida."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "term": "Summer",
+              "termGpa": "3.16",
+              "classes": [
+                {
+                  "courseCode": "MAS3114",
+                  "course": "Computational Linear Algebra",
+                  "grade": {
+                    "letter": "",
+                    "symbol": ""
+                  },
+                  "theme": "Matrix-based computation, linear systems, and numerical reasoning in applied contexts.",
+                  "artifacts": [
+                    {
+                      "type": "homework",
+                      "title": "MATLAB Assignments 1-4",
+                      "note": "Homework assignments implementing linear algebra methods in MATLAB. Unable to share because the homeworks are trivial and due to student confidentiality."
+                    }
+                  ]
+                },
+                {
+                  "courseCode": "STA3032",
+                  "course": "Engineering Statistics",
+                  "grade": {
+                    "letter": "C",
+                    "symbol": "+"
+                  },
+                  "theme": "Probabilistic modeling, statistical inference, and data-driven decision support.",
+                  "artifacts": [
+                    {
+                      "type": "homework",
+                      "title": "Homeworks 1-3",
+                      "note": "Homework sets on probability distributions, estimation, and hypothesis testing. Unable to share because the homeworks are trivial and due to student confidentiality."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "term": "Spring",
+              "termGpa": "3.53",
+              "classes": [
+                {
+                  "courseCode": "CDA3101",
+                  "course": "Introduction to Computer Organization",
+                  "grade": {
+                    "letter": "A",
+                    "symbol": ""
+                  },
+                  "theme": "Hardware-software interface fundamentals, low-level execution, and architectural constraints.",
+                  "artifacts": [
+                    {
+                      "type": "report",
+                      "title": "Cache Simulation Analysis Paper",
+                      "note": "Analysis of cache hit rates for different cache sizes and block sizes. Unable to share due to student confidentiality."
+                    }
+                  ]
+                },
+                {
+                  "courseCode": "COP3530",
+                  "course": "Data Structures & Algorithms",
+                  "grade": {
+                    "letter": "A",
+                    "symbol": "-"
+                  },
+                  "theme": "Core data structures, algorithmic tradeoffs, and complexity-driven implementation choices.",
+                  "artifacts": [
+                    {
+                      "type": "project",
+                      "title": "Gridiron Guru",
+                      "href": "/projects/gridiron-guru"
+                    },
+                    {
+                      "type": "project",
+                      "title": "Projects 1 & 2",
+                      "note": "Projects on AVL Trees and Page Rank. Unable to share due to student confidentiality."
+                    }
+                  ]
+                },
+                {
+                  "courseCode": "PHY2049",
+                  "course": "Physics with Calculus 2",
+                  "grade": {
+                    "letter": "C",
+                    "symbol": "+"
+                  },
+                  "theme": "Modeling dynamic systems with calculus-based analysis and empirical lab validation.",
+                  "artifacts": []
+                },
+                {
+                  "courseCode": "PHY2049L",
+                  "course": "Physics with Calculus 2 Lab",
+                  "grade": {
+                    "letter": "A",
+                    "symbol": ""
+                  },
+                  "theme": "Laboratory experiments and practical applications of calculus-based physics concepts.",
+                  "artifacts": []
+                },
+                {
+                  "courseCode": "PUR3622",
+                  "course": "Social Media Management",
+                  "grade": {
+                    "letter": "A",
+                    "symbol": ""
+                  },
+                  "theme": "Platform strategy, campaign execution, and engagement analytics for digital audiences.",
+                  "artifacts": [
+                    {
+                      "type": "presentation",
+                      "title": "Duolingo Olympics Campaign",
+                      "href": "/presentations/duolingo",
+                      "note": "A social media campaign proposal for Duolingo during the 2024 Olympics."
+                    },
+                    {
+                      "type": "report",
+                      "title": "Duolingo Content Calendar",
+                      "note": "A content calendar for Duolingo during the 2024 Olympics. This document is not publicly shareable due to student confidentiality."
+                    },
+                    {
+                      "type": "report",
+                      "title": "Duolingo Research & Audit",
+                      "href": "/reports/Duolingo Research & Audit.pdf",
+                      "note": "A research and audit of Duolingo's social media presence."
+                    },
+                    {
+                      "type": "report",
+                      "title": "Duolingo Campaign Proposal",
+                      "href": "/reports/Duolingo Campaign Idea.pdf",
+                      "note": "A social media campaign proposal for Duolingo during the 2024 Olympics."
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "year": 2023,
+          "semesters": [
+            {
+              "term": "Fall",
+              "termGpa": "3.57",
+              "classes": [
+                {
+                  "courseCode": "COP3503C",
+                  "course": "Programming Fundamentals 2",
+                  "grade": {
+                    "letter": "A",
+                    "symbol": ""
+                  },
+                  "theme": "Intermediate programming design, modularity, and algorithm implementation in larger codebases.",
+                  "artifacts": [
+                    {
+                      "type": "project",
+                      "title": "Projects 1-3",
+                      "note": "Unable to share due to student confidentiality."
+                    }
+                  ]
+                },
+                {
+                  "courseCode": "COT3100",
+                  "course": "Discrete Structures",
+                  "grade": {
+                    "letter": "A",
+                    "symbol": "-"
+                  },
+                  "theme": "Logic, proofs, sets, and combinatorial reasoning for computer science foundations.",
+                  "artifacts": []
+                },
+                {
+                  "courseCode": "PHY2048",
+                  "course": "Physics with Calculus 1 (with Lab)",
+                  "grade": {
+                    "letter": "B",
+                    "symbol": "-"
+                  },
+                  "theme": "Mechanics fundamentals, measurement, and quantitative modeling of physical systems.",
+                  "artifacts": []
+                },
+                {
+                  "courseCode": "PHY2048L",
+                  "course": "Physics with Calculus 1 Lab",
+                  "grade": {
+                    "letter": "A",
+                    "symbol": ""
+                  },
+                  "theme": "Experimental application of mechanics concepts, data analysis, and scientific reporting.",
+                  "artifacts": []
+                },
+                {
+                  "courseCode": "PUR3000",
+                  "course": "Introduction to Public Relations",
+                  "grade": {
+                    "letter": "A",
+                    "symbol": ""
+                  },
+                  "theme": "PR principles, stakeholder mapping, and foundational communication planning.",
+                  "artifacts": [
+                    {
+                      "type": "homework",
+                      "title": "Assignments 1-5",
+                      "note": "Homework assignments on foundational public-relations planning and communication exercises. Unable to share because the homeworks are trivial and due to student confidentiality."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "term": "Summer",
+              "termGpa": "3.04",
+              "classes": [
+                {
+                  "courseCode": "IDS2935",
+                  "course": "Knowledge and the Universe",
+                  "grade": {
+                    "letter": "A",
+                    "symbol": ""
+                  },
+                  "theme": "Interdisciplinary inquiry on scientific reasoning, uncertainty, and knowledge frameworks.",
+                  "artifacts": [
+                    {
+                      "type": "presentation",
+                      "title": "A Bayesian Perspective on the Outsourcing Dilemma",
+                      "href": "/presentations/outsourcing",
+                      "note": "An analysis of the outsourcing dilemma using Bayesian principles."
+                    },
+                    {
+                      "type": "report",
+                      "title": "Final Writeup: Outsourcing Dilemma",
+                      "note": "A comprehensive report on the outsourcing dilemma, including a Bayesian analysis. This document is not publicly shareable due to student confidentiality."
+                    }
+                  ]
+                },
+                {
+                  "courseCode": "MAC2313",
+                  "course": "Analytic Geometry & Calculus 3",
+                  "grade": {
+                    "letter": "C",
+                    "symbol": "+"
+                  },
+                  "theme": "Multivariable calculus, vector analysis, and geometric reasoning in higher dimensions.",
+                  "artifacts": []
+                }
+              ]
+            },
+            {
+              "term": "Spring",
+              "termGpa": "3.59",
+              "classes": [
+                {
+                  "courseCode": "AST1002",
+                  "course": "Discover the Universe",
+                  "grade": {
+                    "letter": "",
+                    "symbol": ""
+                  },
+                  "theme": "Scientific literacy through astronomy concepts, evidence interpretation, and cosmic-scale reasoning.",
+                  "artifacts": []
+                },
+                {
+                  "courseCode": "COP3502C",
+                  "course": "Programming Fundamentals 1",
+                  "grade": {
+                    "letter": "A",
+                    "symbol": "-"
+                  },
+                  "theme": "Foundational programming, control flow, and data handling as a base for software development.",
+                  "artifacts": [
+                    {
+                      "type": "presentation",
+                      "title": "Sudoku Python Project",
+                      "href": "/presentations/sudoku",
+                      "note": "A demo of a Python project to play Sudoku puzzles using PyGame."
+                    }
+                  ]
+                },
+                {
+                  "courseCode": "EGN2020C",
+                  "course": "Engineering Design & Society",
+                  "grade": {
+                    "letter": "A",
+                    "symbol": ""
+                  },
+                  "theme": "Human-centered design, prototyping, and communication of engineering solutions for real users.",
+                  "artifacts": [
+                    {
+                      "type": "presentation",
+                      "title": "Tempo Titan",
+                      "href": "/presentations/tempo",
+                      "note": "The human-centered design process for Tempo Titan."
+                    }
+                  ]
+                },
+                {
+                  "courseCode": "MAC2312",
+                  "course": "Analytic Geometry & Calculus 2",
+                  "grade": {
+                    "letter": "B",
+                    "symbol": ""
+                  },
+                  "theme": "Integral calculus, infinite sequences/series, and applied accumulation models.",
+                  "artifacts": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "year": 2022,
+          "semesters": [
+            {
+              "term": "Fall",
+              "termGpa": "3.69",
+              "classes": [
+                {
+                  "courseCode": "LIN2614",
+                  "course": "Language in the USA",
+                  "grade": {
+                    "letter": "A",
+                    "symbol": ""
+                  },
+                  "theme": "Sociolinguistic analysis of language, identity, and communication in U.S. contexts.",
+                  "artifacts": [
+                    {
+                      "type": "presentation",
+                      "title": "AppE in the USA",
+                      "note": "A presentation analyzing the sociolinguistic features of AppE (Appalachian English), stigmas, and its cultural significance."
+                    }
+                  ]
+                },
+                {
+                  "courseCode": "MAC2311",
+                  "course": "Analytic Geometry & Calculus 1",
+                  "grade": {
+                    "letter": "B",
+                    "symbol": ""
+                  },
+                  "theme": "Differential calculus foundations, limits, and modeling rates of change.",
+                  "artifacts": []
+                },
+                {
+                  "courseCode": "MUL2010",
+                  "course": "Experiencing Music",
+                  "grade": {
+                    "letter": "A",
+                    "symbol": ""
+                  },
+                  "theme": "Music appreciation through listening frameworks, form analysis, and historical context.",
+                  "artifacts": []
+                },
+                {
+                  "courseCode": "MUS1610",
+                  "course": "Music & Spirituality",
+                  "grade": {
+                    "letter": "A",
+                    "symbol": ""
+                  },
+                  "theme": "Cultural and spiritual dimensions of music, interpretation, and expressive meaning.",
+                  "artifacts": [
+                    {
+                      "type": "presentation",
+                      "title": "The Spiritual Journey of The Weeknd's Dawn FM",
+                      "href": "/presentations/the-weeknd",
+                      "note": "An analysis of The Weeknd's album Dawn FM - themes, production, and link to spirituality."
+                    },
+                    {
+                      "type": "report",
+                      "title": "Capstone Project Report: The Weeknd's Dawn FM",
+                      "href": "/reports/Capstone Project Final Paper.pdf",
+                      "note": "A report on The Weeknd's album Dawn FM - themes, production, and link to spirituality."
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "presentations": [
+      {
+        "id": "sideline-2",
+        "title": "Sideline Presentation 2",
+        "description": "Sideline Project Progress - product backlog, live demo, testing plan, issues & strategies, and next steps.",
+        "date": "2026-03",
+        "course": {
+          "name": "CIS4914 | Senior Project"
+        },
+        "videoUrl": "https://youtu.be/ly-J8dVq30U",
+        "deckUrl": "https://drive.google.com/file/d/1bZbReyPhQ1uVds4Wr3vH-oOVkqEe7c6o/view?usp=drive_link"
+      },
+      {
+        "id": "apple-dei",
+        "title": "Apple Inc. DEI Analysis",
+        "description": "An analysis of Apple's communication & messaging, scrutiny responses, say-do gaps, and recommendations for improvement.",
+        "date": "2026-03",
+        "course": {
+          "name": "PUR3211 | Diverse Voices"
+        },
+        "deckUrl": "https://drive.google.com/file/d/1092oo3JlltDYKRQyeiXRTK3bi1T3Xf3E/view?usp=drive_link",
+        "thumbnailUrl": "/assets/appleDEI.png"
+      },
+      {
+        "id": "sideline-1",
+        "title": "Sideline Presentation 1",
+        "description": "Introduction to Sideline - problem, solution, requirements, architecture, wireframes, and progress.",
+        "date": "2026-02",
+        "course": {
+          "name": "CIS4914 | Senior Project"
+        },
+        "videoUrl": "https://youtu.be/-Y-dBrWAmhE",
+        "deckUrl": "https://drive.google.com/file/d/18Nu_KCVJvqGwlyNxiq6ARaj0i-7kmkHE/view?usp=drive_link"
+      },
+      {
+        "id": "splitsy-demo",
+        "title": "Splitsy Presentation & Product Demo",
+        "description": "Splitsy mobile app demo - problem statement, solution overview, demo, and user testing.",
+        "date": "2025-12",
+        "course": {
+          "name": "CEN4721 | HCI"
+        },
+        "videoUrl": "https://www.youtube.com/watch?v=0XIakB63Fs8"
+      },
+      {
+        "id": "crisis-case-study",
+        "title": "\"Heart On My Sleeve\" Crisis Case Study",
+        "description": "Overview of the crisis, response analysis, applied theories, outcomes & lessons learned, and recommendations for future crisis management.",
+        "date": "2025-08",
+        "course": {
+          "name": "PUR4400C | Crisis Comms"
+        },
+        "videoUrl": "https://www.youtube.com/watch?v=K5omCy-Vu_c",
+        "deckUrl": "https://docs.google.com/presentation/d/198Wq7I_PL-8ES1057FiBcMXWmdCmGsZ_/edit?usp=drive_link&ouid=110877651018463171537&rtpof=true&sd=true"
+      },
+      {
+        "id": "np-completeness",
+        "title": "NP-Completeness & Reductions - Vertex Cover Analysis",
+        "description": "Analysis of computational complexity and reduction techniques for vertex cover problems.",
+        "date": "2025-04",
+        "course": {
+          "name": "COP4533 | Algorithms"
+        },
+        "videoUrl": "https://www.youtube.com/watch?v=NhOnvYDO6S8",
+        "deckUrl": "https://docs.google.com/presentation/d/1gj0874lXG_q_QAQZ2RpL4f_69cLYY51m/edit?usp=drive_link&ouid=110877651018463171537&rtpof=true&sd=true"
+      },
+      {
+        "id": "cloud-architecture",
+        "title": "Cloud-Based Architecture - Analysis",
+        "description": "An overview of cloud architecture - definition, history, how it works, use cases, problems, and implications for the future.",
+        "date": "2024-11",
+        "course": {
+          "name": "CEN3031 | SWE"
+        },
+        "videoUrl": "https://www.youtube.com/watch?v=3Xo26TCBtGg",
+        "deckUrl": "https://docs.google.com/presentation/d/10w3g1_JSEu1K5LY3HEclo6sfxlYDM1OP/edit?usp=drive_link&ouid=110877651018463171537&rtpof=true&sd=true"
+      },
+      {
+        "id": "whisp",
+        "title": "Whisp - Innovation Communications",
+        "description": "A hypothetical product presentation for Whisp - why, what, SWOT analysis, target audience, game theory, calls to action, crisis management, measures of success, and data analytics.",
+        "date": "2025-08",
+        "course": {
+          "name": "PUR 4243 | Innovation Comms"
+        },
+        "deckUrl": "https://docs.google.com/presentation/d/1lI30TZk03SxgtenGfwPDdYLz97Poi8v6/edit?usp=drive_link&ouid=110877651018463171537&rtpof=true&sd=true",
+        "thumbnailUrl": "/assets/whispLogo.png"
+      },
+      {
+        "id": "opioid-crisis",
+        "title": "Opioid Crisis - Public Interest Communications",
+        "description": "A public interest communications campaign for the opioid crisis - problem framing, messaging strategy, and organization partnering.",
+        "date": "2024-12",
+        "course": {
+          "name": "PUR4442 | Public Interest Comms"
+        },
+        "deckUrl": "https://docs.google.com/presentation/d/1_lORAZQkxD5rzHHIs08Pbz6ZR6FyafTM/edit?usp=drive_link&ouid=110877651018463171537&rtpof=true&sd=true",
+        "thumbnailUrl": "/assets/opioidCrisis.png"
+      },
+      {
+        "id": "duolingo",
+        "title": "Duolingo Olympics Campaign",
+        "description": "A social media campaign proposal for Duolingo during the Olympics - campaign overview, research, content strategy, sample posts, engagement tactics, and evaluation plan.",
+        "date": "2024-04",
+        "course": {
+          "name": "PUR3622 | Social Media Management"
+        },
+        "videoUrl": "https://www.youtube.com/watch?v=zCQVAChY-cw",
+        "deckUrl": "https://drive.google.com/file/d/1MH34UviM0bBySifGMLofyJuhsqld4OaV/view?usp=drive_link"
+      },
+      {
+        "id": "gridiron-guru",
+        "title": "Gridiron Guru Demo",
+        "description": "A demo presentation for Gridiron Guru: An American Football Playmaker based on large-sample statistics of NFL play-by-play data.",
+        "date": "2024-04",
+        "course": {
+          "name": "COP3530 | Data Structures & Algorithms"
+        },
+        "videoUrl": "https://www.youtube.com/watch?v=fsc1PRHfNWw"
+      },
+      {
+        "id": "outsourcing",
+        "title": "A Bayesian Perspective on the Outsourcing Dilemma",
+        "description": "An analysis of the outsourcing dilemma using Bayesian principles - problem definition, arguments, Bayesian modeling, and the opinion gap.",
+        "date": "2023-06",
+        "course": {
+          "name": "IDS2935 | Knowledge & the Universe"
+        },
+        "thumbnailUrl": "/assets/outsourcing.png",
+        "deckUrl": "https://docs.google.com/presentation/d/1LXggkc0rnqkSlYFZKiZ9hirGNDL2wpCb/edit?usp=drive_link&ouid=110877651018463171537&rtpof=true&sd=true"
+      },
+      {
+        "id": "sudoku",
+        "title": "Sudoku Python Project",
+        "description": "A demo of a Python project to play Sudoku puzzles using PyGame.",
+        "date": "2023-04",
+        "course": {
+          "name": "COP3502C | Programming Fundamentals 1"
+        },
+        "videoUrl": "https://www.youtube.com/watch?v=nJQsjUFKmSc"
+      },
+      {
+        "id": "the-weeknd",
+        "title": "The Spiritual Journey of The Weeknd's Dawn FM",
+        "description": "An analysis of The Weeknd's album Dawn FM - themes, production, and artistic evolution.",
+        "date": "2023-04",
+        "course": {
+          "name": "MUS1610 | Music & Spirituality"
+        },
+        "videoUrl": "https://www.youtube.com/watch?v=wfclOehgZlA"
+      },
+      {
+        "id": "tempo",
+        "title": "Tempo Titan",
+        "description": "The human-centered design process for Tempo Titan - problem statement, user research, circuitry, design iterations, solid modeling, and final solution.",
+        "date": "2023-04",
+        "course": {
+          "name": "EGN2020C | Engineering Design & Society"
+        },
+        "thumbnailUrl": "/assets/tempo.png",
+        "deckUrl": "https://docs.google.com/presentation/d/14lqgeQ-FJ29FRG5NekYD061sN54BVcsR/edit?usp=drive_link&ouid=110877651018463171537&rtpof=true&sd=true"
+      }
+    ],
+    "reports": [
+      {
+        "fileName": "Capstone Project Final Paper.pdf",
+        "courseCode": "MUS1610",
+        "courseTitle": "Music & Spirituality",
+        "title": "Capstone Project Report: The Weeknd's Dawn FM",
+        "excerpt": "A report on The Weeknd's album Dawn FM covering themes, production, and spirituality.",
+        "date": "2022-12-01",
+        "tags": [
+          "Report",
+          "Capstone"
+        ]
+      },
+      {
+        "fileName": "Duolingo Campaign Idea.pdf",
+        "courseCode": "PUR3622",
+        "courseTitle": "Social Media Management",
+        "title": "Duolingo Campaign Proposal",
+        "excerpt": "A social media campaign proposal for Duolingo during the 2024 Olympics.",
+        "date": "2024-04-20",
+        "tags": [
+          "Report",
+          "Campaign"
+        ]
+      },
+      {
+        "fileName": "Duolingo Research & Audit.pdf",
+        "courseCode": "PUR3622",
+        "courseTitle": "Social Media Management",
+        "title": "Duolingo Research & Audit",
+        "excerpt": "A research and audit of Duolingo's social media presence.",
+        "date": "2024-04-10",
+        "tags": [
+          "Report",
+          "Research",
+          "Audit"
+        ]
+      },
+      {
+        "fileName": "JettNguyen_FailureAnalysisPaper.pdf",
+        "courseCode": "ENC3246",
+        "courseTitle": "Professional Communication for Engineers",
+        "title": "Therac-25 Failure Analysis Paper",
+        "excerpt": "Final paper analyzing the Therac-25 radiation therapy machine failure.",
+        "date": "2024-11-20",
+        "tags": [
+          "Report",
+          "Failure Analysis"
+        ]
+      },
+      {
+        "fileName": "JettNguyen_ResearchReport.pdf",
+        "courseCode": "ENC3246",
+        "courseTitle": "Professional Communication for Engineers",
+        "title": "AI-Powered Traffic Systems Research Report",
+        "excerpt": "Research report proposing AI-powered traffic systems in Gainesville, FL.",
+        "date": "2024-12-01",
+        "tags": [
+          "Report",
+          "Research"
+        ]
+      },
+      {
+        "fileName": "Nguyen_Jett_Final_Paper.pdf",
+        "courseCode": "GEO2500",
+        "courseTitle": "Global/Regional Economies",
+        "title": "The Gap in Artificial Intelligence Adoption and the Core-Periphery Model",
+        "excerpt": "Final paper on AI adoption and global economic structures.",
+        "date": "2025-12-05",
+        "tags": [
+          "Report",
+          "Final Paper"
+        ]
+      },
+      {
+        "fileName": "Nguyen_Jett_Module_2_Essay.pdf",
+        "courseCode": "GEO2500",
+        "courseTitle": "Global/Regional Economies",
+        "title": "GDP vs. HDI as a Measurement of Economic Development",
+        "excerpt": "Essay comparing GDP and HDI as metrics of economic development.",
+        "date": "2025-09-10",
+        "tags": [
+          "Report",
+          "Essay"
+        ]
+      },
+      {
+        "fileName": "Nguyen_Jett_Module_4_Essay.pdf",
+        "courseCode": "GEO2500",
+        "courseTitle": "Global/Regional Economies",
+        "title": "The Economy Shaped by Core-Periphery Relationships",
+        "excerpt": "Essay analyzing core-periphery relationships in global economic development.",
+        "date": "2025-10-01",
+        "tags": [
+          "Report",
+          "Essay"
+        ]
+      },
+      {
+        "fileName": "Nguyen_Jett_Module_6_Essay.pdf",
+        "courseCode": "GEO2500",
+        "courseTitle": "Global/Regional Economies",
+        "title": "Cumulative Causation & the Core-Periphery Relationships",
+        "excerpt": "Essay explaining cumulative causation and peripheralization.",
+        "date": "2025-10-22",
+        "tags": [
+          "Report",
+          "Essay"
+        ]
+      },
+      {
+        "fileName": "Nguyen_Jett_Module_8_Essay.pdf",
+        "courseCode": "GEO2500",
+        "courseTitle": "Global/Regional Economies",
+        "title": "The Coffee Commodity Chain in the Global Economy",
+        "excerpt": "Essay on the coffee commodity chain, Guatemala's role, and global trade impact.",
+        "date": "2025-11-12",
+        "tags": [
+          "Report",
+          "Essay"
+        ]
+      },
+      {
+        "fileName": "Splitsy Project Proposal.pdf",
+        "courseCode": "CEN4721",
+        "courseTitle": "Human-Computer Interaction",
+        "title": "Splitsy Project Proposal",
+        "excerpt": "The project proposal for Splitsy.",
+        "date": "2025-09-18",
+        "tags": [
+          "Report",
+          "Proposal",
+          "ACM Format"
+        ]
+      },
+      {
+        "fileName": "Splitsy Implementation Report.pdf",
+        "courseCode": "CEN4721",
+        "courseTitle": "Human-Computer Interaction",
+        "title": "Splitsy Implementation Report",
+        "excerpt": "A report outlining the vision for the solution, wireframes, and implementation details.",
+        "date": "2025-10-29",
+        "tags": [
+          "Report",
+          "Preliminary",
+          "ACM Format"
+        ]
+      },
+      {
+        "fileName": "Splitsy Final Report.pdf",
+        "courseCode": "CEN4721",
+        "courseTitle": "Human-Computer Interaction",
+        "title": "Splitsy Final Report",
+        "excerpt": "A final report detailing the implementation, testing, user requirements, outcomes, and reflections on the project.",
+        "date": "2025-12-03",
+        "tags": [
+          "Report",
+          "Final",
+          "ACM Format"
+        ]
+      }
+    ],
+    "links":[
+      { "label":"Email",              "handle":"jettcameronnguyen@gmail.com", "href":"mailto:jettcameronnguyen@gmail.com", "iconType":"fa",   "iconValue":"fa-solid fa-envelope" },
+      { "label":"GitHub",             "handle":"github.com/JettNguyen",       "href":"https://github.com/JettNguyen",       "iconType":"fa",   "iconValue":"fa-brands fa-github" },
+      { "label":"LinkedIn",           "handle":"linkedin.com/in/jett-nguyen", "href":"https://linkedin.com/in/jett-nguyen", "iconType":"fa",   "iconValue":"fa-brands fa-linkedin" },
+      { "label":"Production Portfolio","handle":"Spotify Playlist",           "href":"https://open.spotify.com/playlist/3A7pDOj3iWVYk1KKR8LjWJ", "iconType":"fa", "iconValue":"fa-brands fa-spotify" },
+      { "label":"Jett2Fly",           "handle":"jett2fly.com",                "href":"https://jett2fly.com",                "iconType":"img",  "iconValue":"/assets/jett2fly.png" },
+      { "label":"Mercari",            "handle":"7jettster7",                  "href":"https://www.mercari.com/u/7jettster7", "iconType":"img", "iconValue":"/assets/mercari.jpeg" },
+      { "label":"Depop",              "handle":"allweknowisbangers",           "href":"https://www.depop.com/allweknowisbangers", "iconType":"img", "iconValue":"/assets/depop.png" }
+    ],
+    "githubSelection": {
+      "featuredGithubRepoNames": [
+        "NightLink",
+        "Frequify",
+        "Nexel",
+        "Splitsy",
+        "Sideline",
+        "ProducerFingerprint"
+      ],
+      "omittedGithubRepoNames": [
+        "JettNguyen",
+        "JettNguyen.github.io",
+        "CounterAssignment",
+        "esep-webhooks",
+        "observability_assignment11",
+        "RocketScope",
+        "Jett2Fly"
+      ]
+    }
+  },
+  "media": {
+    "assets": [
+      "FrequifySquare.png",
+      "Jett_Nguyen_Resume_2026.pdf",
+      "Nexel.png",
+      "ProducerFingerprint.png",
+      "SlidePuzzle.png",
+      "appleDEI.png",
+      "depop.png",
+      "favicon.svg",
+      "gatorfound.png",
+      "github.png",
+      "gridironguru.png",
+      "gridirongurulogo.png",
+      "jett.png",
+      "jett2fly.png",
+      "mara.png",
+      "mercari.jpeg",
+      "nightlink.png",
+      "opioidCrisis.png",
+      "outsourcing.png",
+      "p2p.png",
+      "pulsegear.png",
+      "sideline.png",
+      "splitsy.jpg",
+      "splitsyexpanded.png",
+      "stackd.png",
+      "tempo.png",
+      "uf.png",
+      "weichert.png",
+      "whispLogo.png"
+    ],
+    "reports": [
+      ".gitkeep",
+      "Capstone Project Final Paper.pdf",
+      "Duolingo Campaign Idea.pdf",
+      "Duolingo Research & Audit.pdf",
+      "JettNguyen_FailureAnalysisPaper.pdf",
+      "JettNguyen_ResearchReport.pdf",
+      "Nguyen_Jett_Final_Paper.pdf",
+      "Nguyen_Jett_Module_2_Essay.pdf",
+      "Nguyen_Jett_Module_4_Essay.pdf",
+      "Nguyen_Jett_Module_6_Essay.pdf",
+      "Nguyen_Jett_Module_8_Essay.pdf",
+      "Splitsy Final Report.pdf",
+      "Splitsy Implementation Report.pdf",
+      "Splitsy Project Proposal.pdf"
+    ],
+    "presentations": []
+  }
+}

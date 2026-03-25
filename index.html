@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Loading…</title>
+  <link rel="icon" href="assets/jett.png">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Goldman:wght@400;600;700;800&family=DM+Mono:wght@400&family=Plus+Jakarta+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<div id="cursor"></div>
+<div id="cursor-ring"></div>
+
+<div id="loader">
+  <div class="loader-name" id="loaderName"></div>
+  <div class="loader-bar-wrap"><div class="loader-bar" id="loaderBar"></div></div>
+  <div class="loader-pct" id="loaderPct">000</div>
+</div>
+
+<div id="transition-overlay"></div>
+<canvas id="bg-canvas"></canvas>
+
+<nav id="mainNav">
+  <div class="nav-bg"></div>
+  <div class="nav-logo" id="navLogo"></div>
+  <ul class="nav-links" id="navLinks">
+    <div class="nav-pill" id="navPill"></div>
+  </ul>
+  <div class="nav-status">
+    <div class="status-dot"></div>
+    <span id="statusText"></span>
+  </div>
+</nav>
+
+<div id="mobile-nav">
+  <div id="mob-lens"></div>
+  <div id="mobile-nav-track"></div>
+</div>
+
+<div id="app"></div>
+
+<script src="data.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
