@@ -21,21 +21,6 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Setup Node
-        uses: actions/setup-node@v4
-        with:
-          node-version: 20
-          cache: npm
-
-      - name: Install dependencies
-        run: |
-          npm ci || true
-
-      - name: Build static export
-        run: |
-          # No build needed for this vanilla static site; keep this step for compatibility.
-          echo "No build step required"
-
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
