@@ -48,6 +48,14 @@ function scrollToSection(page, id) {
   else scroll();
 }
 
+function getProjectOriginLabel(project) {
+  return project.origin === 'school' ? 'School' : 'Independent';
+}
+
+function getProjectCollaborationLabel(project) {
+  return project.collaboration === 'team' ? 'Team' : 'Solo';
+}
+
 const builders = {};
 
 builders.home = () => {
@@ -281,6 +289,12 @@ builders.projects = () => {
     const body = div('proj-body');
     if (p.status) body.appendChild(Object.assign(div('proj-status'), { textContent: p.status }));
     body.appendChild(Object.assign(div('proj-title'), { textContent: p.title }));
+
+    const meta = div('proj-meta');
+    meta.appendChild(span(`proj-indicator ${p.origin === 'school' ? 'school' : 'independent'}`, getProjectOriginLabel(p)));
+    meta.appendChild(span(`proj-indicator ${p.collaboration === 'team' ? 'team' : 'solo'}`, getProjectCollaborationLabel(p)));
+    body.appendChild(meta);
+
     body.appendChild(Object.assign(mk('p', 'proj-desc'), { textContent: p.summary }));
 
     const tags = div('proj-tags');
@@ -1211,12 +1225,16 @@ function openDetailsModal(project) {
   const modal = div('card-modal details-modal');
   modal.style.opacity = '0';
   const imgHtml = project.logo ? `<img class="modal-img modal-img--square" src="${project.logo}" alt="${project.title}">` : '';
+  const metaTags = [getProjectOriginLabel(project), getProjectCollaborationLabel(project)]
+    .map(tag => `<span class="modal-tag">${tag}</span>`)
+    .join('');
   modal.innerHTML = `
     <div class="modal-inner">
       <button class="modal-close">×</button>
       ${project.logo ? `<div class="modal-image-col">${imgHtml}</div>` : ''}
       <div class="modal-info">
         <div class="modal-info-title">${project.title}</div>
+        ${metaTags ? `<div class="modal-info-tags">${metaTags}</div>` : ''}
         ${d.problem     ? `<div class="modal-info-desc"><strong>Problem:</strong> ${d.problem}</div>` : ''}
         ${d.observation ? `<div class="modal-info-desc"><strong>Observation:</strong> ${d.observation}</div>` : ''}
         ${d.hypothesis  ? `<div class="modal-info-desc"><strong>Hypothesis:</strong> ${d.hypothesis}</div>` : ''}
