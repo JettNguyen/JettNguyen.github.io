@@ -622,13 +622,14 @@ builders.coursework = () => {
                         badgeText.textContent = art.type;
                         badge.appendChild(badgeText);
 
-                        artifactCard.appendChild(badge);
-                        
+                        const footer = div('cw-artifact-footer');
+                        footer.appendChild(badge);
                         if (isProjectLink || isPresentationLink) {
                           const arrow = div('cw-artifact-arrow');
                           arrow.textContent = '↗';
-                          artifactCard.appendChild(arrow);
+                          footer.appendChild(arrow);
                         }
+                        artifactCard.appendChild(footer);
                         
                         artifactsGrid.appendChild(artifactCard);
                       });
@@ -1241,6 +1242,7 @@ function openDetailsModal(project) {
         ${d.experiment  ? `<div class="modal-info-desc"><strong>Experiment:</strong> ${d.experiment}</div>` : ''}
         ${d.outcome     ? `<div class="modal-info-desc"><strong>Outcome:</strong> ${d.outcome}</div>` : ''}
         ${d.reflection  ? `<div class="modal-info-desc"><strong>Reflection:</strong> ${d.reflection}</div>` : ''}
+        ${project.posterUrl ? `<div class="modal-poster-section"><div class="modal-poster-label">Research Poster</div><img class="modal-poster-img" src="${project.posterUrl}" alt="${project.title} research poster"></div>` : ''}
       </div>
     </div>
   `;
@@ -1262,6 +1264,24 @@ function openDetailsModal(project) {
   document.addEventListener('keydown', onKeyDown);
   modal.querySelector('.modal-close').onclick = close;
   modal.onclick = ev => { if (ev.target === modal) close(); };
+
+  const posterImg = modal.querySelector('.modal-poster-img');
+  if (posterImg) {
+    posterImg.addEventListener('click', e => {
+      e.stopPropagation();
+      openCardModal({
+        fromRect: posterImg.getBoundingClientRect(),
+        src:      posterImg.src,
+        backSrc:  null,
+        aspect:   'landscape',
+        title:    `${project.title} — Research Poster`,
+        subtitle: '',
+        desc:     '',
+        tags:     [],
+        isTee:    false,
+      });
+    });
+  }
 }
 
 

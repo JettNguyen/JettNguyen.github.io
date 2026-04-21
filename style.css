@@ -1284,7 +1284,41 @@ nav.visible {
 	max-width: min(100%, 620px);
 	width: clamp(280px, 42vw, 520px);
 	padding-bottom: 12px;
+	overflow-y: auto;
+	max-height: calc(85vh - 40px);
+	scrollbar-width: thin;
+	scrollbar-color: rgba(255,255,255,0.2) transparent;
 }
+
+.details-modal .modal-info::-webkit-scrollbar { width: 5px; }
+.details-modal .modal-info::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.2); border-radius: 3px; }
+.details-modal .modal-info::-webkit-scrollbar-track { background: transparent; }
+
+.modal-poster-section {
+	margin-top: 20px;
+	border-top: 1px solid rgba(255,255,255,0.08);
+	padding-top: 14px;
+}
+
+.modal-poster-label {
+	font-size: 11px;
+	font-family: 'DM Mono', monospace;
+	text-transform: uppercase;
+	letter-spacing: 0.08em;
+	color: var(--accent);
+	margin-bottom: 10px;
+}
+
+.modal-poster-img {
+	display: block;
+	width: 100%;
+	height: auto;
+	border-radius: 6px;
+	cursor: zoom-in;
+	transition: opacity 0.2s;
+}
+
+.modal-poster-img:hover { opacity: 0.88; }
 
 .details-modal .modal-info-title {
 	font-size: 22px;
@@ -1366,15 +1400,49 @@ nav.visible {
 
 @media (width <= 600px) {
  .modal-inner {
- flex-direction: column;
- align-items: center;
- overflow-y: auto;
+  flex-direction: column;
+  align-items: center;
+  overflow-y: auto;
  }
 
  .modal-flipper,
  .modal-img--square { width: min(80vw, 300px); height: min(80vw, 300px); }
  .modal-img--portrait { height: min(55vh, 320px); width: calc(min(55vh, 320px) * 2 / 3); }
  .modal-info { max-width: 100%; }
+
+ .details-modal .modal-inner {
+  flex-direction: column;
+  align-items: center;
+  overflow-y: auto;
+  max-height: 90vh;
+ }
+
+ .details-modal .modal-info {
+  overflow-y: visible;
+  max-height: none;
+  width: 100%;
+  max-width: 100%;
+ }
+
+ .modal-poster-img {
+  border-radius: 4px;
+ }
+
+ /* ── Page & section breathing room ── */
+ .page { padding: 0 16px; }
+ .section-header { padding: 32px 0 24px; margin-bottom: 24px; }
+
+ /* ── Projects ── */
+ .project-item { grid-template-columns: 58px 1fr auto; }
+ .proj-logo-large, .proj-logo-placeholder { width: 50px; height: 50px; border-radius: 12px; }
+
+ /* ── Experience timeline ── */
+ .tl-item { grid-template-columns: 1fr; gap: 12px; }
+ .tl-left-col { flex-direction: row; align-items: center; gap: 16px; }
+ .tl-left-col .tl-date { text-align: left; padding-top: 0; }
+
+ /* ── Presentations ── */
+ .pres-grid { grid-template-columns: 1fr; }
 }
 
 .curiosity-grid {
@@ -2515,9 +2583,16 @@ nav.visible {
  font-size: 14px;
  color: var(--accent);
  transition: transform 0.2s ease;
- margin-left: auto;
  align-self: center;
  flex-shrink: 0;
+}
+
+.cw-artifact-footer {
+ display: flex;
+ align-items: center;
+ gap: 8px;
+ flex-shrink: 0;
+ margin-left: auto;
 }
 
 .cw-artifact-card:hover .cw-artifact-arrow {
@@ -2526,17 +2601,54 @@ nav.visible {
 
 @media (width <= 768px) {
  .cw-artifact-card {
- flex-wrap: wrap;
- gap: 10px;
+  flex-wrap: wrap;
+  gap: 10px;
  }
+}
 
- .cw-artifact-badge {
- margin-left: auto;
- }
+@media (width <= 600px) {
+ /* ── Coursework year cards ── */
+ .cw-year-header { padding: 12px 14px; }
+ .cw-year-title { font-size: 22px; letter-spacing: -0.5px; }
+ .cw-year-stats { gap: 10px; font-size: 11px; }
+ .cw-year-card.open .cw-year-content { padding: 12px 14px; }
 
- .cw-artifact-arrow {
- margin-left: 0;
+ /* ── Coursework semester blocks ── */
+ .cw-semester-header { padding: 13px 14px; }
+ .cw-semester-block.open .cw-semester-courses { padding: 0 12px 14px; }
+
+ /* ── Coursework course cards ── */
+ .cw-course-header { padding: 10px 12px; }
+ .cw-course-theme { padding: 10px 14px; }
+ .cw-course-card.open .cw-course-artifacts { padding: 12px; }
+
+ /* ── Artifact grid: allow column to shrink below content size ── */
+ .cw-artifacts-grid { grid-template-columns: minmax(0, 1fr); }
+
+ /* ── Artifact card: stacked layout, can compress to any width ── */
+ .cw-artifact-card {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 6px;
+  align-items: flex-start;
+  min-width: 0;
+  overflow: hidden;
  }
+ .cw-artifact-icon-container { width: 30px; height: 30px; }
+ .cw-artifact-content { min-width: 0; overflow: hidden; }
+ .cw-artifact-title { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+ .cw-artifact-note { overflow: hidden; }
+ .cw-artifact-footer {
+  margin-left: 0;
+  min-width: 0;
+  width: 100%;
+  justify-content: space-between;
+ }
+}
+
+@media (width <= 500px) {
+ .cw-artifact-card:hover { transform: translateY(-2px); }
+ .cw-artifact-card:hover .cw-artifact-arrow { transform: translateY(-1px); }
 }
 
 .contact-wrap {
