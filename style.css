@@ -994,6 +994,11 @@ nav.visible {
  transform-style: preserve-3d;
 }
 
+.tee-card .card-img-container {
+ transform-style: preserve-3d;
+ overflow: visible;
+}
+
 .tee-card .tee-image-container {
  display: none;
 }
@@ -1139,6 +1144,7 @@ nav.visible {
  transition: background-color 0.2s, color 0.2s, transform 0.2s;
  opacity: 1;
 }
+
 .modal-close:hover {
  color: var(--accent);
  background: rgba(239, 68, 68, 0.45);
@@ -1150,6 +1156,7 @@ nav.visible {
  flex-direction: column;
  align-items: center;
  flex-shrink: 0;
+ perspective: 1000px;
 }
 
 .modal-flipper {
@@ -1157,10 +1164,8 @@ nav.visible {
  height: min(48vw, 380px);
  position: relative;
  transform-style: preserve-3d;
- perspective: 1000px;
  border-radius: 14px;
  will-change: transform;
- overflow: hidden;
 }
 
 .modal-face {
@@ -1176,6 +1181,7 @@ nav.visible {
  transform: translateZ(0);
  overflow: hidden;
 }
+
 .modal-back { transform: rotateY(180deg); }
 
 .modal-flip-btn {
@@ -1193,6 +1199,7 @@ nav.visible {
  opacity: 0;
  animation: modalFadeIn 0.2s 0.38s ease forwards;
 }
+
 .modal-flip-btn:hover { color: var(--text); border-color: var(--accent); }
 
 .modal-img {
@@ -1201,6 +1208,7 @@ nav.visible {
  border-radius: 14px;
  will-change: transform;
 }
+
 .modal-img--square { width: min(48vw, 380px); height: min(48vw, 380px); }
 .modal-img--portrait { height: min(70vh, 480px); width: calc(min(70vh, 480px) * 2 / 3); }
 .modal-img--landscape { width: min(60vw, 500px); height: auto; }
@@ -1222,6 +1230,7 @@ nav.visible {
  letter-spacing: -0.3px;
  line-height: 1.2;
  color: var(--text);
+ padding-right: 40px;
 }
 
 .modal-info-sub {
