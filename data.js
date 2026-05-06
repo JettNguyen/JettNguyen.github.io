@@ -48,7 +48,7 @@ window.siteData = {
       {label:"Location",value:"Gainesville, FL"},
       {label:"Graduated",value:"May 2026"},
       {label:"Degree",value:"B.S. Computer Science, Minor in Public Relations"},
-      {label:"GPA",value:"3.63"},
+      {label:"GPA",value:"3.65"},
       {label:"Email",value:"jettcameronnguyen@gmail.com",href:"mailto:jettcameronnguyen@gmail.com"}
     ],
     skills:[
@@ -261,7 +261,7 @@ window.siteData = {
   coursework:{
     sectionLabel:"academics",
     sectionTitle:["Coursework."],
-    overallGpa:"3.63",
+    overallGpa:"3.65",
     artifactTypes:[
       {type:"project",     icon:"◈", label:"Project"},
       {type:"presentation",icon:"▶", label:"Presentation"},
@@ -271,22 +271,22 @@ window.siteData = {
     ],
     years:[
       {year:2026,semesters:[
-        {term:"Spring",termGpa:"TBA",classes:[
-          {courseCode:"CIS4914",course:"Senior Project",grade:{letter:"TBA",symbol:""},theme:"Product development: requirements, architecture, and iterative delivery in a team setting.",artifacts:[
+        {term:"Spring",termGpa:"3.90",classes:[
+          {courseCode:"CIS4914",course:"Senior Project",grade:{letter:"A",symbol:""},theme:"Product development: requirements, architecture, and iterative delivery in a team setting.",artifacts:[
             {type:"project",title:"Sideline",href:"/projects/sideline",note:"MERN stack mobile-first web application for youth soccer match video management."},
             {type:"presentation",title:"Sideline Presentation 1",href:"/presentations/sideline-1",note:"Problem framing, architecture, wireframes, user flow, and next steps."},
             {type:"presentation",title:"Sideline Presentation 2",href:"/presentations/sideline-2",note:"Project progress, tech demo, testing plan, and next steps."},
             {type:"presentation",title:"Sideline Final Presentation",href:"/presentations/sideline-final",note:"Final presentation summarizing project outcomes, demonstrations, and reflections."},
             {type:"report",title:"Sideline Documentation",href:"/reports/Sideline Documentation.pdf",note:"Comprehensive report detailing project overview, implementation details, testing, and next steps."}
           ]},
-          {courseCode:"CIS4930",course:"Internet Programming",grade:{letter:"TBA",symbol:""},theme:"Modern web application design across frontend, backend, authentication, and deployment.",artifacts:[
+          {courseCode:"CIS4930",course:"Internet Programming",grade:{letter:"A",symbol:""},theme:"Modern web application design across frontend, backend, authentication, and deployment.",artifacts:[
             {type:"project",title:"Stackd",href:"/projects/stackd",note:"MERN stack web application for flashcard studying."},
             {type:"report",title:"Stackd Manual",href:"/reports/stackd_manual.pdf",note:"A user manual detailing how to use the Stackd flashcard application."}
           ]},
-          {courseCode:"CNT4007",course:"Computer Network Fundamentals",grade:{letter:"TBA",symbol:""},theme:"Network-layer behavior, reliability, and performance tradeoffs in distributed systems.",artifacts:[
+          {courseCode:"CNT4007",course:"Computer Network Fundamentals",grade:{letter:"A",symbol:"-"},theme:"Network-layer behavior, reliability, and performance tradeoffs in distributed systems.",artifacts:[
             {type:"project",title:"P2P File Sharing",href:"/projects/networks",note:"In-progress P2P file sharing application with custom TCP protocol."}
           ]},
-          {courseCode:"PUR3211",course:"Diverse Voices",grade:{letter:"TBA",symbol:""},theme:"Audience-centered communication, representation, and message design across different communities.",artifacts:[
+          {courseCode:"PUR3211",course:"Diverse Voices",grade:{letter:"A",symbol:""},theme:"Audience-centered communication, representation, and message design across different communities.",artifacts:[
             {type:"presentation",title:"Apple DEI Assessment",href:"/presentations/apple-dei",note:"In-progress presentation assessing diversity, equity, and inclusion at Apple."}
           ]}
         ]}
