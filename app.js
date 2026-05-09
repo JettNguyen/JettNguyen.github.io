@@ -154,10 +154,11 @@ builders.about = () => {
 
   const sidebar = div('sr');
   about.infoFields.forEach(f => {
+    if (f.label === 'GPA') return;
     sidebar.appendChild(Object.assign(div('info-label'), { textContent: f.label }));
     const val = div('info-value');
-    if (f.href) { 
-        val.innerHTML = `<a href="${f.href}">${f.value}</a>`; 
+    if (f.href) {
+        val.innerHTML = `<a href="${f.href}">${f.value}</a>`;
     } else {
         val.textContent = f.value;
     }
@@ -335,8 +336,8 @@ builders.experience = () => {
   const eduBody = div('tl-body');
   eduBody.appendChild(Object.assign(div('edu-inst'), { textContent: edu.institution }));
   eduBody.appendChild(Object.assign(div('edu-deg'),  { textContent: edu.degree }));
-  const gpa = div('edu-deg'); gpa.textContent = 'GPA: ' + edu.gpa; gpa.style.color = 'var(--muted)'; eduBody.appendChild(gpa);
-  eduBody.appendChild(Object.assign(div('edu-date'), { textContent: edu.date }));
+
+
   if (D.experience.resumePdf) {
     eduBody.appendChild(Object.assign(mk('a', 'resume-dl'), { href: D.experience.resumePdf, target: '_blank', textContent: '↓ Download Resume' }));
   }
@@ -355,7 +356,7 @@ builders.experience = () => {
     body.appendChild(Object.assign(div('tl-role'), { textContent: j.role }));
     body.appendChild(Object.assign(div('tl-org'),  { textContent: j.company }));
     const pts = mk('ul', 'tl-points');
-    j.highlights.forEach(h => pts.appendChild(Object.assign(mk('li'), { textContent: h })));
+    j.highlights.forEach(h => { const li = mk('li'); li.innerHTML = h; pts.appendChild(li); });
     body.appendChild(pts);
     item.appendChild(body);
     tl.appendChild(item);
@@ -426,14 +427,9 @@ builders.coursework = () => {
     // Section header
     frag.appendChild(sectionHeader(CW.sectionLabel, CW.sectionTitle));
     
-    // Summary section with GPA and legend
+    // Summary section with legend
     const summary = div('cw-summary');
-    
-    const gpaBlock = div('cw-gpa');
-    gpaBlock.appendChild(Object.assign(div('cw-gpa-label'), { textContent: 'Overall GPA' }));
-    gpaBlock.appendChild(Object.assign(div('cw-gpa-val'), { textContent: CW.overallGpa }));
-    summary.appendChild(gpaBlock);
-    
+
     const legend = div('cw-legend');
     const TYPE_COLORS = {
         project: '#44efb4',
@@ -495,14 +491,6 @@ builders.coursework = () => {
             const semHeader = div('cw-semester-header');
             const semInfo = div('cw-semester-info');
             semInfo.appendChild(Object.assign(div('cw-semester-name'), { textContent: `${sem.term}` }));
-            if (sem.termGpa && sem.termGpa !== 'TBA') {
-                semInfo.appendChild(Object.assign(div('cw-semester-gpa'), { textContent: `GPA ${sem.termGpa}` }));
-            } else if (sem.termGpa === 'TBA') {
-                const tbaBadge = div('cw-semester-gpa');
-                tbaBadge.textContent = 'TBA';
-                tbaBadge.style.opacity = '0.5';
-                semInfo.appendChild(tbaBadge);
-            }
             semHeader.appendChild(semInfo);
             semHeader.appendChild(Object.assign(div('cw-semester-chevron'), { textContent: '▾' }));
             semesterBlock.appendChild(semHeader);
@@ -524,10 +512,6 @@ builders.coursework = () => {
                 courseLeft.appendChild(Object.assign(div('cw-course-name'), { textContent: cls.course }));
                 
                 courseHeader.appendChild(courseLeft);
-                
-                const gradeClass = cls.grade.letter === 'TBA' ? 'tba' : cls.grade.letter[0];
-                const gradeEl = Object.assign(div(`cw-course-grade ${gradeClass}`), { textContent: cls.grade.letter + (cls.grade.symbol || '') });
-                courseHeader.appendChild(gradeEl);
                 courseHeader.appendChild(Object.assign(div('cw-course-chevron'), { textContent: '▾' }));
                 courseCard.appendChild(courseHeader);
                 
