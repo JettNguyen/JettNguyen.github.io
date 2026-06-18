@@ -338,6 +338,12 @@ builders.experience = () => {
   eduBody.appendChild(Object.assign(div('edu-deg'),  { textContent: edu.degree }));
 
 
+  if (edu.highlights) {
+    const eduPts = mk('ul', 'tl-points');
+    edu.highlights.forEach(h => { const li = mk('li'); li.innerHTML = h; eduPts.appendChild(li); });
+    eduBody.appendChild(eduPts);
+  }
+
   if (D.experience.resumePdf) {
     eduBody.appendChild(Object.assign(mk('a', 'resume-dl'), { href: D.experience.resumePdf, target: '_blank', textContent: '↓ Download Resume' }));
   }
@@ -346,7 +352,9 @@ builders.experience = () => {
   tl.appendChild(Object.assign(div('tl-section-label'), { textContent: 'Work Experience' }));
 
   D.experience.jobs.forEach(j => {
-    const item    = div('tl-item sr');
+    const item = j.url
+      ? Object.assign(mk('a', 'tl-item tl-item-link sr'), { href: j.url, target: '_blank', rel: 'noopener' })
+      : div('tl-item sr');
     const leftCol = div('tl-left-col');
     leftCol.appendChild(logoOrPlaceholder(j.logo, j.company, j.company, 'tl-logo-large'));
     const dc = div('tl-date'); dc.innerHTML = j.date.replace(' - ', '<br><span style="color:var(--accent3); font-size: 14px">↓</span><br>'); leftCol.appendChild(dc);
