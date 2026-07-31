@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 1024 1024" role="img" aria-label="Archie">
+  <defs>
+    <linearGradient id="archieGrad" gradientUnits="userSpaceOnUse" x1="512" y1="85" x2="512" y2="888">
+      <stop offset="0" stop-color="#F0AB80"/>
+      <stop offset="0.55" stop-color="#E28D5E"/>
+      <stop offset="1" stop-color="#C36A3D"/>
+    </linearGradient>
+  </defs>
+  <!-- additional base triangle (fletch), behind the body -->
+  <polygon fill="url(#archieGrad)" stroke="url(#archieGrad)" stroke-width="34" stroke-linejoin="round" stroke-linecap="round" points="328,887 512,727 696,887"/>
+  <!-- big triangle: base notch routed into a single outline (no coincident edge) + middle counter cutout -->
+  <path fill="url(#archieGrad)" stroke="url(#archieGrad)" stroke-width="34" stroke-linejoin="round" stroke-linecap="round" fill-rule="evenodd" d="M 512,85 L 824,850 L 512,712 L 200,850 Z M 512,272 L 384,616 L 640,616 Z"/>
+</svg>
