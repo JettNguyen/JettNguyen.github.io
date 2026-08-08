@@ -8,6 +8,23 @@ const mk = (tag, cls='', html='') => {
 const div  = (cls, html='') => mk('div', cls, html);
 const span = (cls, txt) => { const s = mk('span', cls); s.textContent = txt; return s; };
 
+// Several clickable things here are divs or imgs, which the keyboard can't
+// reach. This gives them button semantics: focusable, announced as a button,
+// and activated by Enter or Space the way a real one would be.
+function activatable(el, label, expanded) {
+  el.tabIndex = 0;
+  el.setAttribute('role', 'button');
+  if (label) el.setAttribute('aria-label', label);
+  if (expanded !== undefined) el.setAttribute('aria-expanded', String(expanded));
+  el.addEventListener('keydown', e => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault(); // Space would otherwise scroll the page.
+      el.click();
+    }
+  });
+  return el;
+}
+
 function sectionHeader(lbl, lines) {
   const h = div('section-header sr');
   const l = div('section-label'); l.textContent = lbl; h.appendChild(l);
@@ -197,6 +214,7 @@ builders.about = () => {
       if (item.imageUrl) {
         if (isTee) {
           const imgContainer = div('card-img-container');
+          activatable(imgContainer, `View ${item.title}`);
 
           const frontImg = mk('img', 'interest-card-img tee-front');
           frontImg.src = item.imageUrl;
@@ -223,6 +241,7 @@ builders.about = () => {
           const imgContainer = div('card-img-container');
           imgContainer.dataset.aspect = sec.imageAspect || 'square';
           const img = mk('img', 'interest-card-img');
+          activatable(img, `View ${item.title}`);
           img.src = item.imageUrl;
           img.alt = item.title;
           img.loading = 'lazy';
@@ -390,6 +409,7 @@ builders.presentations = () => {
       thumbImg.src = `https://img.youtube.com/vi/${ytId}/hqdefault.jpg`;
       thumbWrap.appendChild(thumbImg);
       const playBtn  = div('yt-play-btn');
+      activatable(playBtn, `Play video: ${p.title}`);
       const playIcon = div('yt-play-icon'); playIcon.textContent = '▶'; playBtn.appendChild(playIcon);
       thumbWrap.appendChild(playBtn);
       playBtn.addEventListener('click', () => {
@@ -476,6 +496,7 @@ builders.coursework = () => {
         
         // Year header
         const yearHeader = div('cw-year-header');
+        activatable(yearHeader, `${yr.year} coursework`, false);
         yearHeader.appendChild(Object.assign(div('cw-year-title'), { textContent: yr.year }));
         
         const yearStats = div('cw-year-stats');
@@ -497,6 +518,7 @@ builders.coursework = () => {
             
             // Semester header
             const semHeader = div('cw-semester-header');
+            activatable(semHeader, `${sem.term} courses`, false);
             const semInfo = div('cw-semester-info');
             semInfo.appendChild(Object.assign(div('cw-semester-name'), { textContent: `${sem.term}` }));
             semHeader.appendChild(semInfo);
@@ -512,6 +534,7 @@ builders.coursework = () => {
                 
                 // Course header
                 const courseHeader = div('cw-course-header');
+                activatable(courseHeader, `${cls.courseCode || cls.title || 'Course'} details`, false);
                 const courseLeft = div('cw-course-left');
                 
                 if (cls.courseCode) {
@@ -574,8 +597,10 @@ builders.coursework = () => {
                           artifactCard.target = '_blank';
                         } else if (isProjectLink) {
                           artifactCard.addEventListener('click', () => scrollToSection('projects', projectSlug));
+                          activatable(artifactCard, `Go to project: ${art.title}`);
                         } else if (isPresentationLink) {
                           artifactCard.addEventListener('click', () => scrollToSection('presentations', presentationId));
+                          activatable(artifactCard, `Go to presentation: ${art.title}`);
                         }
                         
                         const iconContainer = div('cw-artifact-icon-container');
@@ -652,7 +677,7 @@ builders.coursework = () => {
         document.querySelectorAll('.cw-year-header').forEach(header => {
             header.addEventListener('click', () => {
                 const yearCard = header.closest('.cw-year-card');
-                yearCard.classList.toggle('open');
+                header.setAttribute('aria-expanded', String(yearCard.classList.toggle('open')));
             });
         });
         
@@ -660,7 +685,7 @@ builders.coursework = () => {
             header.addEventListener('click', (e) => {
                 e.stopPropagation();
                 const semesterBlock = header.closest('.cw-semester-block');
-                semesterBlock.classList.toggle('open');
+                header.setAttribute('aria-expanded', String(semesterBlock.classList.toggle('open')));
             });
         });
         
@@ -668,7 +693,7 @@ builders.coursework = () => {
             header.addEventListener('click', (e) => {
                 e.stopPropagation();
                 const courseCard = header.closest('.cw-course-card');
-                courseCard.classList.toggle('open');
+                header.setAttribute('aria-expanded', String(courseCard.classList.toggle('open')));
             });
         });
     }, 100);
@@ -742,6 +767,7 @@ function buildSite() {
     nl.innerHTML = D.meta.initials.slice(0,-1) + '<span>' + D.meta.initials.slice(-1) + '</span>';
   }
   nl.onclick = e => navigate('home', e.clientX, e.clientY);
+  activatable(nl, 'Go to home');
 
   const navLinks = document.getElementById('navLinks');
   D.nav.forEach(item => {
@@ -1259,6 +1285,7 @@ function openDetailsModal(project) {
 
   const posterImg = modal.querySelector('.modal-poster-img');
   if (posterImg) {
+    activatable(posterImg, `View research poster: ${project.title}`);
     posterImg.addEventListener('click', e => {
       e.stopPropagation();
       openCardModal({
