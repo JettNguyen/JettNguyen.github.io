@@ -2275,10 +2275,18 @@ nav.visible {
  font-size: 12px;
 }
 
-.cw-year-chevron {
- font-size: 26px;
+.cw-year-chevron,
+.cw-semester-chevron,
+.cw-course-chevron {
+ display: block;
+ flex-shrink: 0;
  color: var(--accent3);
- transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+ transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), color 0.3s;
+}
+
+.cw-year-chevron {
+ width: 19px;
+ height: 19px;
 }
 
 .cw-year-card.open .cw-year-chevron {
@@ -2350,9 +2358,8 @@ nav.visible {
 }
 
 .cw-semester-chevron {
- font-size: 24px;
- color: var(--accent3);
- transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+ width: 17px;
+ height: 17px;
 }
 
 .cw-semester-block.open .cw-semester-chevron {
@@ -2431,9 +2438,8 @@ nav.visible {
 .cw-course-grade.tba { color: var(--muted); }
 
 .cw-course-chevron {
- font-size: 20px;
- color: var(--accent3);
- transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+ width: 15px;
+ height: 15px;
 }
 
 .cw-course-card.open .cw-course-chevron {

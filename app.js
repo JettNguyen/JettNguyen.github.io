@@ -25,6 +25,25 @@ function activatable(el, label, expanded) {
   return el;
 }
 
+// The chevrons used to be a "▾" text glyph. That character isn't in Plus
+// Jakarta Sans, so it came from whatever fallback font the OS picked, and its
+// ink sat below the centre of its own line box: off-centre at rest, and
+// rotate(180deg) spun it about the box centre rather than the triangle's, so
+// it jumped when a section opened. Drawn geometry is centred by construction.
+function chevron(cls) {
+  const NS = 'http://www.w3.org/2000/svg';
+  const svg = document.createElementNS(NS, 'svg');
+  svg.setAttribute('class', cls);
+  svg.setAttribute('viewBox', '0 0 12 12');
+  svg.setAttribute('aria-hidden', 'true');
+  const path = document.createElementNS(NS, 'path');
+  // Bounding box x 1..11 and y 3.5..8.5, so it is centred on 6,6 both ways.
+  path.setAttribute('d', 'M1 3.5 L11 3.5 L6 8.5 Z');
+  path.setAttribute('fill', 'currentColor');
+  svg.appendChild(path);
+  return svg;
+}
+
 function sectionHeader(lbl, lines) {
   const h = div('section-header sr');
   const l = div('section-label'); l.textContent = lbl; h.appendChild(l);
@@ -513,7 +532,7 @@ builders.coursework = () => {
         if (totalArtifacts > 0) {
             yearStats.appendChild(Object.assign(div(''), { textContent: `${totalArtifacts} artifact${totalArtifacts !== 1 ? 's' : ''}` }));
         }
-        yearStats.appendChild(Object.assign(div('cw-year-chevron'), { textContent: '▾' }));
+        yearStats.appendChild(chevron('cw-year-chevron'));
         yearHeader.appendChild(yearStats);
         yearCard.appendChild(yearHeader);
         
@@ -530,7 +549,7 @@ builders.coursework = () => {
             const semInfo = div('cw-semester-info');
             semInfo.appendChild(Object.assign(div('cw-semester-name'), { textContent: `${sem.term}` }));
             semHeader.appendChild(semInfo);
-            semHeader.appendChild(Object.assign(div('cw-semester-chevron'), { textContent: '▾' }));
+            semHeader.appendChild(chevron('cw-semester-chevron'));
             semesterBlock.appendChild(semHeader);
             
             // Semester courses
@@ -551,7 +570,7 @@ builders.coursework = () => {
                 courseLeft.appendChild(Object.assign(div('cw-course-name'), { textContent: cls.course }));
                 
                 courseHeader.appendChild(courseLeft);
-                courseHeader.appendChild(Object.assign(div('cw-course-chevron'), { textContent: '▾' }));
+                courseHeader.appendChild(chevron('cw-course-chevron'));
                 courseCard.appendChild(courseHeader);
                 
                 // Course content
