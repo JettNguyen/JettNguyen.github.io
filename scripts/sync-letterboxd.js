@@ -47,7 +47,7 @@ async function main() {
     .filter(e => e.title && e.watched);
 
   if (!entries.length) {
-    console.log('No diary entries in the feed — leaving data.js alone.');
+    console.log('No diary entries in the feed, leaving data.js alone.');
     return;
   }
 
@@ -57,7 +57,7 @@ async function main() {
   const rating = entry.rating ? parseFloat(entry.rating) : NaN;
   const value = Number.isNaN(rating)
     ? entry.title
-    : `${entry.title} — ${stars(rating)}`;
+    : `${entry.title} · ${stars(rating)}`;
 
   const src = fs.readFileSync(DATA_FILE, 'utf8');
   const pattern = /recentlyWatched:\s*"(?:[^"\\]|\\.)*"/;

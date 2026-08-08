@@ -17,7 +17,7 @@
       {
         "slug": "sideline",
         "title": "Sideline",
-        "dateLabel": "2026–Ongoing",
+        "dateLabel": "2026-Ongoing",
         "logoUrl": "/assets/sideline.png",
         "categories": [
           "Mobile-First Web App",
@@ -105,7 +105,7 @@
       {
         "slug": "nightlink",
         "title": "NightLink",
-        "dateLabel": "2025–Ongoing",
+        "dateLabel": "2025-Ongoing",
         "logoUrl": "/assets/favicon.svg",
         "categories": [
           "Web App",
@@ -138,7 +138,7 @@
       {
         "slug": "frequify",
         "title": "Frequify",
-        "dateLabel": "2026–Ongoing",
+        "dateLabel": "2026-Ongoing",
         "logoUrl": "/assets/FrequifySquare.png",
         "categories": [
           "Desktop App",
@@ -154,7 +154,7 @@
         "hypothesis": "A desktop-first mastering workflow with analysis metrics and explicit chain controls improves trust and practical output quality.",
         "experiment": "Implemented WAV/MP3 loading, loudness/peak analysis, mastering chain controls (EQ, compression, saturation, stereo, limiter), original/mastered A/B playback, and WAV export in a portable Windows build.",
         "outcome": "Shipped a fully local app with straightforward install/run flow, offline operation, and clear troubleshooting for common audio and export failures.",
-        "reflection": "For creative tools, controllability and transparency are as important as DSP quality—users need to hear and understand each adjustment.",
+        "reflection": "For creative tools, controllability and transparency are as important as DSP quality. Users need to hear and understand each adjustment.",
         "techStack": [
           "Windows Desktop",
           ".NET 8",
@@ -352,7 +352,7 @@
           "Sports Tech",
           "Algorithms"
         ],
-        "summary": "NFL situational recommendation system over 538,745 play-by-play snaps (2013–2024), available as web dashboard and C++ console app.",
+        "summary": "NFL situational recommendation system over 538,745 play-by-play snaps (2013-2024), available as web dashboard and C++ console app.",
         "shortSummaryRecruiter": "A large-scale analytics product combining systems performance and approachable decision-support UX.",
         "shortSummaryEngineer": "A dual-interface analytics stack using C++ data structures and later integrated with React/TS over a shared 500k+ play dataset.",
         "shortSummaryNonTechnical": "A football analytics tool that helps choose better plays using a huge historical dataset.",
@@ -1176,7 +1176,7 @@
         {
           "company": "MARA",
           "role": "Software Engineer Intern",
-          "date": "Jun 2025 – Dec 2025",
+          "date": "Jun 2025 - Dec 2025",
           "highlights": [
             "Built and maintained internal software tools supporting operational workflows.",
             "Collaborated across teams to ship practical, human-centered solutions."
@@ -1185,7 +1185,7 @@
         {
           "company": "Weichert Realtors Equity",
           "role": "Assistant Accountant",
-          "date": "Aug 2021 – May 2022",
+          "date": "Aug 2021 - May 2022",
           "highlights": [
             "Managed property expense and income records with highly structured spreadsheets.",
             "Supported internal team coordination and communication processes."

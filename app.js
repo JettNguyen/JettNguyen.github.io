@@ -774,7 +774,7 @@ builders.contact = () => {
 };
 
 function buildSite() {
-  document.title = D.meta.name + ' — Portfolio';
+  document.title = D.meta.name + ' · Portfolio';
   currentPage = pageFromHash();
 
   const loaderName = document.getElementById('loaderName');
@@ -940,7 +940,7 @@ function runHomeAnims() {
   setTimeout(() => document.getElementById('homeRight')?.classList.add('go'), 150);
 }
 
-const CHARS = '!<>-_\\/[]{}—=+*^?#@abcdefghijklmnopqrstuvwxyz0123456789';
+const CHARS = '!<>-_\\/[]{}~=+*^?#@abcdefghijklmnopqrstuvwxyz0123456789';
 function scramble(el, finalText, dur = 600) {
   const total = Math.round(dur / 30); let f = 0;
   const t = setInterval(() => {
@@ -1096,7 +1096,7 @@ function initMobileNav() {
     if (!dragging) return;
     dragDelta = e.touches[0].clientX - dragStartX;
     track.style.transform = `translateX(${baseOffset + dragDelta * 1.8}px)`;
-    // Highlight whichever item is currently under the lens — no label swapping
+    // Highlight whichever item is currently under the lens, with no label swapping
     const nearest = nearestIndex();
     setActive(nearest);
   }, { passive: true });
@@ -1172,7 +1172,7 @@ function initTeeInteractions() {
     const card = e.target.closest('.tee-card');
     if (!card) return;
 
-    // Mobile taps on the shirt images only flip — don't open modal
+    // Mobile taps on the shirt images only flip; they don't open the modal
     if (isMobile() && (e.target.matches('.tee-front') || e.target.matches('.back-img'))) return;
 
     const label = card.querySelector('.tee-flip-label');
@@ -1331,7 +1331,7 @@ function openDetailsModal(project) {
         src:      posterImg.src,
         backSrc:  null,
         aspect:   'landscape',
-        title:    `${project.title} — Research Poster`,
+        title:    `${project.title} · Research Poster`,
         subtitle: '',
         desc:     '',
         tags:     [],

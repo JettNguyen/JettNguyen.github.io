@@ -3007,7 +3007,7 @@ nav.visible {
  transform:scale(0.94);
 }
 
-/* Buttons — hover lifts 3px, so the press settles back down and narrows. */
+/* Buttons: hover lifts 3px, so the press settles back down and narrows. */
 .btn-primary:active {
  transform:translateY(-1px) scale(0.97);
  box-shadow:0 4px 14px rgba(239, 68, 68, 0.3);
@@ -3051,7 +3051,7 @@ nav.visible {
  transform:scale(0.99);
 }
 
-/* Interest + tee cards — only the image itself opens the lightbox. */
+/* Interest and tee cards: only the image itself opens the lightbox. */
 .interest-card-img:active {
  transform:scale(0.97);
  opacity:0.85;
@@ -3086,7 +3086,7 @@ nav.visible {
  background:rgba(255, 255, 255, 0.06);
 }
 
-/* Artifact cards — hover slides 4px right; the press pulls it back in. */
+/* Artifact cards: hover slides 4px right, so the press pulls it back in. */
 .cw-artifact-card:active {
  transform:translateX(2px) scale(0.99);
  background:var(--surface2);
@@ -3109,7 +3109,7 @@ nav.visible {
 
 /* Keyboard focus.
    :focus-visible rather than :focus, so a mouse click never leaves a ring
-   behind — only keyboard navigation shows one. The offset keeps the ring off
+   behind. Only keyboard navigation shows one. The offset keeps the ring off
    the element's own border, which is often already accent-colored on hover. */
 
 .nav-logo:focus-visible,
