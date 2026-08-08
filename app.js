@@ -323,7 +323,8 @@ builders.projects = () => {
 
     const lnks = div('proj-links');
     if (p.githubUrl) lnks.appendChild(Object.assign(mk('a', 'proj-link'), { href: p.githubUrl, target: '_blank', textContent: 'GitHub' }));
-    if (p.demoUrl)   lnks.appendChild(Object.assign(mk('a', 'proj-link'), { href: p.demoUrl,   target: '_blank', textContent: 'Live Demo' }));
+    // Most demos are the running app; some point at a recording instead.
+    if (p.demoUrl)   lnks.appendChild(Object.assign(mk('a', 'proj-link'), { href: p.demoUrl,   target: '_blank', textContent: p.demoLabel || 'Live Demo' }));
     if (p.details) {
       const detailsA = Object.assign(mk('a', 'proj-link details-link'), { href: '#', textContent: 'Details' });
       detailsA.onclick = (e) => { e.preventDefault(); openDetailsModal(p); };
