@@ -756,6 +756,7 @@ builders.contact = () => {
 
 function buildSite() {
   document.title = D.meta.name + ' — Portfolio';
+  currentPage = pageFromHash();
 
   const loaderName = document.getElementById('loaderName');
   D.meta.name.toUpperCase().split('').forEach((ch, i) => {
@@ -784,7 +785,7 @@ function buildSite() {
     btn.dataset.page = item.id;
     btn.textContent  = item.label;
     btn.onclick = e => navigate(item.id, e.clientX, e.clientY);
-    if (item.id === 'home') btn.classList.add('active');
+    if (item.id === currentPage) btn.classList.add('active');
     li.appendChild(btn);
     navLinks.appendChild(li);
   });
@@ -794,7 +795,7 @@ function buildSite() {
   const app = document.getElementById('app');
   D.nav.forEach(item => {
     const page = div('page'); page.id = 'page-' + item.id;
-    if (item.id === 'home') page.classList.add('active');
+    if (item.id === currentPage) page.classList.add('active');
     const content = builders[item.id]?.();
     if (content) page.appendChild(content);
     app.appendChild(page);
@@ -895,7 +896,10 @@ const pi = setInterval(() => {
 function startSite() {
   document.getElementById('mainNav').classList.add('visible');
   movePill();
-  setTimeout(runHomeAnims, 200);
+  setTimeout(() => {
+    if (currentPage === 'home') runHomeAnims();
+    else triggerPageAnims(currentPage);
+  }, 200);
   const st = document.getElementById('statusText');
   if (st) { const orig = st.textContent; setInterval(() => scramble(st, orig, 700), 6000); }
   initTeeInteractions();
@@ -930,12 +934,23 @@ function scramble(el, finalText, dur = 600) {
   }, 30);
 }
 
+// The site is one document, so without this every page shares a single URL:
+// nothing is linkable and a refresh always lands back on home.
+function pageFromHash() {
+  const id = decodeURIComponent(location.hash.replace(/^#\/?/, ''));
+  return D.nav.some(n => n.id === id) ? id : 'home';
+}
+
 let currentPage = 'home', transitioning = false;
 const overlay   = document.getElementById('transition-overlay');
 
 function navigate(to, clickX, clickY) {
   if (to === currentPage || transitioning) return;
   transitioning = true;
+
+  // Setting the hash adds a history entry. The hashchange it fires re-enters
+  // navigate(), which returns immediately on the transitioning guard above.
+  if (pageFromHash() !== to) location.hash = to;
 
   const ox = (clickX ? (clickX / window.innerWidth)  * 100 : 50).toFixed(2) + '%';
   const oy = (clickY ? (clickY / window.innerHeight) * 100 : 50).toFixed(2) + '%';
@@ -955,6 +970,8 @@ function navigate(to, clickX, clickY) {
 
   setTimeout(() => { overlay.className = ''; transitioning = false; }, 550);
 }
+
+window.addEventListener('hashchange', () => navigate(pageFromHash(), 0, 0));
 
 function updateNav(page) {
   document.querySelectorAll('.nav-btn').forEach(b => b.classList.toggle('active', b.dataset.page === page));
