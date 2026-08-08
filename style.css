@@ -813,6 +813,7 @@ nav.visible {
 .info-value a {
  color:var(--accent);
  text-decoration:none;
+ transition:color 0.2s,opacity 0.2s;
 }
 
 .skill-row {
@@ -2916,5 +2917,226 @@ nav.visible {
  #mobile-nav::after {
  right:0;
  background:linear-gradient(to left, rgba(7, 7, 7, 1), transparent);
+ }
+}
+
+/* ------------------------ Interactive states ------------------------ */
+
+/* The About sidebar link was the one clickable element with no hover state.
+   Its transition lives on the base rule above. */
+.info-value a:hover {
+ color:var(--text);
+ text-decoration:underline;
+ text-underline-offset:3px;
+}
+
+/* Pressed states.
+   These sit at the end of the sheet on purpose: a mouse held down matches
+   :hover and :active at once, so :active has to come later to win the
+   cascade at equal specificity. Each one pulls its hover motion back toward
+   the page and shortens the transition so the press reads as immediate. */
+
+.nav-logo:active,
+.nav-btn:active,
+.btn-primary:active,
+.btn-ghost:active,
+.info-value a:active,
+.modal-close:active,
+.modal-flip-btn:active,
+.modal-poster-img:active,
+.interest-card-img:active,
+.proj-link:active,
+.tl-item-link:active,
+.resume-dl:active,
+.yt-play-btn:active,
+.pres-link:active,
+.cw-year-header:active,
+.cw-semester-header:active,
+.cw-course-header:active,
+.cw-artifact-card:active,
+.contact-link:active {
+ transition-duration:0.06s;
+}
+
+/* Nav */
+.nav-logo:active {
+ opacity:0.75;
+}
+
+.nav-logo:active img {
+ transform:scale(0.98);
+}
+
+.nav-btn:active {
+ color:var(--accent);
+ transform:scale(0.94);
+}
+
+/* Buttons — hover lifts 3px, so the press settles back down and narrows. */
+.btn-primary:active {
+ transform:translateY(-1px) scale(0.97);
+ box-shadow:0 4px 14px rgba(239, 68, 68, 0.3);
+}
+
+.btn-ghost:active {
+ transform:translateY(-1px) scale(0.97);
+ background:rgba(255, 255, 255, 0.06);
+ border-color:rgba(255, 255, 255, 0.3);
+}
+
+.resume-dl:active {
+ transform:translateY(0) scale(0.98);
+ background:rgba(239, 68, 68, 0.16);
+}
+
+/* Text links */
+.info-value a:active {
+ opacity:0.6;
+}
+
+.proj-link:active,
+.pres-link:active {
+ transform:scale(0.97);
+ background:rgba(239, 68, 68, 0.2);
+}
+
+/* Modal controls */
+.modal-close:active {
+ transform:scale(0.92);
+ background:rgba(239, 68, 68, 0.6);
+}
+
+.modal-flip-btn:active {
+ transform:scale(0.95);
+ background:rgba(255, 255, 255, 0.06);
+}
+
+.modal-poster-img:active {
+ opacity:0.7;
+ transform:scale(0.99);
+}
+
+/* Interest + tee cards — only the image itself opens the lightbox. */
+.interest-card-img:active {
+ transform:scale(0.97);
+ opacity:0.85;
+}
+
+/* Timeline */
+.tl-item-link:active {
+ background:rgba(255, 255, 255, 0.07);
+ transform:scale(0.995);
+}
+
+/* Presentations */
+.yt-play-btn:active {
+ background:rgba(0, 0, 0, 0.15);
+}
+
+.yt-play-btn:active .yt-play-icon {
+ transform:scale(0.98);
+ box-shadow:0 0 12px rgba(239, 68, 68, 0.35);
+}
+
+/* Coursework accordions */
+.cw-year-header:active {
+ background:rgba(255, 255, 255, 0.07);
+}
+
+.cw-semester-header:active {
+ background:rgba(255, 255, 255, 0.08);
+}
+
+.cw-course-header:active {
+ background:rgba(255, 255, 255, 0.06);
+}
+
+/* Artifact cards — hover slides 4px right; the press pulls it back in. */
+.cw-artifact-card:active {
+ transform:translateX(2px) scale(0.99);
+ background:var(--surface2);
+ border-color:rgba(239, 68, 68, 0.45);
+}
+
+/* The no-link variant is not clickable, so it must stay inert on press too. */
+.cw-artifact-card.no-link:active {
+ transform:none;
+ background:var(--surface);
+ border-color:var(--border);
+}
+
+/* Contact */
+.contact-link:active {
+ transform:translateX(3px) scale(0.99);
+ background:var(--surface2);
+ border-color:rgba(239, 68, 68, 0.45);
+}
+
+/* Keyboard focus.
+   :focus-visible rather than :focus, so a mouse click never leaves a ring
+   behind — only keyboard navigation shows one. The offset keeps the ring off
+   the element's own border, which is often already accent-colored on hover. */
+
+.nav-logo:focus-visible,
+.nav-btn:focus-visible,
+.btn-primary:focus-visible,
+.btn-ghost:focus-visible,
+.info-value a:focus-visible,
+.modal-close:focus-visible,
+.modal-flip-btn:focus-visible,
+.modal-poster-img:focus-visible,
+.interest-card-img:focus-visible,
+.card-img-container:focus-visible,
+.proj-link:focus-visible,
+.tl-item-link:focus-visible,
+.resume-dl:focus-visible,
+.yt-play-btn:focus-visible,
+.pres-link:focus-visible,
+.cw-year-header:focus-visible,
+.cw-semester-header:focus-visible,
+.cw-course-header:focus-visible,
+.cw-artifact-card:focus-visible,
+.contact-link:focus-visible {
+ outline:2px solid var(--accent);
+ outline-offset:3px;
+ border-radius:6px;
+}
+
+/* Full-bleed rows read better with the ring tight against the edge. */
+.cw-year-header:focus-visible,
+.cw-semester-header:focus-visible,
+.cw-course-header:focus-visible {
+ outline-offset:-2px;
+}
+
+/* The nav pill already marks the current page; keep the ring inside the bar. */
+.nav-btn:focus-visible {
+ outline-offset:2px;
+}
+
+/* Images carry their own radius, so match it instead of the 6px default. */
+.interest-card-img:focus-visible,
+.card-img-container:focus-visible,
+.modal-poster-img:focus-visible {
+ border-radius:12px;
+}
+
+/* Reduced motion: keep every state change legible, drop the movement. */
+@media (prefers-reduced-motion: reduce) {
+ .btn-primary:active,
+ .btn-ghost:active,
+ .resume-dl:active,
+ .proj-link:active,
+ .pres-link:active,
+ .modal-close:active,
+ .modal-flip-btn:active,
+ .modal-poster-img:active,
+ .interest-card-img:active,
+ .tl-item-link:active,
+ .cw-artifact-card:active,
+ .contact-link:active,
+ .nav-btn:active,
+ .nav-logo:active img {
+  transform:none;
  }
 }
