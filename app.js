@@ -406,7 +406,14 @@ builders.presentations = () => {
       const ytId      = p.videoUrl.split('/embed/')[1]?.split('?')[0];
       const thumbWrap = div('yt-thumb-wrap');
       const thumbImg = mk('img'); thumbImg.alt = p.title; thumbImg.loading = 'lazy';
-      thumbImg.src = `https://img.youtube.com/vi/${ytId}/hqdefault.jpg`;
+      // hqdefault is 480x360, so it letterboxes a 16:9 video and then gets
+      // cropped again by object-fit. maxres (1280x720) and mq (320x180) are
+      // both true 16:9; maxres only exists if the video was uploaded in HD.
+      thumbImg.src = `https://img.youtube.com/vi/${ytId}/maxresdefault.jpg`;
+      thumbImg.onerror = () => {
+        thumbImg.onerror = null; // mqdefault always exists; stop here either way.
+        thumbImg.src = `https://img.youtube.com/vi/${ytId}/mqdefault.jpg`;
+      };
       thumbWrap.appendChild(thumbImg);
       const playBtn  = div('yt-play-btn');
       activatable(playBtn, `Play video: ${p.title}`);
