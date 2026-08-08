@@ -2246,7 +2246,10 @@ nav.visible {
 
 .cw-year-header {
  display: flex;
- align-items: baseline;
+ /* Not baseline: the year and the stats are very different sizes, and the
+    chevron is a replaced element whose baseline is its bottom edge, so
+    baseline alignment drops the whole stats row below the row's centre. */
+ align-items: center;
  justify-content: space-between;
  padding: 15px 25px;
  background: var(--surface2);
