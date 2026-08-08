@@ -182,14 +182,14 @@ builders.about = () => {
     sidebar.appendChild(val);
   });
   
-  sidebar.appendChild(Object.assign(div('skills-section-title'), { textContent: 'Technical Skills' }));
-  about.skills.forEach(s => {
-    const row = div('skill-row');
-    row.innerHTML = `
-      <span class="skill-name">${s.name}</span>
-      <div class="skill-bar"><div class="skill-fill" data-w="${s.weight}"></div></div>
-    `;
-    sidebar.appendChild(row);
+  sidebar.appendChild(Object.assign(div('skills-section-title'), { textContent: 'Skills' }));
+  about.skillGroups.forEach(g => {
+    const group = div('skill-group');
+    group.appendChild(Object.assign(div('skill-group-label'), { textContent: g.label }));
+    const list = div('skill-list');
+    g.items.forEach(name => list.appendChild(span('skill-chip', name)));
+    group.appendChild(list);
+    sidebar.appendChild(group);
   });
   top.appendChild(sidebar);
   frag.appendChild(top);
@@ -972,12 +972,6 @@ function triggerPageAnims(page) {
   if (!pageEl) return;
   pageEl.querySelectorAll('.sr').forEach(e => e.classList.add('vis'));
   pageEl.querySelector('.section-header')?.classList.add('in');
-  if (page === 'about') {
-    pageEl.querySelectorAll('.skill-fill').forEach(b => {
-      b.style.transitionDelay = '0s';
-      b.style.transform = `scaleX(${b.dataset.w})`;
-    });
-  }
 }
 
 function initMobileNav() {

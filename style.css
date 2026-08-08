@@ -796,6 +796,13 @@ nav.visible {
  font-weight:400;
 }
 
+/* The bio used to carry six different inline hex colors. One accent, used
+   only for the things Jett actually built, does the same job with less noise. */
+.bio-mark {
+ color:var(--accent);
+ font-weight:600;
+}
+
 .info-label {
  font-size:10px;
  letter-spacing:0.15em;
@@ -816,35 +823,33 @@ nav.visible {
  transition:color 0.2s,opacity 0.2s;
 }
 
-.skill-row {
- display:flex;
- align-items:center;
- gap:14px;
- margin-bottom:11px;
+.skill-group {
+ margin-bottom:18px;
 }
 
-.skill-name {
+.skill-group-label {
+ font-size:9px;
+ letter-spacing:0.14em;
+ text-transform:uppercase;
+ color:var(--muted);
+ opacity:0.7;
+ margin-bottom:7px;
+}
+
+.skill-list {
+ display:flex;
+ flex-wrap:wrap;
+ gap:5px;
+}
+
+.skill-chip {
  font-size:11px;
  color:var(--text);
- width:100px;
- flex-shrink:0;
-}
-
-.skill-bar {
- flex:1;
- height:2px;
- background:rgba(255, 255, 255, 0.05);
- border-radius:2px;
- overflow:hidden;
-}
-
-.skill-fill {
- height:100%;
- border-radius:2px;
- background:linear-gradient(90deg,var(--accent),var(--accent3));
- transform:scaleX(0);
- transform-origin:left;
- transition:transform 1.2s cubic-bezier(0.16,1,0.3,1);
+ padding:3px 9px;
+ border:1px solid var(--border);
+ border-radius:4px;
+ background:var(--surface);
+ white-space:nowrap;
 }
 
 .skills-section-title {
@@ -1894,6 +1899,19 @@ nav.visible {
  line-height:1.8;
  padding:2px 0 2px 15px;
  position:relative;
+}
+
+/* Experience bullets emphasise two different things: the action taken, and the
+   concrete specifics behind it (stack, names, numbers). These were 28 inline
+   styles; as classes the distinction is consistent and lives in one place. */
+.tl-points strong {
+ color:var(--text);
+ font-weight:600;
+}
+
+.spec {
+ color:var(--ct-project);
+ font-weight:600;
 }
 
 .tl-points li::before {
