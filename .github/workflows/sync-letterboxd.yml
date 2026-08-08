@@ -1,0 +1,52 @@
+name: Sync recently watched from Letterboxd
+
+on:
+  schedule:
+    - cron: "0 */6 * * *" # every 6 hours; GitHub cron is best-effort and can lag
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  actions: write
+
+concurrency:
+  group: sync-letterboxd
+  cancel-in-progress: true
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Update data.js
+        env:
+          LETTERBOXD_USER: jett2fly
+        run: node scripts/sync-letterboxd.js
+
+      - name: Commit if changed
+        id: commit
+        run: |
+          if git diff --quiet -- data.js; then
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -am "chore: sync recently watched from Letterboxd"
+          git push
+          echo "changed=true" >> "$GITHUB_OUTPUT"
+
+      # A GITHUB_TOKEN push does not trigger other workflows, so kick off the
+      # Pages deploy explicitly.
+      - name: Trigger Pages deploy
+        if: steps.commit.outputs.changed == 'true'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: gh workflow run deploy-gh-pages.yml --ref main

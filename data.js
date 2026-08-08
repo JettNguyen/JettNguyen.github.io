@@ -70,7 +70,7 @@ window.siteData = {
     ],
     liveSignals:{
       currentlyListening:"",
-      recentlyWatched:"Don't Be a Menace to South Central While Drinking Your Juice in the Hood — ★★★",
+      recentlyWatched:"Project Hail Mary — ★★★★½",
       currentlyInto:"Human behavior systems, interactive storytelling, and audio tooling"
     },
     interestSections:[
