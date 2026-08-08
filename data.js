@@ -147,12 +147,7 @@ window.siteData = {
         subtitle: "Control vs predetermined traits",
         description: "I think about how much of a person is shaped before they even try to change, and what that means for growth."
       },
-      {
-        icon: "⊡",
-        title: "Do systems shape people?",
-        subtitle: "Environment vs individual behavior",
-        description: "I'm drawn to the idea that behavior might be more about the system someone is in than who they are."
-      },
+      
       {
         icon: "◌",
         title: "Why do some things feel more real?",
@@ -171,12 +166,7 @@ window.siteData = {
         subtitle: "Agency, engagement, and flow",
         description: "I'm interested in why making something feels fundamentally more engaging than just experiencing it."
       },
-      {
-        icon: "◭",
-        title: "Does perspective change meaning?",
-        subtitle: "Not just how something looks, but what it is",
-        description: "I think about how the same thing can mean completely different things depending on who's looking at it."
-      },
+      
       {
         icon: "⌁",
         title: "Are we optimizing the right things?",
@@ -189,12 +179,7 @@ window.siteData = {
         subtitle: "If it's fixable, why isn't it fixed",
         description: "I'm drawn to the hidden reasons inefficient systems persist, beyond just laziness or oversight."
       },
-      {
-        icon: "▭",
-        title: "Is simplicity honest?",
-        subtitle: "Or just hidden complexity",
-        description: "I'm skeptical of things that feel simple if I can't see what's being abstracted away underneath."
-      },
+      
       {
         icon: "◎",
         title: "What makes something feel personal?",
