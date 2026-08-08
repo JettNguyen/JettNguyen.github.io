@@ -1301,6 +1301,11 @@ nav.visible {
 	padding-bottom: 12px;
 	overflow-y: auto;
 	max-height: calc(85vh - 40px);
+	/* .modal-info centres its children. Once the details outgrow the box that
+	   centring pushes the top of the content above the scroll origin, where
+	   scrollTop can never reach it, so the title and first section get cut off.
+	   Long content has to start at the top. */
+	justify-content: flex-start;
 	scrollbar-width: thin;
 	scrollbar-color: rgba(255,255,255,0.2) transparent;
 }
