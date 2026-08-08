@@ -53,10 +53,13 @@ window.siteData = {
       {label:"Email",value:"jettcameronnguyen@gmail.com",href:"mailto:jettcameronnguyen@gmail.com"}
     ],
     skillGroups:[
-      {label:"Languages", items:["TypeScript / JavaScript","Python","Rust","C / C++","HTML / CSS"]},
-      {label:"Web & Apps", items:["React","Node / Express","MongoDB","Tauri","Vite"]},
-      {label:"AI", items:["Agentic AI","Prompt Engineering","Human-Computer Interaction"]},
-      {label:"Beyond Code", items:["Public Relations","E-Commerce","Music Production","Video Production","Social Media"]}
+      {label:"Languages", items:["TypeScript","JavaScript","Python","Rust","C++","C#"]},
+      {label:"Frontend", items:["React","React Native","Vite","Tailwind CSS","HTML / CSS"]},
+      {label:"Backend & Data", items:["Node.js","Express","MongoDB","Prisma","Firebase","Supabase"]},
+      {label:"Desktop & Systems", items:["Tauri","Electron",".NET","Unity","Audio DSP"]},
+      {label:"Cloud & Tooling", items:["AWS S3","AWS Lambda","Docker","Stripe","GitHub Actions"]},
+      {label:"AI", items:["Agentic AI","LLM Integration","Prompt Engineering"]},
+      {label:"Beyond Code", items:["Human-Computer Interaction","Public Relations","Music Production","Video Production"]}
     ],
     liveSignals:{
       currentlyListening:"",
