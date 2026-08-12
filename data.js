@@ -63,7 +63,7 @@ window.siteData = {
     ],
     liveSignals:{
       currentlyListening:"",
-      recentlyWatched:"Project Hail Mary · ★★★★½",
+      recentlyWatched:"Drive · ★★★★",
       currentlyInto:"Human behavior systems, interactive storytelling, and audio tooling"
     },
     interestSections:[
