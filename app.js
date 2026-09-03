@@ -345,6 +345,31 @@ builders.projects = () => {
     body.appendChild(tags);
 
     const lnks = div('proj-links');
+    if (p.embedUrl) {
+      const play = mk('button', 'proj-link proj-link-play');
+      play.type = 'button';
+      play.textContent = 'Play here';
+      play.setAttribute('aria-expanded', 'false');
+      play.onclick = () => {
+        const open = body.querySelector('.proj-embed');
+        if (open) { open.remove(); play.textContent = 'Play here'; play.setAttribute('aria-expanded', 'false'); return; }
+        const wrap = div('proj-embed');
+        const frame = mk('iframe');
+        frame.src = p.embedUrl;
+        frame.title = `${p.title}, playable`;
+        frame.loading = 'lazy';
+        frame.allow = 'fullscreen';
+        wrap.appendChild(frame);
+        const bar = div('proj-embed-bar');
+        bar.appendChild(Object.assign(mk('a'), { href: p.embedUrl, target: '_blank', rel: 'noopener', textContent: 'Open full size ↗' }));
+        wrap.appendChild(bar);
+        body.appendChild(wrap);
+        play.textContent = 'Close game';
+        play.setAttribute('aria-expanded', 'true');
+        wrap.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      };
+      lnks.appendChild(play);
+    }
     if (p.githubUrl) lnks.appendChild(Object.assign(mk('a', 'proj-link'), { href: p.githubUrl, target: '_blank', textContent: 'GitHub' }));
     // Most demos are the running app; some point at a recording instead.
     if (p.demoUrl)   lnks.appendChild(Object.assign(mk('a', 'proj-link'), { href: p.demoUrl,   target: '_blank', textContent: p.demoLabel || 'Live Demo' }));
