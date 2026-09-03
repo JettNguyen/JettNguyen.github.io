@@ -15,5 +15,6 @@ Personal portfolio site for projects, coursework, reports, presentations, and re
 - Vanilla JavaScript (client-side site behavior)
 - CSS for responsive design and animations
 - Static HTML with all content in `data.js`; no build step
-- Images are resized WebP (photos around 900px, logos 512px); keep new assets in that range
+- Images are resized WebP (photos around 900px, logos 512px, product screenshots in `assets/screens/`); keep new assets in that range
+- `scripts/sync-spotify.js` writes the listening signal; it needs SPOTIFY_CLIENT_ID, SPOTIFY_CLIENT_SECRET, and SPOTIFY_REFRESH_TOKEN as repository secrets
 - `scripts/sync-letterboxd.js` rewrites the recently-watched signal in `data.js` on a schedule
