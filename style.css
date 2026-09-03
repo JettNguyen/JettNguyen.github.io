@@ -782,6 +782,38 @@ nav.visible {
  scroll-snap-align:start;
 }
 
+.interest-shelf {
+ position:relative;
+}
+
+.interest-shelf::before,
+.interest-shelf::after {
+ content:'';
+ position:absolute;
+ top:6px;
+ bottom:14px;
+ width:64px;
+ z-index:2;
+ pointer-events:none;
+ opacity:0;
+ transition:opacity 0.25s;
+}
+
+.interest-shelf::before {
+ left:0;
+ background:linear-gradient(to right, var(--bg), transparent);
+}
+
+.interest-shelf::after {
+ right:0;
+ background:linear-gradient(to left, var(--bg), transparent);
+}
+
+.interest-shelf.fade-left::before,
+.interest-shelf.fade-right::after {
+ opacity:1;
+}
+
 @media (width <= 600px) {
  .interest-grid { grid-auto-columns:160px; }
 }

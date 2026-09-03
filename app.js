@@ -289,7 +289,9 @@ builders.about = () => {
       grid.appendChild(card);
     });
 
-    section.appendChild(grid);
+    const shelf = div('interest-shelf');
+    shelf.appendChild(grid);
+    section.appendChild(shelf);
     frag.appendChild(section);
   });
 
@@ -829,6 +831,7 @@ function startSite() {
   initTeeInteractions();
   initImageLightbox();
   initMobileNav();
+  initShelfFades();
 }
 
 function runHomeAnims() {
@@ -935,6 +938,23 @@ function initMobileNav() {
     track.appendChild(b);
   });
   updateNav(currentPage);
+}
+
+// Each shelf shows a fade on whichever end still has cards past it, so a
+// row that continues off-screen reads as scrollable rather than cut off.
+function initShelfFades() {
+  document.querySelectorAll('.interest-shelf').forEach(shelf => {
+    const grid = shelf.querySelector('.interest-grid');
+    const update = () => {
+      const max = grid.scrollWidth - grid.clientWidth;
+      shelf.classList.toggle('fade-left',  grid.scrollLeft > 4);
+      shelf.classList.toggle('fade-right', max - grid.scrollLeft > 4);
+    };
+    grid.addEventListener('scroll', update, { passive: true });
+    // The About page is display:none until visited, so widths are 0 at
+    // build time. The observer fires once it is laid out, and on resize.
+    new ResizeObserver(update).observe(grid);
+  });
 }
 
 function initTeeInteractions() {
