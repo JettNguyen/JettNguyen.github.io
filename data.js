@@ -62,7 +62,6 @@ window.siteData = {
     ],
     liveSignals:{
       currentlyListening:"The Morning · The Weeknd",
-      currentlyListening:"",
       listeningLabel:"last played",
       recentlyWatched:"Obsession · ★★★★½",
       currentlyInto:"Human behavior systems, interactive storytelling, and audio tooling"
