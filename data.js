@@ -62,6 +62,7 @@ window.siteData = {
     ],
     liveSignals:{
       currentlyListening:"",
+      listeningLabel:"last played",
       recentlyWatched:"Project Hail Mary · ★★★★½",
       currentlyInto:"Human behavior systems, interactive storytelling, and audio tooling"
     },

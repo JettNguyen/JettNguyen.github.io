@@ -165,7 +165,7 @@ builders.about = () => {
   // Live Status / Signals
   const ls = about.liveSignals;
   const signals = [
-    ls.currentlyListening && { label: 'listening', val: ls.currentlyListening },
+    ls.currentlyListening && { label: ls.listeningLabel || 'listening', val: ls.currentlyListening },
     ls.recentlyWatched    && { label: 'watched',   val: ls.recentlyWatched },
     ls.currentlyInto      && { label: 'into',      val: ls.currentlyInto },
   ].filter(Boolean);
