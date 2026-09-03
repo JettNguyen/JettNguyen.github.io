@@ -62,8 +62,9 @@ window.siteData = {
     ],
     liveSignals:{
       currentlyListening:"",
+      currentlyListening:"",
       listeningLabel:"last played",
-      recentlyWatched:"Project Hail Mary · ★★★★½",
+      recentlyWatched:"Obsession · ★★★★½",
       currentlyInto:"Human behavior systems, interactive storytelling, and audio tooling"
     },
     interestSections:[
