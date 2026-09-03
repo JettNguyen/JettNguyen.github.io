@@ -1161,6 +1161,46 @@ function openCardModal(opts) {
   }, 280);
 }
 
+// A small, honest chart for a project that ran a study: mean task time per
+// condition with standard deviation whiskers, and satisfaction against the
+// scale's neutral point. Every number is printed beside its mark, so the
+// figure reads without colour and the text carries the statistics.
+function studyHtml(st) {
+  const t = st.time, sat = st.satisfaction;
+  const W = 340, x0 = 78, barW = 210, maxV = Math.ceil((t.manual + t.sdManual) / 20) * 20;
+  const sx = v => x0 + (v / maxV) * barW;
+  const row = (y, label, v, sd, cls) => `
+    <text x="0" y="${y + 17}" class="study-lbl">${label}</text>
+    <rect x="${x0}" y="${y}" width="${sx(v) - x0}" height="24" rx="4" class="study-bar ${cls}"/>
+    <line x1="${sx(v - sd)}" x2="${sx(v + sd)}" y1="${y + 12}" y2="${y + 12}" class="study-sd"/>
+    <line x1="${sx(v - sd)}" x2="${sx(v - sd)}" y1="${y + 7}" y2="${y + 17}" class="study-sd"/>
+    <line x1="${sx(v + sd)}" x2="${sx(v + sd)}" y1="${y + 7}" y2="${y + 17}" class="study-sd"/>
+    <text x="${sx(v + sd) + 6}" y="${y + 17}" class="study-val">${v.toFixed(1)} s</text>`;
+  const timeChart = `
+    <svg viewBox="0 0 ${W} 70" class="study-chart" role="img" aria-label="Mean time to split the bill: ${t.manual} seconds by hand, ${t.splitsy} seconds with Splitsy">
+      ${row(4, 'By hand', t.manual, t.sdManual, 'manual')}
+      ${row(40, 'Splitsy', t.splitsy, t.sdSplitsy, 'splitsy')}
+    </svg>`;
+  const mx = v => 78 + (v / 100) * 210;
+  const satChart = `
+    <svg viewBox="0 0 ${W} 40" class="study-chart" role="img" aria-label="Satisfaction ${sat.mean} of 100, neutral point 50">
+      <text x="0" y="21" class="study-lbl">Satisfaction</text>
+      <rect x="78" y="8" width="210" height="24" rx="4" class="study-track"/>
+      <rect x="78" y="8" width="${mx(sat.mean) - 78}" height="24" rx="4" class="study-bar splitsy"/>
+      <line x1="${mx(sat.benchmark)}" x2="${mx(sat.benchmark)}" y1="4" y2="36" class="study-mark"/>
+      <text x="${mx(sat.mean) + 6}" y="21" class="study-val">${sat.mean}</text>
+    </svg>`;
+  return `
+    <section class="study">
+      <div class="study-title">User study</div>
+      <p class="study-method">${st.method}</p>
+      ${timeChart}
+      <p class="study-note">Bars are means, whiskers are one standard deviation. Paired one-tailed t-test: t = ${t.t}, p = ${t.p}.</p>
+      ${satChart}
+      <p class="study-note">Visual analog scale, 0 to 100, with the neutral point at ${sat.benchmark} marked. Scores ranged from ${sat.min} to ${sat.max}; SD ${sat.sd}.</p>
+    </section>`;
+}
+
 function openDetailsModal(project) {
   const d = project.details || {};
   const modal = div('card-modal details-modal');
@@ -1175,6 +1215,7 @@ function openDetailsModal(project) {
         ${d.hypothesis  ? `<div class="modal-info-desc"><strong>Hypothesis:</strong> ${d.hypothesis}</div>` : ''}
         ${d.experiment  ? `<div class="modal-info-desc"><strong>Experiment:</strong> ${d.experiment}</div>` : ''}
         ${d.outcome     ? `<div class="modal-info-desc"><strong>Outcome:</strong> ${d.outcome}</div>` : ''}
+        ${project.study ? studyHtml(project.study) : ''}
         ${d.reflection  ? `<div class="modal-info-desc"><strong>Reflection:</strong> ${d.reflection}</div>` : ''}
         ${project.posterUrl ? `<div class="modal-poster-section"><div class="modal-poster-label">Research Poster</div><img class="modal-poster-img" src="${project.posterUrl}" alt="${project.title} research poster"></div>` : ''}`;
 
