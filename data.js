@@ -61,7 +61,7 @@ window.siteData = {
       {label:"Beyond Code", items:["Human-Computer Interaction","Public Relations","Music Production","Video Production"]}
     ],
     liveSignals:{
-      currentlyListening:"",
+      currentlyListening:"The Morning · The Weeknd",
       currentlyListening:"",
       listeningLabel:"last played",
       recentlyWatched:"Obsession · ★★★★½",
