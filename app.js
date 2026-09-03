@@ -381,6 +381,19 @@ builders.projects = () => {
     if (lnks.children.length) body.appendChild(lnks);
 
     item.appendChild(body);
+
+    // The third grid column was empty. Two thumbnails there give the row a
+    // look at the product; clicking one opens the full set in the details.
+    if (p.screenshots?.length && p.details) {
+      const strip = div('proj-shots');
+      p.screenshots.slice(0, 2).forEach(sh => {
+        const img = mk('img'); img.src = sh.src; img.alt = sh.alt; img.loading = 'lazy'; img.decoding = 'async';
+        activatable(img, `Open ${p.title} details`);
+        img.addEventListener('click', () => openDetailsModal(p));
+        strip.appendChild(img);
+      });
+      item.appendChild(strip);
+    }
     list.appendChild(item);
   });
 
@@ -1052,6 +1065,8 @@ function mountModal(modal, label, close, exitMs) {
   closeBtn.setAttribute('aria-label', 'Close');
   const focusables = () => [...modal.querySelectorAll('button, [href], [tabindex]:not([tabindex="-1"])')];
   const onKey = e => {
+    const stack = document.querySelectorAll('.card-modal');
+    if (stack[stack.length - 1] !== modal) return; // a lightbox is open above this one
     if (e.key === 'Escape') { e.preventDefault(); teardown(); return; }
     if (e.key !== 'Tab') return;
     const f = focusables(); if (!f.length) return;
@@ -1150,27 +1165,50 @@ function openDetailsModal(project) {
   const d = project.details || {};
   const modal = div('card-modal details-modal');
   modal.style.opacity = '0';
-  const imgHtml = project.logo ? `<img class="modal-img modal-img--square" src="${project.logo}" alt="${project.title}">` : '';
+  const shots = project.screenshots || [];
   const metaTags = [getProjectOriginLabel(project), getProjectCollaborationLabel(project)]
     .map(tag => `<span class="modal-tag">${tag}</span>`)
     .join('');
-  modal.innerHTML = `
-    <div class="modal-inner">
-      <button class="modal-close">×</button>
-      ${project.logo ? `<div class="modal-image-col">${imgHtml}</div>` : ''}
-      <div class="modal-info">
-        <div class="modal-info-title">${project.title}</div>
-        ${metaTags ? `<div class="modal-info-tags">${metaTags}</div>` : ''}
+  const sections = `
         ${d.problem     ? `<div class="modal-info-desc"><strong>Problem:</strong> ${d.problem}</div>` : ''}
         ${d.observation ? `<div class="modal-info-desc"><strong>Observation:</strong> ${d.observation}</div>` : ''}
         ${d.hypothesis  ? `<div class="modal-info-desc"><strong>Hypothesis:</strong> ${d.hypothesis}</div>` : ''}
         ${d.experiment  ? `<div class="modal-info-desc"><strong>Experiment:</strong> ${d.experiment}</div>` : ''}
         ${d.outcome     ? `<div class="modal-info-desc"><strong>Outcome:</strong> ${d.outcome}</div>` : ''}
         ${d.reflection  ? `<div class="modal-info-desc"><strong>Reflection:</strong> ${d.reflection}</div>` : ''}
-        ${project.posterUrl ? `<div class="modal-poster-section"><div class="modal-poster-label">Research Poster</div><img class="modal-poster-img" src="${project.posterUrl}" alt="${project.title} research poster"></div>` : ''}
+        ${project.posterUrl ? `<div class="modal-poster-section"><div class="modal-poster-label">Research Poster</div><img class="modal-poster-img" src="${project.posterUrl}" alt="${project.title} research poster"></div>` : ''}`;
+
+  if (shots.length) {
+    // Screenshots lead: a small logo beside the title, a shelf of screens,
+    // then the write-up scrolling underneath.
+    modal.innerHTML = `
+    <div class="modal-inner details-stack">
+      <button class="modal-close">×</button>
+      <div class="details-head">
+        ${project.logo ? `<img src="${project.logo}" alt="">` : ''}
+        <div>
+          <div class="modal-info-title">${project.title}</div>
+          ${metaTags ? `<div class="modal-info-tags">${metaTags}</div>` : ''}
+        </div>
       </div>
-    </div>
-  `;
+      <div class="shots-shelf">
+        ${shots.map(s => `<figure><img src="${s.src}" alt="${s.alt}" loading="lazy" decoding="async" tabindex="0" role="button">${s.caption ? `<figcaption>${s.caption}</figcaption>` : ''}</figure>`).join('')}
+      </div>
+      <div class="modal-info">${sections}</div>
+    </div>`;
+  } else {
+    const imgHtml = project.logo ? `<img class="modal-img modal-img--square" src="${project.logo}" alt="${project.title}">` : '';
+    modal.innerHTML = `
+    <div class="modal-inner">
+      <button class="modal-close">×</button>
+      ${project.logo ? `<div class="modal-image-col">${imgHtml}</div>` : ''}
+      <div class="modal-info">
+        <div class="modal-info-title">${project.title}</div>
+        ${metaTags ? `<div class="modal-info-tags">${metaTags}</div>` : ''}
+        ${sections}
+      </div>
+    </div>`;
+  }
 
   document.body.appendChild(modal);
   requestAnimationFrame(() => { modal.style.opacity = '1'; });
@@ -1179,6 +1217,20 @@ function openDetailsModal(project) {
     modal.classList.add('exit');
     setTimeout(() => modal.remove(), 220);
   }, 220);
+
+  modal.querySelectorAll('.shots-shelf img').forEach(img => {
+    const open = e => {
+      e.stopPropagation();
+      openCardModal({
+        fromRect: img.getBoundingClientRect(),
+        src: img.src, backSrc: null,
+        aspect: img.naturalWidth >= img.naturalHeight ? 'landscape' : 'portrait',
+        title: img.alt, subtitle: '', desc: '', tags: [], isTee: false,
+      });
+    };
+    img.addEventListener('click', open);
+    img.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); open(e); } });
+  });
 
   const posterImg = modal.querySelector('.modal-poster-img');
   if (posterImg) {

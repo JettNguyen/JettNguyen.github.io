@@ -1734,6 +1734,127 @@ nav.visible {
  color:var(--text);
 }
 
+/* Product thumbnails in the row's third column. */
+.proj-shots {
+ display:flex;
+ gap:8px;
+ align-self:center;
+ padding-right:6px;
+}
+
+.proj-shots img {
+ height:150px;
+ width:auto;
+ max-width:230px;
+ object-fit:cover;
+ border-radius:10px;
+ border:1px solid var(--border);
+ background:var(--surface2);
+ cursor:pointer;
+ transition:transform 0.3s cubic-bezier(0.16,1,0.3,1), border-color 0.2s;
+}
+
+.proj-shots img:hover {
+ transform:translateY(-3px);
+ border-color:var(--border2);
+}
+
+.proj-shots img:focus-visible {
+ outline:2px solid var(--accent);
+ outline-offset:3px;
+}
+
+@media (width <= 900px) {
+ .proj-shots { display:none; }
+}
+
+/* Details modal, screenshot layout: header, shelf, then the write-up. */
+.details-modal .modal-inner.details-stack {
+ flex-direction:column;
+ align-items:stretch;
+ gap:14px;
+ width:min(94vw, 960px);
+ max-height:88vh;
+}
+
+.details-head {
+ display:flex;
+ align-items:center;
+ gap:14px;
+ padding-right:48px;
+}
+
+.details-head img {
+ width:52px;
+ height:52px;
+ border-radius:12px;
+ object-fit:contain;
+ padding:4px;
+ background:var(--surface2);
+ border:1px solid var(--border);
+ flex-shrink:0;
+}
+
+.details-stack .modal-info-title {
+ margin-bottom:6px;
+}
+
+.shots-shelf {
+ display:flex;
+ gap:10px;
+ overflow-x:auto;
+ flex-shrink:0;
+ padding-bottom:8px;
+ scrollbar-width:thin;
+ scrollbar-color:rgba(255, 255, 255, 0.2) transparent;
+}
+
+.shots-shelf figure {
+ margin:0;
+ flex-shrink:0;
+}
+
+.shots-shelf img {
+ display:block;
+ height:clamp(200px, 36vh, 340px);
+ width:auto;
+ border-radius:10px;
+ border:1px solid var(--border2);
+ cursor:zoom-in;
+ transition:opacity 0.2s;
+}
+
+.shots-shelf img:hover { opacity:0.9; }
+
+.shots-shelf img:focus-visible {
+ outline:2px solid var(--accent);
+ outline-offset:3px;
+}
+
+.shots-shelf figcaption {
+ font-family:'DM Mono',monospace;
+ font-size:11px;
+ letter-spacing:0.05em;
+ color:var(--muted);
+ margin-top:5px;
+}
+
+.details-stack .modal-info {
+ width:100%;
+ max-width:none;
+ max-height:none;
+ flex:1;
+ min-height:0;
+ overflow-y:auto;
+ padding-right:8px;
+}
+
+@media (width <= 600px) {
+ .details-modal .modal-inner.details-stack { max-height:90vh; }
+ .details-stack .modal-info { overflow:visible; }
+ .shots-shelf img { height:min(48vh, 300px); }
+}
+
 .proj-status {
  display:inline-flex;
  align-items:center;
