@@ -28,124 +28,8 @@ html,body {
  font-family:'Plus Jakarta Sans',sans-serif;
  font-size:15px;
  overflow:hidden;
- cursor:none;
 }
 
-#cursor {
- position:fixed;
- width:10px;
- height:10px;
- background:var(--accent);
- border-radius:50%;
- pointer-events:none;
- z-index:9999;
- transform:translate(-50%,-50%);
- transition:width 0.5s cubic-bezier(0.15,1,0.25,1),height 0.2s cubic-bezier(0.15,1,0.25,1),border-color 0.2s,opacity 0.3s;
-}
-
-#cursor-ring {
- position:fixed;
- width:36px;
- height:36px;
- border:2px solid rgba(239, 68, 68, 0.25);
- border-radius:50%;
- pointer-events:none;
- z-index:9998;
- transform:translate(-50%,-50%);
- transition:width 0.5s cubic-bezier(0.15,1,0.25,1),height 0.2s cubic-bezier(0.15,1,0.25,1),border-color 0.2s;
-}
-
-.ch #cursor {
- width:5px;
- height:5px;
- background-color:rgba(68, 180, 239, 0.75);
-}
-
-.ch #cursor-ring {
- width:52px;
- height:52px;
- border-color:rgba(68, 180, 239, 0.75);
-}
-
-#bg-canvas {
- position:fixed;
- inset:0;
- z-index:0;
- pointer-events:none;
-}
-
-/* ------------------------ Loader ------------------------ */
-#loader {
- position:fixed;
- inset:0;
- z-index:10000;
- background:var(--bg);
- display:flex;
- align-items:center;
- justify-content:center;
- flex-direction:column;
- gap:25px;
-}
-
-.loader-name {
- font-family:Goldman,sans-serif;
- font-weight:800;
- font-size:clamp(36px,6vw,76px);
- letter-spacing:-2px;
- line-height:1;
- display:flex;
- overflow:hidden;
- padding-bottom:0.1em;
-}
-
-.lchar {
- display:inline-block;
- opacity:0;
- transform:translateY(100%) rotate(8deg);
- animation:lcharIn 0.5s cubic-bezier(0.16,1,0.3,1) both;
-}
-
-@keyframes lcharIn {
- to {
- opacity:1;
- transform:none;
- }
-}
-
-.loader-bar-wrap {
- width:200px;
- height:1px;
- background:var(--border2);
- position:relative;
-}
-
-.loader-bar {
- height:100%;
- width:0%;
- background:var(--accent);
- box-shadow:0 0 15px var(--accent);
- transition:width 0.8s cubic-bezier(0.15,1,0.25,1);
-}
-
-.loader-pct {
- font-size:11px;
- letter-spacing:0.15em;
- color:var(--muted);
-}
-
-#loader.exit {
- animation:loaderSweep 0.65s cubic-bezier(0.7,0,0.3,1) forwards;
-}
-
-@keyframes loaderSweep {
- 0% {
- clip-path:inset(0 0 0 0);
- }
-
- 100% {
- clip-path:inset(0 100% 0 0);
- }
-}
 
 /* ------------------------ Transition ------------------------ */
 #transition-overlay {
@@ -184,7 +68,7 @@ nav {
 }
 
 nav.visible {
- animation:navIn 0.6s 0.8s cubic-bezier(0.16,1,0.3,1) forwards;
+ animation:navIn 0.6s 0.05s cubic-bezier(0.16,1,0.3,1) forwards;
 }
 
 @keyframes navIn {
@@ -232,7 +116,7 @@ nav.visible {
  font-size:18px;
  color:var(--accent);
  letter-spacing:-0.5px;
- cursor:none;
+ cursor:pointer;
  z-index:1;
  position:relative;
  transition:letter-spacing 0.35s cubic-bezier(0.16,1,0.3,1);
@@ -284,7 +168,7 @@ nav.visible {
  font-size:11px;
  color:var(--muted);
  padding:7px 9px;
- cursor:none;
+ cursor:pointer;
  letter-spacing:0.06em;
  transition:color 0.2s;
  border-radius:6px;
@@ -323,18 +207,7 @@ nav.visible {
  background:var(--accent);
  border-radius:50%;
  flex-shrink:0;
- animation:blink 2s infinite;
  margin-left: 5px;
-}
-
-@keyframes blink {
- 0%,100% {
- box-shadow:0 0 0 0 rgba(239, 68, 68, 0.5);
- }
-
- 50% {
- box-shadow:0 0 0 6px rgba(239, 68, 68, 0);
- }
 }
 
 
@@ -351,9 +224,7 @@ nav.visible {
  inset:0;
  padding:0 40px;
  overflow:hidden auto;
- opacity:0;
- pointer-events:none;
- transition:opacity 0.1s;
+ display:none;
 }
 
 .page::-webkit-scrollbar {
@@ -366,8 +237,7 @@ nav.visible {
 }
 
 .page.active {
- opacity:1;
- pointer-events:all;
+ display:block;
 }
 
 /* ------------------------ Home ------------------------ */
@@ -599,7 +469,7 @@ nav.visible {
 }
 
 .hs-meta {
- font-size:10px;
+ font-size:11px;
  letter-spacing:0.12em;
  color:var(--muted);
  text-align:center;
@@ -623,7 +493,7 @@ nav.visible {
  padding:12px 24px;
  border:none;
  border-radius:6px;
- cursor:none;
+ cursor:pointer;
  font-weight:500;
  transition:transform 0.3s cubic-bezier(0.16,1,0.3,1),box-shadow 0.3s;
 }
@@ -655,7 +525,7 @@ nav.visible {
  padding:12px 24px;
  border:1px solid var(--border);
  border-radius:6px;
- cursor:none;
+ cursor:pointer;
  transition:color 0.2s,border-color 0.2s,transform 0.3s;
 }
 
@@ -804,7 +674,7 @@ nav.visible {
 }
 
 .info-label {
- font-size:10px;
+ font-size:11px;
  letter-spacing:0.15em;
  text-transform:uppercase;
  color:var(--muted);
@@ -828,7 +698,7 @@ nav.visible {
 }
 
 .skill-group-label {
- font-size:9px;
+ font-size:10px;
  letter-spacing:0.14em;
  text-transform:uppercase;
  color:var(--muted);
@@ -882,29 +752,44 @@ nav.visible {
 }
 
 .interest-section-intro {
- font-size:12px;
+ font-size:13px;
  color:var(--muted);
  line-height:1.6;
  max-width:520px;
 }
 
 /* ------------------------ Interests ------------------------ */
+/* One scrolling row per section. The old auto-fill grid put 15 albums in
+   three rows on desktop and, at phone width, in a single 22,000px column. */
 .interest-grid {
  display:grid;
- grid-template-columns:repeat(auto-fill,minmax(175px,1fr));
- grid-auto-columns:min-content;
+ grid-auto-flow:column;
+ grid-auto-columns:180px;
  gap:10px;
  margin-top:16px;
- scrollbar-width: none;
+ padding:6px 0 14px;
+ overflow-x:auto;
+ overscroll-behavior-x:contain;
+ scroll-snap-type:x proximity;
+ scrollbar-width:thin;
+ scrollbar-color:rgba(255, 255, 255, 0.2) transparent;
 }
 
-.interest-grid::-webkit-scrollbar { display: none; }
+.interest-grid::-webkit-scrollbar { height:5px; }
+.interest-grid::-webkit-scrollbar-thumb { background:rgba(255, 255, 255, 0.2); border-radius:3px; }
+
+.interest-grid > .interest-card {
+ scroll-snap-align:start;
+}
+
+@media (width <= 600px) {
+ .interest-grid { grid-auto-columns:160px; }
+}
 
 .interest-card {
  border:1px solid var(--border);
  border-radius:10px;
  overflow:hidden;
- cursor:none;
  transition:border-color 0.25s,background-color 0.25s,transform 0.4s cubic-bezier(0.16,1,0.3,1);
  position:relative;
  background:var(--surface);
@@ -955,7 +840,7 @@ nav.visible {
 }
 
 .interest-card-desc {
- font-size:10px;
+ font-size:12px;
  color:var(--text);
  line-height:1.5;
 }
@@ -968,7 +853,7 @@ nav.visible {
 }
 
 .interest-card-tag {
- font-size:9px;
+ font-size:11px;
  letter-spacing:0.04em;
  padding:2px 7px;
  border:1px solid var(--border);
@@ -1080,7 +965,7 @@ nav.visible {
 
 .tee-flip-label {
  font-family: 'DM Mono', monospace;
- font-size: 9px;
+ font-size: 10px;
  letter-spacing: 0.08em;
  color: var(--muted);
  line-height: 1;
@@ -1141,7 +1026,7 @@ nav.visible {
  width: 36px;
  height: 36px;
  border-radius: 50%;
- cursor: none;
+ cursor:pointer;
  padding: 0;
  line-height: 1;
  display: flex;
@@ -1200,7 +1085,7 @@ nav.visible {
  font-family: 'DM Mono', monospace;
  font-size: 11px;
  letter-spacing: 0.06em;
- cursor: none;
+ cursor:pointer;
  transition: color 0.2s, border-color 0.2s;
  opacity: 0;
  animation: modalFadeIn 0.2s 0.38s ease forwards;
@@ -1259,7 +1144,7 @@ nav.visible {
 }
 
 .modal-tag {
- font-size: 10px;
+ font-size: 11px;
  letter-spacing: 0.05em;
  padding: 3px 9px;
  border: 1px solid var(--border);
@@ -1467,7 +1352,7 @@ nav.visible {
 
 .curiosity-grid {
  display:grid;
- grid-template-columns:repeat(auto-fill,minmax(240px,1fr));
+ grid-template-columns:repeat(auto-fill,minmax(min(240px, 100%),1fr));
  gap:10px;
  margin-top:16px;
 }
@@ -1476,7 +1361,6 @@ nav.visible {
  border:1px solid var(--border);
  border-radius:10px;
  padding:20px 22px;
- cursor:none;
  transition:border-color 0.25s,background-color 0.25s,transform 0.4s cubic-bezier(0.16,1,0.3,1);
  background:var(--surface);
 }
@@ -1502,13 +1386,13 @@ nav.visible {
 }
 
 .curiosity-sub {
- font-size:11px;
+ font-size:12px;
  color:var(--accent3);
  margin-bottom:10px;
 }
 
 .curiosity-desc {
- font-size:12px;
+ font-size:13px;
  color:var(--muted);
  line-height:1.6;
 }
@@ -1535,12 +1419,11 @@ nav.visible {
  height:5px;
  background:var(--accent);
  border-radius:50%;
- animation:blink 2s infinite;
  flex-shrink:0;
 }
 
 .signal-label {
- font-size:10px;
+ font-size:11px;
  letter-spacing:0.1em;
  text-transform:uppercase;
  color:var(--muted);
@@ -1677,13 +1560,13 @@ nav.visible {
  display:inline-flex;
  align-items:center;
  gap:6px;
- font-size:10px;
+ font-size:11px;
  letter-spacing:0.08em;
  text-transform:uppercase;
  padding:4px 10px;
  border-radius:999px;
  border:1px solid var(--border);
- color:var(--fg);
+ color:var(--text);
  background:rgba(255,255,255,0.02);
  }
  
@@ -1735,7 +1618,7 @@ nav.visible {
 }
 
 .proj-tag {
- font-size:10px;
+ font-size:11px;
  letter-spacing:0.04em;
  padding:3px 9px;
  border-radius:100px;
@@ -1778,9 +1661,6 @@ nav.visible {
  line-height:1;
 }
 
-.project-item:hover .proj-status::before {
- animation:none;
-}
 
 .proj-status::before {
  content:'';
@@ -1791,7 +1671,6 @@ nav.visible {
  border-radius:50%;
  flex-shrink:0;
  align-self:center;
- animation:proj-dot-blink 2s infinite;
 }
 
 /* ------------------------ Experience ------------------------ */
@@ -1810,7 +1689,7 @@ nav.visible {
 .tl-item-link {
  color: inherit;
  text-decoration: none;
- cursor: none;
+ cursor:pointer;
  border-radius: 12px;
  transition: background 0.2s;
 }
@@ -1820,7 +1699,7 @@ nav.visible {
 }
 
 .tl-section-label {
- font-size: 10px;
+ font-size: 11px;
  letter-spacing: 0.15em;
  text-transform: uppercase;
  color: var(--muted);
@@ -1899,7 +1778,7 @@ nav.visible {
 }
 
 .tl-points li {
- font-size:12px;
+ font-size:13px;
  color:var(--muted);
  line-height:1.8;
  padding:2px 0 2px 15px;
@@ -1964,7 +1843,7 @@ nav.visible {
  border:1px solid rgba(239, 68, 68, 0.25);
  border-radius:6px;
  transition:background-color 0.2s,transform 0.3s;
- cursor:none;
+ cursor:pointer;
 }
 
 .resume-dl:hover {
@@ -1985,7 +1864,6 @@ nav.visible {
  border:1px solid var(--border);
  border-radius:12px;
  overflow:hidden;
- cursor:none;
  transition:border-color 0.25s,transform 0.4s cubic-bezier(0.16,1,0.3,1);
  position:relative;
  background:var(--surface);
@@ -2017,7 +1895,7 @@ nav.visible {
  width:100%;
  padding-top:56.25%;
  overflow:hidden;
- cursor:none;
+ cursor:pointer;
 }
 
 .yt-thumb-wrap img {
@@ -2092,7 +1970,7 @@ nav.visible {
 }
 
 .pres-course {
- font-size:10px;
+ font-size:11px;
  letter-spacing:0.1em;
  color:var(--accent);
  margin-bottom:7px;
@@ -2126,7 +2004,7 @@ nav.visible {
 }
 
 .pres-desc {
- font-size:11px;
+ font-size:12px;
  color:var(--muted);
  line-height:1.6;
  margin-bottom:10px;
@@ -2159,7 +2037,7 @@ nav.visible {
 }
 
 .pres-date {
- font-size:10px;
+ font-size:11px;
  color:var(--muted);
  margin-top:8px;
 }
@@ -2219,7 +2097,7 @@ nav.visible {
 }
 
 .cw-legend-label {
- font-size: 11px;
+ font-size: 12px;
  color: var(--muted);
 }
 
@@ -2253,7 +2131,7 @@ nav.visible {
  justify-content: space-between;
  padding: 15px 25px;
  background: var(--surface2);
- cursor: none;
+ cursor:pointer;
  user-select: none;
  transition: background-color 0.2s;
 }
@@ -2329,7 +2207,7 @@ nav.visible {
  justify-content: space-between;
  padding: 18px 24px;
  background: rgba(255, 255, 255, 0.02);
- cursor: none;
+ cursor:pointer;
  user-select: none;
  transition: background-color 0.2s;
 }
@@ -2394,7 +2272,7 @@ nav.visible {
  align-items: center;
  justify-content: space-between;
  padding: 10px 20px;
- cursor: none;
+ cursor:pointer;
  user-select: none;
  transition: background-color 0.2s;
  gap: 12px;
@@ -2572,7 +2450,7 @@ nav.visible {
 }
 
 .cw-artifact-note {
- font-size: 11px;
+ font-size: 12px;
  color: var(--muted);
  line-height: 1.4;
 }
@@ -2581,7 +2459,7 @@ nav.visible {
  display: inline-flex;
  align-items: center;
  gap: 6px;
- font-size: 9px;
+ font-size: 11px;
  padding: 4px 10px;
  border-radius: 20px;
  text-transform: uppercase;
@@ -2593,7 +2471,7 @@ nav.visible {
 }
 
 .badge-icon {
- font-size: 8px;
+ font-size: 10px;
  font-weight: 600;
  line-height: 1;
 }
@@ -2736,7 +2614,7 @@ nav.visible {
  border-radius:10px;
  text-decoration:none;
  color:var(--text);
- cursor:none;
+ cursor:pointer;
  transition:border-color 0.25s,background-color 0.25s,transform 0.4s cubic-bezier(0.16,1,0.3,1);
  position:relative;
  overflow:hidden;
@@ -2803,7 +2681,7 @@ nav.visible {
 }
 
 .cl-handle {
- font-size:10px;
+ font-size:12px;
  color:var(--muted);
  margin-left:5px;
 }
@@ -2865,72 +2743,69 @@ nav.visible {
  opacity:1;
 }
 
-/* Mobile nav for 700px */
+/* Mobile nav: a row of real buttons that scrolls sideways. The previous
+   version was a drag-to-select carousel, so tapping a label did nothing. */
 #mobile-nav { display:none; }
 
 @media(width <=700px) {
 
- nav { display:none; }
+ #mainNav { display:none; }
  #app { inset:0 0 64px; }
 
  #mobile-nav {
- display: flex;
+ display:flex;
  position:fixed;
  bottom:0;
  left:0;
  right:0;
- height:64px;
+ height:calc(64px + env(safe-area-inset-bottom));
+ padding-bottom:env(safe-area-inset-bottom);
  z-index:100;
  background:rgba(7, 7, 7, 0.85);
  backdrop-filter:blur(28px);
  border-top:1px solid var(--border);
- overflow:hidden;
- touch-action:none;
- }
-
- #mob-lens {
- position:absolute;
- top:50%;
- left:50%;
- transform:translate(-50%,-50%);
- height:32px;
- min-width:48px;
- background:rgba(239, 68, 68, 0.07);
- border:1px solid rgba(239, 68, 68, 0.2);
- border-radius:8px;
- pointer-events:none;
- z-index:2;
- transition:width 0.2s cubic-bezier(0.16,1,0.3,1);
  }
 
  #mobile-nav-track {
- position:absolute;
- top:0;
- height:64px;
  display:flex;
  align-items:center;
- will-change:transform;
+ gap:4px;
+ width:100%;
+ height:64px;
+ padding:0 16px;
+ overflow-x:auto;
+ scroll-padding:0 16px;
+ scrollbar-width:none;
+ -webkit-overflow-scrolling:touch;
  }
 
+ #mobile-nav-track::-webkit-scrollbar { display:none; }
+
  .mob-item {
- height:64px;
- display:flex;
- align-items:center;
- justify-content:center;
+ flex-shrink:0;
+ height:44px;
+ padding:0 14px;
+ border:1px solid transparent;
+ border-radius:8px;
+ background:none;
  font-family:'DM Mono',monospace;
- font-size:11px;
+ font-size:12px;
  letter-spacing:0.06em;
  white-space:nowrap;
- user-select:none;
- padding:0 16px;
  color:var(--muted);
- opacity:0.4;
- transition:color 0.2s, opacity 0.2s;
+ cursor:pointer;
+ transition:color 0.2s, background-color 0.2s, border-color 0.2s;
  }
 
  .mob-item.active {
  color:var(--accent);
- opacity:1;
+ background:rgba(239, 68, 68, 0.07);
+ border-color:rgba(239, 68, 68, 0.2);
+ }
+
+ .mob-item:focus-visible {
+ outline:2px solid var(--accent);
+ outline-offset:2px;
  }
 
  #mobile-nav::before,
@@ -2939,7 +2814,7 @@ nav.visible {
  position:absolute;
  top:0;
  bottom:0;
- width:72px;
+ width:28px;
  z-index:3;
  pointer-events:none;
  }
@@ -3156,8 +3031,16 @@ nav.visible {
  border-radius:12px;
 }
 
-/* Reduced motion: keep every state change legible, drop the movement. */
+/* Reduced motion: every animation and transition finishes instantly, so
+   reveal and fade-in states still land on their final values. */
 @media (prefers-reduced-motion: reduce) {
+ *, *::before, *::after {
+  animation-duration:0.01ms !important;
+  animation-iteration-count:1 !important;
+  transition-duration:0.01ms !important;
+  scroll-behavior:auto !important;
+ }
+
  .btn-primary:active,
  .btn-ghost:active,
  .resume-dl:active,

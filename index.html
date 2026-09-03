@@ -2,29 +2,29 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Loading…</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Jett Nguyen · Portfolio</title>
+  <meta name="description" content="Jett Nguyen: University of Florida computer science graduate with a public relations minor. Co-founder of Otian AI, building software from a user-centered perspective. Projects, experience, and contact.">
+  <link rel="canonical" href="https://jettnguyen.github.io/">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Jett Nguyen · Portfolio">
+  <meta property="og:description" content="Computer science and public relations. Co-founder of Otian AI. Projects, experience, and contact.">
+  <meta property="og:url" content="https://jettnguyen.github.io/">
+  <meta property="og:image" content="https://jettnguyen.github.io/assets/og.jpg">
+  <meta name="twitter:card" content="summary">
+  <meta name="theme-color" content="#070707">
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="style.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Goldman:wght@400;600;700;800&family=DM+Mono:wght@400&family=Plus+Jakarta+Sans:wght@400;500;600&display=swap" rel="stylesheet">
 </head>
 <body>
 
-<div id="cursor"></div>
-<div id="cursor-ring"></div>
+<div id="transition-overlay" aria-hidden="true"></div>
 
-<div id="loader">
-  <div class="loader-name" id="loaderName"></div>
-  <div class="loader-bar-wrap"><div class="loader-bar" id="loaderBar"></div></div>
-  <div class="loader-pct" id="loaderPct">000</div>
-</div>
-
-<div id="transition-overlay"></div>
-<canvas id="bg-canvas"></canvas>
-
-<nav id="mainNav">
+<nav id="mainNav" aria-label="Primary">
   <div class="nav-bg"></div>
   <div class="nav-logo" id="navLogo"></div>
   <ul class="nav-links" id="navLinks">
@@ -36,12 +36,11 @@
   </div>
 </nav>
 
-<div id="mobile-nav">
-  <div id="mob-lens"></div>
+<div id="mobile-nav" role="navigation" aria-label="Primary">
   <div id="mobile-nav-track"></div>
 </div>
 
-<div id="app"></div>
+<main id="app"></main>
 
 <script src="data.js"></script>
 <script src="app.js"></script>

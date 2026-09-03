@@ -60,6 +60,7 @@ function sectionHeader(lbl, lines) {
 function logoOrPlaceholder(url, alt, name, cls) {
   if (url) {
     const img = mk('img', cls); img.src = url; img.alt = alt;
+    img.loading = 'lazy'; img.decoding = 'async';
     img.onerror = () => {
       const ph = div(cls.replace('large', 'placeholder')); ph.textContent = name[0]; img.replaceWith(ph);
     };
@@ -139,6 +140,7 @@ builders.home = () => {
   const frame = div('headshot-frame');
   if (home.headshotUrl) {
     const img = mk('img'); img.src = home.headshotUrl; img.alt = home.headshotAlt || D.meta.name;
+    img.width = 280; img.height = 280; img.fetchPriority = 'high';
     img.onerror = () => {
       img.style.display = 'none';
       const ph = div('hs-placeholder'); ph.textContent = D.meta.initials; frame.appendChild(ph);
@@ -243,7 +245,7 @@ builders.about = () => {
           imgContainer.appendChild(frontImg);
 
           const backImg = mk('img', 'interest-card-img back-img');
-          backImg.src = item.imageUrl.replace('-front.png', '-back.png');
+          backImg.src = item.imageUrl.replace(/-front\.(\w+)$/, '-back.$1');
           backImg.onerror = () => backImg.remove();
             backImg.loading = 'lazy';
             backImg.decoding = 'async';
@@ -450,7 +452,7 @@ builders.presentations = () => {
       });
       card.appendChild(thumbWrap);
     } else if (p.thumbnailUrl) {
-      const img = mk('img', 'pres-thumb-static'); img.src = p.thumbnailUrl; img.alt = p.title; img.loading = 'lazy';
+      const img = mk('img', 'pres-thumb-static'); img.src = p.thumbnailUrl; img.alt = p.title; img.loading = 'lazy'; img.decoding = 'async';
       img.onerror = () => { img.style.display = 'none'; };
       card.appendChild(img);
     } else {
@@ -508,7 +510,7 @@ builders.coursework = () => {
     // Years container
     const yearsContainer = div('cw-years');
     
-    CW.years.forEach(yr => {
+    CW.years.forEach((yr, yi) => {
         // Calculate stats for the year
         let totalCourses = 0;
         let totalArtifacts = 0;
@@ -523,7 +525,8 @@ builders.coursework = () => {
         
         // Year header
         const yearHeader = div('cw-year-header');
-        activatable(yearHeader, `${yr.year} coursework`, false);
+        activatable(yearHeader, `${yr.year} coursework`, yi === 0);
+        if (yi === 0) yearCard.classList.add('open');
         yearHeader.appendChild(Object.assign(div('cw-year-title'), { textContent: yr.year }));
         
         const yearStats = div('cw-year-stats');
@@ -540,12 +543,13 @@ builders.coursework = () => {
         const yearContent = div('cw-year-content');
         const semestersGrid = div('cw-semesters-grid');
         
-        yr.semesters.forEach(sem => {
+        yr.semesters.forEach((sem, si) => {
             const semesterBlock = div('cw-semester-block');
-            
+            if (yi === 0 && si === 0) semesterBlock.classList.add('open');
+
             // Semester header
             const semHeader = div('cw-semester-header');
-            activatable(semHeader, `${sem.term} courses`, false);
+            activatable(semHeader, `${sem.term} courses`, yi === 0 && si === 0);
             const semInfo = div('cw-semester-info');
             semInfo.appendChild(Object.assign(div('cw-semester-name'), { textContent: `${sem.term}` }));
             semHeader.appendChild(semInfo);
@@ -635,6 +639,7 @@ builders.coursework = () => {
                           const logoImg = mk('img', 'cw-artifact-logo');
                           logoImg.src = logoUrl;
                           logoImg.alt = art.title;
+                          logoImg.loading = 'lazy';
                           logoImg.onerror = () => {
                             logoImg.style.display = 'none';
                             const fallbackIcon = div(`cw-artifact-icon ${iconInfo.cls}`);
@@ -745,7 +750,7 @@ builders.contact = () => {
       if (l.iconColor) i.style.color = l.iconColor;
       icon.appendChild(i);
     } else if (l.iconType === 'img') {
-      const img = mk('img'); img.src = l.iconValue; img.alt = l.label;
+      const img = mk('img'); img.src = l.iconValue; img.alt = ''; img.loading = 'lazy';
       img.style.cssText = 'width:20px;height:20px;object-fit:contain;border-radius:5px';
       img.onerror = () => { img.style.display = 'none'; icon.textContent = l.label[0]; };
       icon.appendChild(img);
@@ -777,14 +782,6 @@ function buildSite() {
   document.title = D.meta.name + ' · Portfolio';
   currentPage = pageFromHash();
 
-  const loaderName = document.getElementById('loaderName');
-  D.meta.name.toUpperCase().split('').forEach((ch, i) => {
-    const s = mk('span', 'lchar');
-    s.style.animationDelay = (i * .05) + 's';
-    s.style.color = i < D.meta.loaderAccentChars ? 'var(--accent)' : 'inherit';
-    s.textContent = ch === ' ' ? '\u00a0' : ch;
-    loaderName.appendChild(s);
-  });
 
   const nl = document.getElementById('navLogo');
   if (D.meta.logoUrl) {
@@ -821,96 +818,6 @@ function buildSite() {
   });
 }
 
-const HOVER_TARGETS = 'a, button, .nav-logo, .yt-play-btn, .proj-link, .tee-card, .card-img-container';
-document.addEventListener('mouseover', e => {
-  document.body.classList.toggle('ch', !!e.target.closest(HOVER_TARGETS));
-});
-document.addEventListener('mouseout', e => {
-  if (!e.relatedTarget?.closest(HOVER_TARGETS)) document.body.classList.remove('ch');
-});
-
-const cursor     = document.getElementById('cursor');
-const cursorRing = document.getElementById('cursor-ring');
-let mx = window.innerWidth / 2, my = window.innerHeight / 2, rx = mx, ry = my;
-let lastWasTouch = false;
-document.addEventListener('mousemove', e => {
-  if (lastWasTouch) { lastWasTouch = false; return; }
-  mx = e.clientX; my = e.clientY;
-  cursor.style.left = mx + 'px';
-  cursor.style.top  = my + 'px';
-  cursor.style.opacity = '1';
-  cursorRing.style.opacity = '1';
-});
-document.addEventListener('touchstart', () => {
-  lastWasTouch = true;
-  cursor.style.opacity = '0';
-  cursorRing.style.opacity = '0';
-}, { passive: true });
-(function loopRing() {
-  rx += (mx - rx) * .09;
-  ry += (my - ry) * .09;
-  cursorRing.style.left = rx + 'px';
-  cursorRing.style.top  = ry + 'px';
-  requestAnimationFrame(loopRing);
-})();
-
-const canvas = document.getElementById('bg-canvas');
-const ctx    = canvas.getContext('2d');
-let CW, CH;
-function resizeCanvas() { CW = canvas.width = window.innerWidth; CH = canvas.height = window.innerHeight; }
-resizeCanvas();
-window.addEventListener('resize', resizeCanvas);
-
-class Dot {
-  constructor() { this.spawn(true); }
-  spawn(rand) {
-    this.x    = Math.random() * CW;
-    this.y    = rand ? Math.random() * CH : CH + 5;
-    this.vx   = (Math.random() - .5) * .1;
-    this.vy   = -(0.1 + Math.random() * .22);
-    this.life = 0;
-    this.max  = 260 + Math.random() * 340;
-    this.r    = Math.random() * 1.3 + .3;
-  }
-  tick() {
-    this.x += this.vx; this.y += this.vy; this.life++;
-    const t = this.life / this.max;
-    this.a  = t < .2 ? t / .2 : (t > .75 ? (1 - (t - .75) / .25) : 1);
-    if (this.life >= this.max) this.spawn(false);
-  }
-  draw() {
-    ctx.save();
-    ctx.globalAlpha = this.a * .3;
-    ctx.fillStyle   = '#ef4444';
-    ctx.shadowBlur  = 5;
-    ctx.shadowColor = '#ef4444';
-    ctx.beginPath();
-    ctx.arc(this.x, this.y, this.r, 0, Math.PI * 2);
-    ctx.fill();
-    ctx.restore();
-  }
-}
-const DOTS = Array.from({ length: 50 }, () => new Dot());
-(function animCanvas() {
-  ctx.clearRect(0, 0, CW, CH);
-  DOTS.forEach(p => { p.tick(); p.draw(); });
-  requestAnimationFrame(animCanvas);
-})();
-
-let pct = 0;
-const loaderBar = document.getElementById('loaderBar');
-const loaderPct = document.getElementById('loaderPct');
-const pi = setInterval(() => {
-  pct = Math.min(pct + (Math.random() * 20 + 10), 100);
-  loaderBar.style.width = pct + '%';
-  loaderPct.textContent = String(Math.floor(pct)).padStart(3, '0');
-  if (pct >= 100) {
-    clearInterval(pi);
-    loaderPct.textContent = '100';
-    document.getElementById('loader').classList.add('exit');
-    setTimeout(() => { document.getElementById('loader').style.display = 'none'; startSite(); }, 650);
-  }
-}, 60);
 
 function startSite() {
   document.getElementById('mainNav').classList.add('visible');
@@ -919,8 +826,6 @@ function startSite() {
     if (currentPage === 'home') runHomeAnims();
     else triggerPageAnims(currentPage);
   }, 200);
-  const st = document.getElementById('statusText');
-  if (st) { const orig = st.textContent; setInterval(() => scramble(st, orig, 700), 6000); }
   initTeeInteractions();
   initImageLightbox();
   initMobileNav();
@@ -940,18 +845,6 @@ function runHomeAnims() {
   setTimeout(() => document.getElementById('homeRight')?.classList.add('go'), 150);
 }
 
-const CHARS = '!<>-_\\/[]{}~=+*^?#@abcdefghijklmnopqrstuvwxyz0123456789';
-function scramble(el, finalText, dur = 600) {
-  const total = Math.round(dur / 30); let f = 0;
-  const t = setInterval(() => {
-    el.textContent = finalText.split('').map((c, i) => {
-      if (c === ' ') return ' ';
-      if (i < Math.floor(f / total * finalText.length)) return c;
-      return CHARS[Math.floor(Math.random() * CHARS.length)];
-    }).join('');
-    if (++f > total) { clearInterval(t); el.textContent = finalText; }
-  }, 30);
-}
 
 // The site is one document, so without this every page shares a single URL:
 // nothing is linkable and a refresh always lands back on home.
@@ -960,11 +853,12 @@ function pageFromHash() {
   return D.nav.some(n => n.id === id) ? id : 'home';
 }
 
-let currentPage = 'home', transitioning = false;
+let currentPage = 'home', transitioning = false, pendingNav = null;
 const overlay   = document.getElementById('transition-overlay');
 
 function navigate(to, clickX, clickY) {
-  if (to === currentPage || transitioning) return;
+  if (to === currentPage) return;
+  if (transitioning) { pendingNav = to; return; }
   transitioning = true;
 
   // Setting the hash adds a history entry. The hashchange it fires re-enters
@@ -987,13 +881,24 @@ function navigate(to, clickX, clickY) {
     triggerPageAnims(to);
   }, 275);
 
-  setTimeout(() => { overlay.className = ''; transitioning = false; }, 550);
+  setTimeout(() => {
+    overlay.className = ''; transitioning = false;
+    if (pendingNav) { const next = pendingNav; pendingNav = null; navigate(next, 0, 0); }
+  }, 550);
 }
 
 window.addEventListener('hashchange', () => navigate(pageFromHash(), 0, 0));
 
 function updateNav(page) {
   document.querySelectorAll('.nav-btn').forEach(b => b.classList.toggle('active', b.dataset.page === page));
+  document.querySelectorAll('.mob-item').forEach(b => {
+    const on = b.dataset.page === page;
+    b.classList.toggle('active', on);
+    if (on) { b.setAttribute('aria-current', 'page'); b.scrollIntoView({ inline: 'center', block: 'nearest', behavior: 'smooth' }); }
+    else b.removeAttribute('aria-current');
+  });
+  const label = D.nav.find(n => n.id === page)?.label;
+  document.title = page === 'home' ? D.meta.name + ' · Portfolio' : `${label} · ${D.meta.name}`;
   movePill();
 }
 
@@ -1019,124 +924,17 @@ function triggerPageAnims(page) {
 }
 
 function initMobileNav() {
-  const pages  = D.nav.map(n => n.id);
-  const labels = D.nav.map(n => n.label);
-  const nav    = document.getElementById('mobile-nav');
-  const track  = document.getElementById('mobile-nav-track');
-  const lens   = document.getElementById('mob-lens');
-
+  const track = document.getElementById('mobile-nav-track');
   if (!track) return;
-
-  // Build all items into the track
-  labels.forEach((lbl, i) => {
-    const el = document.createElement('div');
-    el.className = 'mob-item';
-    el.textContent = lbl;
-    el.dataset.index = i;
-    track.appendChild(el);
+  D.nav.forEach(item => {
+    const b = mk('button', 'mob-item');
+    b.type = 'button';
+    b.dataset.page = item.id;
+    b.textContent = item.label;
+    b.onclick = () => navigate(item.id, 0, 0);
+    track.appendChild(b);
   });
-
-  const items   = () => Array.from(track.querySelectorAll('.mob-item'));
-  const NAV_W   = () => nav.offsetWidth;
-  const ITEM_W  = (i) => items()[i].offsetWidth;
-
-  // Calculate the translateX so item at index i is centered in the nav
-  function offsetForIndex(i) {
-    const its = items();
-    // Sum widths of all items before i
-    let left = 0;
-    for (let j = 0; j < i; j++) left += its[j].offsetWidth;
-    // Center: nav center minus (item's left edge + half item width)
-    return NAV_W() / 2 - left - its[i].offsetWidth / 2;
-  }
-
-  let idx        = 0;
-  let baseOffset = offsetForIndex(0);
-  let dragStartX = 0;
-  let dragDelta  = 0;
-  let dragging   = false;
-
-  function setActive(i) {
-    items().forEach((el, j) => el.classList.toggle('active', j === i));
-    lens.style.width = (items()[i].offsetWidth + 8) + 'px';
-  }
-
-  function snapTo(i, animate) {
-    idx = Math.max(0, Math.min(pages.length - 1, i));
-    baseOffset = offsetForIndex(idx);
-    if (animate) {
-      track.style.transition = 'transform .3s cubic-bezier(.16,1,.3,1)';
-      setTimeout(() => { track.style.transition = ''; }, 300);
-    }
-    track.style.transform = `translateX(${baseOffset}px)`;
-    setActive(idx);
-  }
-
-  // Find which item is closest to center given current transform
-  function nearestIndex() {
-    const navRect = nav.getBoundingClientRect();
-    const center  = navRect.left + NAV_W() / 2;
-    let best = 0, bestDist = Infinity;
-    items().forEach((el, i) => {
-      const r    = el.getBoundingClientRect();
-      const dist = Math.abs((r.left + r.width / 2) - center);
-      if (dist < bestDist) { bestDist = dist; best = i; }
-    });
-    return best;
-  }
-
-  track.addEventListener('touchstart', e => {
-    dragStartX = e.touches[0].clientX;
-    dragDelta  = 0;
-    dragging   = true;
-    track.style.transition = '';
-  }, { passive: true });
-
-  track.addEventListener('touchmove', e => {
-    if (!dragging) return;
-    dragDelta = e.touches[0].clientX - dragStartX;
-    track.style.transform = `translateX(${baseOffset + dragDelta * 1.8}px)`;
-    // Highlight whichever item is currently under the lens, with no label swapping
-    const nearest = nearestIndex();
-    setActive(nearest);
-  }, { passive: true });
-
-  track.addEventListener('touchend', () => {
-    dragging = false;
-    const nearest = nearestIndex();
-    const changed = nearest !== idx;
-    dragDelta = 0;
-    snapTo(nearest, true);
-    if (changed) navigate(pages[nearest], null, null);
-  });
-
-  track.addEventListener('mousedown', e => {
-    dragStartX = e.clientX;
-    dragDelta  = 0;
-    dragging   = true;
-    track.style.transition = '';
-    e.preventDefault();
-  });
-
-  window.addEventListener('mousemove', e => {
-    if (!dragging) return;
-    dragDelta = e.clientX - dragStartX;
-    track.style.transform = `translateX(${baseOffset + dragDelta * 1.8}px)`;
-    setActive(nearestIndex());
-  });
-
-  window.addEventListener('mouseup', () => {
-    if (!dragging) return;
-    dragging = false;
-    const nearest = nearestIndex();
-    const changed = nearest !== idx;
-    dragDelta = 0;
-    snapTo(nearest, true);
-    if (changed) navigate(pages[nearest], null, null);
-  });
-
-  // Wait one frame so items have rendered and have offsetWidth
-  requestAnimationFrame(() => snapTo(0, false));
+  updateNav(currentPage);
 }
 
 function initTeeInteractions() {
@@ -1200,6 +998,35 @@ function initTeeInteractions() {
   });
 }
 
+function mountModal(modal, label, close, exitMs) {
+  const opener = document.activeElement;
+  modal.setAttribute('role', 'dialog');
+  modal.setAttribute('aria-modal', 'true');
+  modal.setAttribute('aria-label', label);
+  const closeBtn = modal.querySelector('.modal-close');
+  closeBtn.setAttribute('aria-label', 'Close');
+  const focusables = () => [...modal.querySelectorAll('button, [href], [tabindex]:not([tabindex="-1"])')];
+  const onKey = e => {
+    if (e.key === 'Escape') { e.preventDefault(); teardown(); return; }
+    if (e.key !== 'Tab') return;
+    const f = focusables(); if (!f.length) return;
+    const first = f[0], last = f[f.length - 1];
+    if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+    else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+  };
+  const teardown = () => {
+    document.removeEventListener('keydown', onKey);
+    close();
+    setTimeout(() => { document.body.style.overflow = ''; opener?.focus?.(); }, exitMs);
+  };
+  document.addEventListener('keydown', onKey);
+  closeBtn.onclick = teardown;
+  modal.onclick = ev => { if (ev.target === modal) teardown(); };
+  document.body.style.overflow = 'hidden';
+  requestAnimationFrame(() => closeBtn.focus({ preventScroll: true }));
+  return teardown;
+}
+
 function openCardModal(opts) {
   // opts: { fromRect, src, backSrc, aspect, title, subtitle, desc, tags, isTee }
   const { fromRect, src, backSrc, aspect, title, subtitle, desc, tags, isTee } = opts;
@@ -1234,7 +1061,6 @@ function openCardModal(opts) {
   `;
 
   document.body.appendChild(modal);
-  document.body.style.overflow = 'hidden';
 
   // FLIP zoom from card image
   const zoomEl = modal.querySelector('.modal-flipper, .modal-img');
@@ -1269,12 +1095,10 @@ function openCardModal(opts) {
     };
   }
 
-  const close = () => {
+  mountModal(modal, title, () => {
     modal.classList.add('exit');
-    setTimeout(() => { modal.remove(); document.body.style.overflow = ''; }, 280);
-  };
-  modal.querySelector('.modal-close').onclick = close;
-  modal.onclick = ev => { if (ev.target === modal) close(); };
+    setTimeout(() => modal.remove(), 280);
+  }, 280);
 }
 
 function openDetailsModal(project) {
@@ -1304,28 +1128,20 @@ function openDetailsModal(project) {
   `;
 
   document.body.appendChild(modal);
-  document.body.style.overflow = 'hidden';
   requestAnimationFrame(() => { modal.style.opacity = '1'; });
 
-  const close = () => {
+  mountModal(modal, `${project.title} details`, () => {
     modal.classList.add('exit');
-    document.removeEventListener('keydown', onKeyDown);
-    setTimeout(() => { modal.remove(); document.body.style.overflow = ''; }, 220);
-  };
-
-  const onKeyDown = (e) => {
-    if (e.key === 'Escape') close();
-  };
-
-  document.addEventListener('keydown', onKeyDown);
-  modal.querySelector('.modal-close').onclick = close;
-  modal.onclick = ev => { if (ev.target === modal) close(); };
+    setTimeout(() => modal.remove(), 220);
+  }, 220);
 
   const posterImg = modal.querySelector('.modal-poster-img');
   if (posterImg) {
     activatable(posterImg, `View research poster: ${project.title}`);
     posterImg.addEventListener('click', e => {
       e.stopPropagation();
+      // The lightbox stacks on this modal. Restore the scroll lock this modal
+      // holds after the lightbox releases its own.
       openCardModal({
         fromRect: posterImg.getBoundingClientRect(),
         src:      posterImg.src,
@@ -1368,3 +1184,4 @@ function initImageLightbox() {
 }
 
 buildSite();
+Promise.race([document.fonts?.ready, new Promise(r => setTimeout(r, 400))]).then(startSite);
