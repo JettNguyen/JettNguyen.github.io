@@ -198,13 +198,13 @@ PAGES[''] = () => {
   return frag(`
     <section class="hero wrap" id="hero">
       <div class="hero-grid">
-        <div class="hero-text">
+        <div class="hero-text" data-px="0" data-tilt="6">
           <h1 class="display">${headline}</h1>
           <p class="hero-intro">${esc(h.intro || h.description)}</p>
           ${h.facts?.length ? `<ul class="hero-facts">${h.facts.map(f => `<li>${esc(f)}</li>`).join('')}</ul>` : ''}
         </div>
         <figure class="hero-portrait">
-          <div class="frame" data-px="0.10" data-px-mode="top"><img src="${h.headshotUrl}" alt="${esc(h.headshotAlt || D.meta.name)}" width="600" height="600" fetchpriority="high"></div>
+          <div class="frame" data-px="0.10" data-px-mode="top" data-tilt="-14"><img src="${h.headshotUrl}" alt="${esc(h.headshotAlt || D.meta.name)}" width="600" height="600" fetchpriority="high"></div>
           <figcaption>${esc(h.headshotCaption || '')}</figcaption>
         </figure>
       </div>
@@ -261,13 +261,16 @@ PAGES[''] = () => {
 
 function workItem(p, i) {
   const shots = (p.screenshots || []).slice(0, 3);
+  // Each screenshot sits on its own plane: the middle one nearest, so it
+  // moves the most as the page scrolls.
+  const depth = [0.05, 0.11, 0.08];
   const imgs = shots.length
-    ? shots.map((s, j) => `<img src="${s.src}" alt="${esc(s.alt)}" loading="${i === 0 ? 'eager' : 'lazy'}" decoding="async"${j === 0 ? ' data-vt' : ''}>`).join('')
-    : `<img src="${p.logo}" alt="" data-vt>`;
+    ? shots.map((s, j) => `<img src="${s.src}" alt="${esc(s.alt)}" loading="${i === 0 ? 'eager' : 'lazy'}" decoding="async" data-px="${depth[j] ?? 0.07}"${j === 0 ? ' data-vt' : ''}>`).join('')
+    : `<img src="${p.logo}" alt="" data-vt data-px="0.06">`;
   return `
     <li class="work-item" data-reveal${p.tint ? ` style="--tint:${p.tint}"` : ''}>
       <a class="work-frame" data-kind="${shots.length ? 'shots' : 'logo'}" href="#/project/${p.slug}" aria-label="${esc(p.title)}">
-        <div class="work-frame-inner" data-px="0.09" style="--n:${shots.length || 1}">${imgs}</div>
+        <div class="work-frame-inner" style="--n:${shots.length || 1}">${imgs}</div>
       </a>
       <div class="work-meta" data-px="-0.03">
         <h3>${p.logo ? `<img class="work-logo" src="${p.logo}" alt="">` : ''}<a href="#/project/${p.slug}">${esc(p.title)}</a></h3>
@@ -456,7 +459,7 @@ PAGES.about = () => {
 function piece(it, isTee, i) {
   const back = isTee ? it.imageUrl.replace(/-front\.(\w+)$/, '-back.$1') : '';
   return `
-    <figure class="piece${isTee ? ' tee' : ''}" data-reveal data-px="${[0.04, -0.03, 0.06][i % 3]}" style="--i:${Math.min(i, 8)}" tabindex="0" role="button"
+    <figure class="piece${isTee ? ' tee' : ''}" data-reveal style="--i:${Math.min(i, 8)}" tabindex="0" role="button"
       data-src="${it.imageUrl}" ${back ? `data-back="${back}"` : ''} data-title="${esc(it.title)}" data-sub="${esc(it.subtitle || '')}" data-desc="${esc(it.description || '')}">
       <div class="piece-img">
         <img class="front" src="${it.imageUrl}" alt="${esc(it.title)}" loading="lazy" decoding="async">
@@ -587,7 +590,7 @@ function afterRender() {
   // A landscape first screenshot fills its frame alone; phones sit in a row.
   $$('.work-frame[data-kind="shots"]').forEach(f => {
     const img = f.querySelector('img');
-    const check = () => { if (img.naturalWidth > img.naturalHeight) { f.dataset.kind = 'landscape'; f.querySelector('.work-frame-inner').style.setProperty('--n', 1); } };
+    const check = () => { if (img.naturalWidth > img.naturalHeight) { f.dataset.kind = 'landscape'; f.querySelector('.work-frame-inner').style.setProperty('--n', 1); img.dataset.px = '0.07'; } };
     if (img.complete && img.naturalWidth) check(); else img.addEventListener('load', check, { once: true });
   });
 
@@ -596,6 +599,7 @@ function afterRender() {
   initEmbeds();
   initVideos();
   initParallax();
+  initTilt();
 }
 
 // Scroll-linked motion. Each [data-px] element gets a --py offset that its
@@ -629,9 +633,31 @@ function tickParallax() {
       if (p < -1.5 || p > 1.5) continue;
       px = -p * it.speed * vh;
     }
-    it.el.style.setProperty('--py', px.toFixed(1) + 'px');
+    const v = px.toFixed(1) + 'px';
+    if (it.last !== v) { it.last = v; it.el.style.setProperty('--py', v); }
   }
 }
+
+// Pointer depth on the hero: planes with a positive tilt lean toward the
+// cursor, negative ones away, so the headline and portrait separate.
+const TILT = { items: [], tx: 0, ty: 0, x: 0, y: 0, raf: 0 };
+function initTilt() {
+  TILT.items = HOVER.matches && !RM.matches ? $$('[data-tilt]').map(el => ({ el, k: parseFloat(el.dataset.tilt) || 0 })) : [];
+}
+function tiltTick() {
+  TILT.x += (TILT.tx - TILT.x) * 0.08; TILT.y += (TILT.ty - TILT.y) * 0.08;
+  for (const it of TILT.items) {
+    it.el.style.setProperty('--mx', (TILT.x * it.k).toFixed(2) + 'px');
+    it.el.style.setProperty('--my', (TILT.y * it.k * 0.7).toFixed(2) + 'px');
+  }
+  if (Math.abs(TILT.tx - TILT.x) > 0.01 || Math.abs(TILT.ty - TILT.y) > 0.01) TILT.raf = requestAnimationFrame(tiltTick); else TILT.raf = 0;
+}
+window.addEventListener('pointermove', e => {
+  if (!TILT.items.length) return;
+  TILT.tx = (e.clientX / window.innerWidth - 0.5) * 2;
+  TILT.ty = (e.clientY / window.innerHeight - 0.5) * 2;
+  if (!TILT.raf) TILT.raf = requestAnimationFrame(tiltTick);
+}, { passive: true });
 window.addEventListener('scroll', () => {
   if (!PX.raf) PX.raf = requestAnimationFrame(() => { PX.raf = 0; tickParallax(); });
 }, { passive: true });
