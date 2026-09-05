@@ -378,6 +378,7 @@ PAGES.project = slug => {
   const d = p.details || {};
   const shots = p.screenshots || [];
   const links = [
+    p.appStoreUrl && `<a class="store-link" href="${p.appStoreUrl}" target="_blank" rel="noopener">On the App Store ↗</a>`,
     p.demoUrl   && `<a href="${p.demoUrl}" target="_blank" rel="noopener">${esc(p.demoLabel || 'Live site')} ↗</a>`,
     p.githubUrl && `<a href="${p.githubUrl}" target="_blank" rel="noopener">Source on GitHub ↗</a>`,
     p.embedUrl  && `<button class="text-link" type="button" data-embed="${p.embedUrl}">Play it here</button>`,

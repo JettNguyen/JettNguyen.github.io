@@ -479,6 +479,7 @@ strong { font-weight: 600; }
 .proj-meta dd a { border-bottom: 1px solid var(--rule-2); transition: color var(--d-fast); }
 .proj-meta dd a:hover { color: var(--accent); }
 .proj-meta .links { display: flex; flex-direction: column; gap: 4px; align-items: flex-start; }
+.proj-meta .store-link { color: var(--accent); border-bottom-color: color-mix(in srgb, var(--accent) 40%, transparent); }
 @media (width <= 720px) { .proj-meta { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 
 .proj-shots { display: grid; gap: 16px; margin-block: clamp(32px, 5vw, 64px); }
