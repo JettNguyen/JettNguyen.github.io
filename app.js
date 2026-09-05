@@ -111,6 +111,18 @@ window.addEventListener('hashchange', render);
 /* header and footer                                                   */
 /* ------------------------------------------------------------------ */
 
+// The portrait is drawn twice, once per theme: a putty rim for paper, a cream
+// rim for the dark page. Only the one in use is fetched.
+const isDark = () => {
+  const t = document.documentElement.dataset.theme;
+  return t ? t === 'dark' : window.matchMedia('(prefers-color-scheme: dark)').matches;
+};
+const portraitSrc = () => (isDark() && D.home.headshotUrlDark) || D.home.headshotUrl;
+const syncPortraits = () => { $$('img[data-portrait]').forEach(i => { const s = portraitSrc(); if (i.getAttribute('src') !== s) i.src = s; }); };
+window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
+  if (!document.documentElement.dataset.theme) syncPortraits();
+});
+
 const NAV = [
   { label: 'Work',    href: '#/work',    head: 'work' },
   { label: 'About',   href: '#/about',   head: 'about' },
@@ -124,16 +136,13 @@ function buildHeader() {
     + `<button class="theme-btn" id="themeBtn" type="button" aria-label="Toggle dark mode"></button>`;
 
   const btn = $('#themeBtn');
-  const isDark = () => {
-    const t = document.documentElement.dataset.theme;
-    return t ? t === 'dark' : window.matchMedia('(prefers-color-scheme: dark)').matches;
-  };
   const paint = () => { btn.textContent = isDark() ? 'light' : 'dark'; };
   btn.onclick = () => {
     const next = isDark() ? 'light' : 'dark';
     document.documentElement.dataset.theme = next;
     try { localStorage.setItem('theme', next); } catch (e) { /* private mode */ }
     paint();
+    syncPortraits();
   };
   paint();
 
@@ -204,7 +213,7 @@ PAGES[''] = () => {
           ${h.facts?.length ? `<ul class="hero-facts">${h.facts.map(f => `<li>${esc(f)}</li>`).join('')}</ul>` : ''}
         </div>
         <figure class="hero-portrait">
-          <div class="frame" data-px="0.10" data-px-mode="top" data-tilt="-14"><img src="${h.headshotUrl}" alt="${esc(h.headshotAlt || D.meta.name)}" width="600" height="600" fetchpriority="high"></div>
+          <div class="frame" data-px="0.10" data-px-mode="top" data-tilt="-14"><img data-portrait src="${portraitSrc()}" alt="${esc(h.headshotAlt || D.meta.name)}" width="1400" height="1400" fetchpriority="high"></div>
           <figcaption>${esc(h.headshotCaption || '')}</figcaption>
         </figure>
       </div>
@@ -409,7 +418,7 @@ PAGES.about = () => {
           ${a.bio.map(p => `<p>${p}</p>`).join('')}
         </div>
         <aside class="about-side">
-          <div class="frame"><img src="${h.headshotUrl}" alt="${esc(h.headshotAlt || D.meta.name)}" width="600" height="600"></div>
+          <div class="frame"><img data-portrait src="${portraitSrc()}" alt="${esc(h.headshotAlt || D.meta.name)}" width="1400" height="1400"></div>
           <dl class="facts">
             ${facts.map(f => `<div><dt>${esc(f.label)}</dt><dd>${f.href ? `<a href="${f.href}">${esc(f.value)}</a>` : esc(f.value)}</dd></div>`).join('')}
           </dl>
