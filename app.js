@@ -21,7 +21,6 @@ const ongoing  = p => /ongoing/i.test(p.date || '');
 const kind     = p => p.categories?.[0] || '';
 const originOf = p => p.origin === 'school' ? 'Coursework' : 'Independent';
 const teamOf   = p => p.collaboration === 'team' ? 'Team' : 'Solo';
-const previewOf = p => p.screenshots?.[0]?.src || p.logo || '';
 
 /* ------------------------------------------------------------------ */
 /* routing                                                             */
@@ -221,7 +220,7 @@ function buildFooter() {
   const others = c.links.filter(l => l !== email);
   const now = [
     ls.currentlyListening && [ls.listeningLabel || 'listening', ls.currentlyListening],
-    ls.recentlyWatched    && ['watched', ls.recentlyWatched],
+    ls.recentlyWatched    && ['last watched', ls.recentlyWatched],
     ls.currentlyInto      && ['into', ls.currentlyInto],
   ].filter(Boolean);
 
@@ -238,7 +237,7 @@ function buildFooter() {
         ${D.experience.resumePdf ? `<li><a href="${D.experience.resumePdf}" target="_blank" rel="noopener"><span class="l">Résumé</span><span class="h">PDF</span></a></li>` : ''}
       </ul>
       <p class="foot-colophon">
-        <span>Set in Instrument Serif and Instrument Sans. Hand-written HTML, CSS, and JavaScript.</span>
+        <span>Set in Instrument Serif and Instrument Sans. Plain HTML, CSS, and JavaScript, with no framework and no build step.</span>
         <span>The listening and watching lines update on their own from Spotify and Letterboxd.</span>
       </p>
     </div>`;
@@ -356,7 +355,7 @@ PAGES.work = () => frag(`
     <ol class="index">
       <li class="idx-head" aria-hidden="true"><span>No.</span><span>Project</span><span>What it is</span><span>Kind</span><span style="text-align:right">Year</span></li>
       ${projects.map((p, i) => `
-        <li class="index-row" data-peek="${previewOf(p)}" data-reveal style="--i:${Math.min(i, 8)};--tint:${p.tint || 'transparent'}">
+        <li class="index-row" data-reveal style="--i:${Math.min(i, 8)};--tint:${p.tint || 'transparent'}">
           <a href="#/project/${p.slug}">
             <span class="idx-n">${pad2(i + 1)}</span>
             <span class="idx-title">${p.logo ? `<img class="idx-logo" src="${p.logo}" alt="" loading="lazy">` : ''}${esc(p.title)}${p.status ? `<span class="flag">${esc(p.status)}</span>` : ''}</span>
@@ -648,8 +647,7 @@ function afterRender() {
     a.addEventListener('click', e => {
       if (e.metaKey || e.ctrlKey || e.shiftKey) return;
       e.preventDefault();
-      const vt = a.querySelector('[data-vt]') || (a.closest('.index-row') && $('#peek').classList.contains('on') ? $('#peek img') : null);
-      navigate(a.getAttribute('href'), vt);
+      navigate(a.getAttribute('href'), a.querySelector('[data-vt]'));
     });
   });
 
@@ -660,7 +658,6 @@ function afterRender() {
     if (img.complete && img.naturalWidth) check(); else img.addEventListener('load', check, { once: true });
   });
 
-  initPeek();
   initLightboxTargets();
   initEmbeds();
   initVideos();
@@ -729,30 +726,6 @@ window.addEventListener('scroll', () => {
 }, { passive: true });
 window.addEventListener('resize', () => { measureParallax(); tickParallax(); });
 window.addEventListener('load', () => { measureParallax(); tickParallax(); });
-
-// A preview that follows the cursor over index rows.
-let peekRaf = 0;
-function initPeek() {
-  const peek = $('#peek'), img = $('#peek img');
-  if (!HOVER.matches) return;
-  let tx = 0, ty = 0, x = 0, y = 0, on = false;
-  const tick = () => {
-    x += (tx - x) * 0.18; y += (ty - y) * 0.18;
-    peek.style.left = x + 'px'; peek.style.top = y + 'px';
-    if (on || Math.abs(tx - x) > 0.5) peekRaf = requestAnimationFrame(tick); else peekRaf = 0;
-  };
-  $$('.index-row[data-peek]').forEach(row => {
-    row.addEventListener('pointerenter', e => {
-      const src = row.dataset.peek; if (!src) return;
-      if (img.getAttribute('src') !== src) img.src = src;
-      tx = e.clientX + 40; ty = e.clientY; if (!on) { x = tx; y = ty; }
-      on = true; peek.classList.add('on');
-      if (!peekRaf) peekRaf = requestAnimationFrame(tick);
-    });
-    row.addEventListener('pointermove', e => { tx = e.clientX + 40; ty = e.clientY; });
-    row.addEventListener('pointerleave', () => { on = false; peek.classList.remove('on'); });
-  });
-}
 
 function initLightboxTargets() {
   $$('.piece').forEach(f => {
