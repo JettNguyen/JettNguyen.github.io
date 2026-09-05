@@ -133,10 +133,18 @@ function buildHeader() {
   const nav = $('#siteNav');
   nav.innerHTML = NAV.map(n => `<a href="${n.href}" data-head="${n.head}">${n.label}</a>`).join('')
     + (D.experience.resumePdf ? `<a href="${D.experience.resumePdf}" target="_blank" rel="noopener" data-resume>Résumé</a>` : '')
-    + `<button class="theme-btn" id="themeBtn" type="button" aria-label="Toggle dark mode"></button>`;
+    + `<button class="theme-btn" id="themeBtn" type="button">
+         <svg viewBox="0 0 22 22" aria-hidden="true" focusable="false">
+           <circle cx="11" cy="11" r="8.2"/><path d="M11 2.8a8.2 8.2 0 0 1 0 16.4z"/>
+         </svg>
+       </button>`;
 
   const btn = $('#themeBtn');
-  const paint = () => { btn.textContent = isDark() ? 'light' : 'dark'; };
+  const paint = () => {
+    const label = isDark() ? 'Switch to light mode' : 'Switch to dark mode';
+    btn.setAttribute('aria-label', label);
+    btn.title = label;
+  };
   btn.onclick = () => {
     const next = isDark() ? 'light' : 'dark';
     document.documentElement.dataset.theme = next;
@@ -153,10 +161,58 @@ function buildHeader() {
 }
 
 function setNav(route) {
+  const hit = h => h === route.head || (h === 'work' && route.head === 'project');
   $$('#siteNav a[data-head]').forEach(a => {
-    const on = a.dataset.head === route.head || (a.dataset.head === 'work' && route.head === 'project');
-    if (on) a.setAttribute('aria-current', 'page'); else a.removeAttribute('aria-current');
+    if (hit(a.dataset.head)) a.setAttribute('aria-current', 'page'); else a.removeAttribute('aria-current');
   });
+  let active = null;
+  $$('.tnav-item[data-head]').forEach(a => {
+    const on = hit(a.dataset.head);
+    a.classList.toggle('on', on);
+    if (on) { a.setAttribute('aria-current', 'page'); active = a; } else a.removeAttribute('aria-current');
+  });
+  if (active) centreDrum(active);
+}
+
+// A drum of words: the one sitting in the centre is the page you are on, and
+// the rest turn away from you as they leave. Touch only; the header carries
+// the same links on pointer devices.
+let drumRaf = 0, drumSettle = 0;
+function buildDrum() {
+  const track = $('#tnavTrack');
+  if (!track || track.children.length) return;
+  const items = [{ label: 'Home', href: '#/', head: '' }, ...NAV];
+  if (D.experience.resumePdf) items.push({ label: 'Résumé', href: D.experience.resumePdf, ext: true });
+  track.innerHTML = items.map(i => i.ext
+    ? `<a class="tnav-item" href="${i.href}" target="_blank" rel="noopener">${i.label}<span class="ext">↗</span></a>`
+    : `<a class="tnav-item" href="${i.href}" data-head="${i.head}">${i.label}</a>`).join('');
+  track.addEventListener('scroll', () => {
+    if (!drumRaf) drumRaf = requestAnimationFrame(paintDrum);
+  }, { passive: true });
+  window.addEventListener('resize', paintDrum);
+  paintDrum();
+}
+
+function paintDrum() {
+  drumRaf = 0;
+  const track = $('#tnavTrack');
+  if (!track || RM.matches) return;
+  const r = track.getBoundingClientRect();
+  const cx = r.left + r.width / 2, half = r.width / 2 || 1;
+  $$('.tnav-item', track).forEach(it => {
+    const b = it.getBoundingClientRect();
+    const d = Math.max(-1.5, Math.min(1.5, (b.left + b.width / 2 - cx) / half));
+    it.style.setProperty('--d', d.toFixed(3));
+    it.style.setProperty('--a', Math.abs(d).toFixed(3));
+  });
+}
+
+function centreDrum(el) {
+  const track = el.parentElement;
+  if (!track || !track.clientWidth) return;      // hidden on pointer devices
+  clearTimeout(drumSettle);
+  el.scrollIntoView({ inline: 'center', block: 'nearest', behavior: RM.matches ? 'auto' : 'smooth' });
+  drumSettle = setTimeout(paintDrum, 420);
 }
 
 function buildFooter() {
@@ -787,6 +843,7 @@ function openLightbox({ src, back, title = '', sub = '', desc = '' }) {
 if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
 buildHeader();
 buildFooter();
+buildDrum();
 $('#wordmark').addEventListener('click', e => {
   if (parseHash().head === '' ) { e.preventDefault(); window.scrollTo({ top: 0, behavior: RM.matches ? 'auto' : 'smooth' }); }
 });
