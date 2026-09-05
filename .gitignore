@@ -10,3 +10,6 @@ tsconfig.tsbuildinfo
 
 # 9 MB source portrait; the site uses assets/jett-cutout.webp
 assets/pfp business.png
+
+# 1.5 MB source artwork; the site uses assets/jett-portrait.webp
+assets/jett-redesign-portrait.png

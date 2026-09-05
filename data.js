@@ -24,7 +24,7 @@ window.siteData = {
     eyebrow:"cs + pr · University of Florida 2026",
     nameLines:["Jett","Nguyen."],
     accentLine:1,
-    headshotUrl:"assets/jett-cutout.webp",
+    headshotUrl:"assets/jett-portrait.webp",
     headshotAlt:"Jett Nguyen",
     headshotCaption:"University of Florida · May 2026",
     description:"B.S. in Computer Science with a Public Relations minor, building software from a user-centered and psychological perspective.",
