@@ -61,8 +61,8 @@ window.siteData = {
       {label:"Beyond Code", items:["Human-Computer Interaction","Public Relations","Music Production","Video Production"]}
     ],
     liveSignals:{
-      currentlyListening:"Everybody Wants To Rule The World · Tears For Fears",
-      listeningLabel:"last played",
+      currentlyListening:"Aria Math · C418",
+      listeningLabel:"listening",
       recentlyWatched:"Obsession · ★★★★½",
       currentlyInto:"Human behavior systems, interactive storytelling, and audio tooling"
     },
