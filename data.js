@@ -62,7 +62,7 @@ window.siteData = {
     ],
     liveSignals:{
       currentlyListening:"Aria Math · C418",
-      listeningLabel:"listening",
+      listeningLabel:"last played",
       recentlyWatched:"Obsession · ★★★★½",
       currentlyInto:"Human behavior systems, interactive storytelling, and audio tooling"
     },
