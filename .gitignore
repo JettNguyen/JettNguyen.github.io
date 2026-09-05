@@ -7,3 +7,6 @@ package-lock.json
 out/
 .env.local
 tsconfig.tsbuildinfo
+
+# 9 MB source portrait; the site uses assets/jett-cutout.webp
+assets/pfp business.png

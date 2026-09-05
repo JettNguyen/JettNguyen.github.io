@@ -237,13 +237,13 @@ strong { font-weight: 600; }
 .hero.in .hero-intro, .hero.in .hero-facts { opacity: 1; transform: none; }
 
 .hero-portrait { position: relative; }
-.hero-portrait .frame { overflow: hidden; aspect-ratio: 4 / 5; background: var(--paper-2); border-radius: 4px; }
+.hero-portrait .frame { overflow: hidden; aspect-ratio: 4 / 5; background: color-mix(in srgb, var(--accent) 9%, var(--paper-2)); border-radius: 4px; }
 .hero-portrait img {
-  width: 100%; height: 100%; object-fit: cover; object-position: 50% 50%;
-  transform: scale(calc(var(--zoom, 1.4) + 0.08)); opacity: 0;
+  width: 100%; height: 100%; object-fit: cover; object-position: 50% 10%;
+  transform: scale(calc(var(--zoom, 1.06) + 0.05)); opacity: 0;
   transition: transform 1.5s var(--ease) 0.1s, opacity 0.9s var(--ease) 0.1s;
 }
-.hero.in .hero-portrait img { transform: scale(var(--zoom, 1.4)); opacity: 1; }
+.hero.in .hero-portrait img { transform: scale(var(--zoom, 1.06)); opacity: 1; transform-origin: 50% 20%; }
 .hero-portrait figcaption { margin-top: 10px; font-family: var(--mono); font-size: var(--fs-mono); color: var(--muted); }
 
 @media (width <= 820px) {
@@ -475,8 +475,8 @@ strong { font-weight: 600; }
 .about-bio p:first-child { font-family: var(--serif); font-size: clamp(1.35rem, 2vw, 1.7rem); line-height: 1.3; color: var(--ink); max-width: 30ch; }
 .bio-mark { color: var(--ink); font-weight: 500; }
 .about-side { position: sticky; top: calc(var(--head-h) + 24px); }
-.about-side .frame { overflow: hidden; aspect-ratio: 4 / 5; background: var(--paper-2); }
-.about-side img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 50%; transform: scale(var(--zoom, 1.4)); }
+.about-side .frame { overflow: hidden; aspect-ratio: 4 / 5; background: color-mix(in srgb, var(--accent) 9%, var(--paper-2)); border-radius: 4px; }
+.about-side img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 10%; transform: scale(var(--zoom, 1.06)); transform-origin: 50% 20%; }
 .facts { margin-top: 24px; display: grid; gap: 10px; }
 .facts div { display: grid; grid-template-columns: 90px minmax(0, 1fr); gap: 12px; padding-top: 10px; border-top: 1px solid var(--rule); font-size: var(--fs-small); }
 .facts dt { font-family: var(--mono); font-size: var(--fs-mono); color: var(--muted); padding-top: 2px; }
