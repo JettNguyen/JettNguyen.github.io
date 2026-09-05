@@ -32,7 +32,7 @@ const LEGACY = {
   experience: ['', 'experience'], presentations: ['archive', 'presentations'],
   coursework: ['archive', 'coursework'], contact: ['', 'contact'],
 };
-const ROUTES = new Set(['', 'work', 'about', 'archive', 'project']);
+const ROUTES = new Set(['', 'work', 'about', 'archive', 'resume', 'project']);
 
 function parseHash() {
   const raw = location.hash.replace(/^#\/?/, '');
@@ -94,6 +94,7 @@ function pageTitle({ head, arg }) {
   if (head === 'work')    return `Work · ${n}`;
   if (head === 'about')   return `About · ${n}`;
   if (head === 'archive') return `Archive · ${n}`;
+  if (head === 'resume')  return `Résumé · ${n}`;
   return n;
 }
 
@@ -126,12 +127,12 @@ const NAV = [
   { label: 'Work',    href: '#/work',    head: 'work' },
   { label: 'About',   href: '#/about',   head: 'about' },
   { label: 'Archive', href: '#/archive', head: 'archive' },
+  { label: 'Résumé',  href: '#/resume',  head: 'resume' },
 ];
 
 function buildHeader() {
   const nav = $('#siteNav');
   nav.innerHTML = NAV.map(n => `<a href="${n.href}" data-head="${n.head}">${n.label}</a>`).join('')
-    + (D.experience.resumePdf ? `<a href="${D.experience.resumePdf}" target="_blank" rel="noopener" data-resume>Résumé</a>` : '')
     + `<button class="theme-btn" id="themeBtn" type="button">
          <svg viewBox="0 0 22 22" aria-hidden="true" focusable="false">
            <circle cx="11" cy="11" r="8.2"/><path d="M11 2.8a8.2 8.2 0 0 1 0 16.4z"/>
@@ -181,10 +182,7 @@ function buildDrum() {
   const track = $('#tnavTrack');
   if (!track || track.children.length) return;
   const items = [{ label: 'Home', href: '#/', head: '' }, ...NAV];
-  if (D.experience.resumePdf) items.push({ label: 'Résumé', href: D.experience.resumePdf, ext: true });
-  track.innerHTML = items.map(i => i.ext
-    ? `<a class="tnav-item" href="${i.href}" target="_blank" rel="noopener">${i.label}<span class="ext">↗</span></a>`
-    : `<a class="tnav-item" href="${i.href}" data-head="${i.head}">${i.label}</a>`).join('');
+  track.innerHTML = items.map(i => `<a class="tnav-item" href="${i.href}" data-head="${i.head}">${i.label}</a>`).join('');
   track.addEventListener('scroll', () => {
     if (!drumRaf) drumRaf = requestAnimationFrame(paintDrum);
   }, { passive: true });
@@ -298,7 +296,7 @@ PAGES[''] = () => {
     <section class="section wrap" id="experience">
       <header class="section-head" data-reveal>
         <h2>Experience</h2>
-        ${xp.resumePdf ? `<a class="arrow-link" href="${xp.resumePdf}" target="_blank" rel="noopener">Résumé as PDF</a>` : ''}
+        <a class="arrow-link" href="#/resume">Full résumé</a>
       </header>
       <div class="xp">
         ${xp.jobs.map((j, i) => `
@@ -537,6 +535,102 @@ function piece(it, isTee, i) {
       </figcaption>
     </figure>`;
 }
+
+// The résumé, rendered from the same data as everything else so the two can
+// never drift. The PDF in assets is this page printed.
+PAGES.resume = () => {
+  const xp = D.experience, r = xp.resume || {}, c = D.contact;
+  const lines = ['Email', 'GitHub', 'LinkedIn']
+    .map(l => c.links.find(x => x.label === l)).filter(Boolean)
+    .concat([{ label: 'Site', handle: 'jettnguyen.github.io', href: 'https://jettnguyen.github.io/' }]);
+  const picks = (r.picks || []).map(k => { const p = bySlug(k.slug); return p && { ...p, note: k.note }; }).filter(Boolean);
+  const points = a => a?.length ? `<ul class="rs-points">${a.map(x => `<li>${esc(x)}</li>`).join('')}</ul>` : '';
+  const head = (title, aside) => `<h2 class="rs-h">${title}${aside ? `<span>${aside}</span>` : ''}</h2>`;
+
+  const row = ({ logo, title, date, org, body, tint }) => `
+    <article class="rs-item"${tint ? ` style="--tint:${tint}"` : ''}>
+      ${logo ? `<img class="rs-logo" src="${logo}" alt="" loading="lazy">` : '<span class="rs-logo blank"></span>'}
+      <div class="rs-body">
+        <div class="rs-top"><h3>${title}</h3><span class="rs-date">${esc(date)}</span></div>
+        <div class="rs-org">${org}</div>
+        ${body}
+      </div>
+    </article>`;
+
+  return frag(`
+    <section class="wrap resume">
+      <header class="page-head resume-head">
+        <div class="resume-intro">
+          <h1><span class="on-print">${esc(D.meta.name)}</span><span class="off-print">Résumé</span></h1>
+          <p class="lede">${esc(r.statement || '')}</p>
+        </div>
+        <div class="resume-aside panel">
+          <ul class="resume-contact">
+            ${lines.map(l => `<li><span>${esc(l.label)}</span><a href="${l.href}"${l.href.startsWith('mailto') ? '' : ' target="_blank" rel="noopener"'}>${esc(l.handle)}</a></li>`).join('')}
+          </ul>
+          ${xp.resumePdf ? `<a class="resume-dl off-print" href="${xp.resumePdf}" download>Download the PDF</a>` : ''}
+        </div>
+      </header>
+
+      <div class="resume-grid">
+        <div class="resume-main">
+          <section class="rs" data-reveal>
+            ${head('Experience', `${word(xp.jobs.length)} roles`)}
+            ${xp.jobs.map(j => row({
+              logo: j.logo, title: esc(j.role), date: j.date,
+              org: j.url ? `<a href="${j.url}" target="_blank" rel="noopener">${esc(j.company)}</a>` : esc(j.company),
+              body: points(j.resumePoints),
+            })).join('')}
+          </section>
+
+          <section class="rs" data-reveal>
+            ${head('Selected projects', `<a href="#/work">all ${word(projects.length)}</a>`)}
+            ${picks.map(p => row({
+              logo: p.logo, tint: p.tint,
+              title: `<a href="#/project/${p.slug}">${esc(p.title)}</a>${p.appStoreUrl ? '<span class="rs-flag">App Store</span>' : ''}`,
+              date: `${year(p)}${ongoing(p) ? ' to now' : ''}`,
+              org: `${originOf(p)}, ${teamOf(p).toLowerCase()} &middot; ${(p.techStack || []).slice(0, 5).map(esc).join(', ')}`,
+              body: `<ul class="rs-points"><li>${esc(p.summary)}</li><li>${esc(p.note)}</li></ul>`,
+            })).join('')}
+          </section>
+        </div>
+
+        <aside class="resume-side">
+          <section class="rs panel" data-reveal>
+            ${head('Education')}
+            ${row({
+              logo: xp.education.logo, title: esc(xp.education.degree), date: xp.education.dates,
+              org: esc(xp.education.institution), body: points(xp.education.resumePoints),
+            })}
+          </section>
+
+          <section class="rs panel" data-reveal>
+            ${head('Skills')}
+            <dl class="rs-skills">
+              ${(D.about.skillGroups || []).map(g => `<div><dt>${esc(g.label)}</dt><dd>${g.items.map(esc).join(', ')}</dd></div>`).join('')}
+            </dl>
+          </section>
+
+          ${r.activities?.length ? `
+          <section class="rs panel" data-reveal>
+            ${head('Activities')}
+            ${r.activities.map(a => `
+              <div class="rs-act">
+                <div class="rs-act-org">${esc(a.org)}<span>${esc(a.place)}</span></div>
+                <ul>${a.roles.map(x => `<li><span class="t">${esc(x.title)}</span><span class="m">${esc(x.date)}</span><span class="n">${esc(x.note)}</span></li>`).join('')}</ul>
+              </div>`).join('')}
+          </section>` : ''}
+
+          ${r.certifications?.length ? `
+          <section class="rs panel" data-reveal>
+            ${head('Certifications')}
+            <ul class="rs-certs">${r.certifications.map(x => `<li>${esc(x)}</li>`).join('')}</ul>
+          </section>` : ''}
+        </aside>
+      </div>
+    </section>
+  `);
+};
 
 PAGES.archive = () => {
   const P = D.presentations, CW = D.coursework;
