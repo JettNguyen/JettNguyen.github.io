@@ -1,0 +1,15 @@
+{
+  // Live Server watches the whole folder, so git bookkeeping (autofetch writes
+  // FETCH_HEAD), OneDrive sync and Finder rewriting .DS_Store all read as edits
+  // and reload the page while nobody is typing. Watch the site files only.
+  "liveServer.settings.ignoreFiles": [
+    "**/.git/**",
+    "**/node_modules/**",
+    "**/.DS_Store",
+    "**/.vscode/**",
+    "**/reports/**",
+    "**/*.scss",
+    "**/*.sass",
+    "**/*.ts"
+  ]
+}

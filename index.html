@@ -3,44 +3,47 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <title>Jett Nguyen · Portfolio</title>
+  <title>Jett Nguyen</title>
   <meta name="description" content="Jett Nguyen: University of Florida computer science graduate with a public relations minor. Co-founder of Otian AI, building software from a user-centered perspective. Projects, experience, and contact.">
   <link rel="canonical" href="https://jettnguyen.github.io/">
   <meta property="og:type" content="website">
-  <meta property="og:title" content="Jett Nguyen · Portfolio">
+  <meta property="og:title" content="Jett Nguyen">
   <meta property="og:description" content="Computer science and public relations. Co-founder of Otian AI. Projects, experience, and contact.">
   <meta property="og:url" content="https://jettnguyen.github.io/">
   <meta property="og:image" content="https://jettnguyen.github.io/assets/og.jpg">
   <meta name="twitter:card" content="summary">
-  <meta name="theme-color" content="#121214">
-  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="style.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <meta name="theme-color" content="#f3efe7" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#161412" media="(prefers-color-scheme: dark)">
+  <link rel="icon" href="assets/favicon-32.png" sizes="32x32" type="image/png">
+  <link rel="icon" href="assets/favicon-64.png" sizes="64x64" type="image/png">
+  <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+  <script>
+    // Apply a saved theme before first paint so the page never flashes the wrong one.
+    try { var t = localStorage.getItem('theme'); if (t) document.documentElement.dataset.theme = t; } catch (e) {}
+  </script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Goldman:wght@400;600;700;800&family=DM+Mono:wght@400&family=Plus+Jakarta+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Instrument+Sans:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<div id="transition-overlay" aria-hidden="true"></div>
+<a class="skip" href="#app">Skip to content</a>
 
-<nav id="mainNav" aria-label="Primary">
-  <div class="nav-bg"></div>
-  <div class="nav-logo" id="navLogo"></div>
-  <ul class="nav-links" id="navLinks">
-    <div class="nav-pill" id="navPill"></div>
-  </ul>
-  <div class="nav-status">
-    <div class="status-dot"></div>
-    <span id="statusText"></span>
+<header class="site-head" id="siteHead">
+  <div class="wrap site-head-row">
+    <a class="wordmark" href="#/" id="wordmark">Jett Nguyen</a>
+    <nav class="site-nav" aria-label="Primary" id="siteNav"></nav>
   </div>
+</header>
+
+<main id="app" tabindex="-1"></main>
+
+<footer class="site-foot" id="siteFoot"></footer>
+
+<nav class="tnav" id="touchNav" aria-label="Sections">
+  <div class="tnav-track" id="tnavTrack"></div>
 </nav>
-
-<div id="mobile-nav" role="navigation" aria-label="Primary">
-  <div id="mobile-nav-track"></div>
-</div>
-
-<main id="app"></main>
 
 <script src="data.js"></script>
 <script src="app.js"></script>
