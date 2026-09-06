@@ -48,7 +48,7 @@ window.siteData = {
     bio: [
       "I'm <span class='bio-mark'>Jett Nguyen</span>. I graduated from the University of Florida in May 2026 with a B.S. in Computer Science and a minor in Public Relations. I'm looking for work where those two overlap: building software, and being able to explain why it matters.",
       "It started with Lego sets when I was a kid, then spent years producing music. Both taught me the same thing, which is that the tool you work in shapes what you end up making. That's most of why I write software. The PR minor came later, after watching solid projects go nowhere because nobody could describe them in a sentence.",
-      "Outside of code I shoot video, collect vintage clothing, and watch more film than I probably should. Most of what I build borrows from one of them.",
+      "Outside of code I shoot video, collect vintage clothing, and watch more film than I probably should. I played Rocket League for Gator Esports for two years and still cast matches for our top team, which turned out to be the best public speaking practice I have had. Most of what I build borrows from one of them.",
       "In 2026 I co-founded <span class='bio-mark'>Otian AI</span> with Jack Raney. We spent months setting up AI assistants by hand, one at a time, until we understood the friction well enough to build it away. That became <span class='bio-mark'>Archie</span>, a desktop app that runs a personal AI agent on your own machine. Bring your own API key and your conversations go straight to your provider; keys, memory, and agent state never leave your computer."
     ],
     infoFields:[
@@ -65,7 +65,7 @@ window.siteData = {
       {label:"Desktop & Systems", items:["Tauri","Electron",".NET","Unity","Audio DSP"]},
       {label:"Cloud & Tooling", items:["AWS S3","AWS Lambda","Docker","Stripe","GitHub Actions"]},
       {label:"AI", items:["Agentic AI","LLM Integration","Prompt Engineering"]},
-      {label:"Beyond Code", items:["Human-Computer Interaction","Public Relations","Music Production","Video Production"]}
+      {label:"Beyond Code", items:["Human-Computer Interaction","Public Relations","Live Commentary","Music Production","Video Production"]}
     ],
     liveSignals:{
       currentlyListening:"The Morning · The Weeknd",
@@ -238,6 +238,7 @@ window.siteData = {
         {slug:"splitsy",note:"Measured against splitting the same bill by hand: ten students, both ways, in randomized order."}
       ],
       activities:[
+        {org:"Gator Esports at the University of Florida",place:"Gainesville, FL",roles:[{title:"Rocket League Caster",date:"Current",note:"Live commentary on the top team's matches"},{title:"Rocket League Player",date:"Two years",note:"Club roster, Champion 3"}]},
         {org:"University of Florida Football",place:"Gainesville, FL",roles:[{title:"Green Team",date:"Aug 2025",note:"Organization and sustainability"}]},
         {org:"Boca Ciega Senior High School",place:"Gulfport, FL",roles:[{title:"Teaching Assistant",date:"Aug 2021 - May 2022",note:"Mentorship and communication"},{title:"Shadower",date:"Sep - Nov 2018",note:"Leadership and responsibility"}]},
         {org:"Juvenile Arbitration and Teen Court Pinellas",place:"St. Petersburg, FL",roles:[{title:"Volunteer Juror",date:"Sep - Nov 2018",note:"Critical thinking and collaborative decisions"}]}
