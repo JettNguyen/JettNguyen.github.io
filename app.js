@@ -635,11 +635,16 @@ PAGES.resume = () => {
 PAGES.archive = () => {
   const P = D.presentations, CW = D.coursework;
   const ytId = url => url?.split('/embed/')[1]?.split('?')[0];
+  const courses = CW.years.reduce((n, y) => n + y.semesters.reduce((m, s) => m + s.classes.length, 0), 0);
   return frag(`
     <section class="wrap">
       <header class="page-head">
         <h1>Archive</h1>
         <p class="lede">Class presentations and every course from four years at the University of Florida, with what came out of each one.</p>
+        <nav class="page-jump" aria-label="Sections on this page">
+          <a href="#/archive/presentations"><span class="k">Presentations</span><span class="m">${word(P.items.length)} talks</span></a>
+          <a href="#/archive/coursework"><span class="k">Coursework</span><span class="m">${courses} courses${CW.overallGpa ? `, GPA ${esc(CW.overallGpa)}` : ''}</span></a>
+        </nav>
       </header>
     </section>
 

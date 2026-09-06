@@ -713,6 +713,18 @@ strong { font-weight: 600; }
 .questions .sub { color: var(--muted); font-size: var(--fs-small); margin-top: 2px; font-style: italic; font-family: var(--serif); font-size: 1.05rem; }
 .questions p { color: var(--ink-2); font-size: var(--fs-small); margin-top: 8px; max-width: 62ch; line-height: 1.55; }
 
+/* ---------- in-page jump links ---------- */
+.page-jump { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 30px; }
+.page-jump a {
+  display: grid; gap: 3px; padding: 13px 20px;
+  border: 1px solid var(--rule); border-radius: 4px;
+  transition: border-color var(--d-fast), background-color var(--d-fast);
+}
+.page-jump a:hover { border-color: var(--rule-2); background: var(--paper-2); }
+.page-jump .k { font-family: var(--serif); font-size: 1.2rem; line-height: 1.1; }
+.page-jump a:hover .k { color: var(--accent); }
+.page-jump .m { font-family: var(--mono); font-size: var(--fs-mono); color: var(--muted); }
+
 /* ---------- archive page ---------- */
 .pres-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 32px 20px; }
 .pres { display: grid; gap: 12px; align-content: start; }
