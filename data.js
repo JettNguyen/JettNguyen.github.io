@@ -69,7 +69,7 @@ window.siteData = {
     ],
     liveSignals:{
       currentlyListening:"Easy Lover · Philip Bailey, Phil Collins",
-      listeningLabel:"listening",
+      listeningLabel:"last played",
       recentlyWatched:"Obsession · ★★★★½",
       currentlyInto:"Human behavior systems, interactive storytelling, and audio tooling"
     },
