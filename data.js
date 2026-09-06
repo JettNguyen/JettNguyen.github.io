@@ -97,7 +97,7 @@ window.siteData = {
       },
       {
         key:"films", imageAspect:"portrait",title:"Films",
-        intro:"Stories and visuals that shape how I think about design, framing, and product narrative.",
+        intro:"Films I keep coming back to. Framing and pacing are the parts that stick, and they turn up in what I make.",
         items:[
           {slug:"whiplash",title:"Whiplash (2014)",subtitle:"★★★★★",imageUrl:"https://a.ltrbxd.com/resized/sm/upload/cl/dn/kr/f1/4C9LHDxMsoYI0S3iMPZdm3Oevwo-0-2000-0-3000-crop.jpg?v=d13ea36528",tags:["Film","Favorite"],description:"My favorite film ever. Who won the final battle is still up for debate."},
           {slug:"la-la-land",title:"La La Land (2016)",subtitle:"★★★★★",imageUrl:"https://a.ltrbxd.com/resized/film-poster/2/4/0/3/4/4/240344-la-la-land-0-2000-0-3000-crop.jpg?v=053670ff84",tags:["Film","Favorite"],description:"I am a combination of Sebastian and Mia; the realist and the dreamer."},
