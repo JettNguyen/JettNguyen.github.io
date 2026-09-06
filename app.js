@@ -251,7 +251,7 @@ const frag = html => { const t = document.createElement('template'); t.innerHTML
 PAGES[''] = () => {
   const h = D.home;
   const selected = (h.selected || []).map(bySlug).filter(Boolean);
-  const bio = D.about.bio || [];
+  const bio = (D.about.bio || []).map(b => (typeof b === 'string' ? { text: b } : b));
   const xp = D.experience;
 
   const headline = (h.headline || h.nameLines).map((l, i) =>
@@ -285,9 +285,9 @@ PAGES[''] = () => {
     ${bio[1] ? `
     <section class="section wrap" id="about-teaser">
       <div class="pull" data-reveal>
-        <blockquote>${stripTags(bio[1])}</blockquote>
+        <blockquote>${stripTags(bio[1].text)}</blockquote>
         <div class="pull-side">
-          <p>${stripTags(bio[2] || '')}</p>
+          <p>${stripTags(bio[2]?.text || '')}</p>
           <a class="arrow-link" href="#/about">More about me</a>
         </div>
       </div>
@@ -464,18 +464,41 @@ function studyHtml(st) {
 PAGES.about = () => {
   const a = D.about, h = D.home;
   const facts = (a.infoFields || []).filter(f => f.label !== 'GPA');
+  const bio = (a.bio || []).map(b => (typeof b === 'string' ? { text: b } : b));
+  const ls = a.liveSignals || {};
+  const now = [
+    ls.currentlyListening && [ls.listeningLabel || 'listening', ls.currentlyListening],
+    ls.recentlyWatched    && ['last watched', ls.recentlyWatched],
+    ls.currentlyInto      && ['into', ls.currentlyInto],
+  ].filter(Boolean);
+
   return frag(`
     <section class="wrap">
-      <header class="page-head"><h1>About</h1></header>
+      <header class="page-head about-head">
+        <h1>About</h1>
+        ${bio[0] ? `<p class="about-lede">${bio[0].text}</p>` : ''}
+        <ul class="about-facts">
+          ${facts.map(f => `<li><span>${esc(f.label)}</span>${f.href ? `<a href="${f.href}">${esc(f.value)}</a>` : esc(f.value)}</li>`).join('')}
+        </ul>
+      </header>
       <div class="about-grid">
         <div class="about-bio">
-          ${a.bio.map(p => `<p>${p}</p>`).join('')}
+          ${bio.slice(1).map((b, i) => `
+            <section class="bio-block" data-reveal style="--i:${i}">
+              ${b.label ? `<h2>${esc(b.label)}</h2>` : ''}
+              <p>${b.text}</p>
+            </section>`).join('')}
         </div>
         <aside class="about-side">
-          <div class="frame"><img data-portrait src="${portraitSrc()}" alt="${esc(h.headshotAlt || D.meta.name)}" width="1400" height="1400"></div>
-          <dl class="facts">
-            ${facts.map(f => `<div><dt>${esc(f.label)}</dt><dd>${f.href ? `<a href="${f.href}">${esc(f.value)}</a>` : esc(f.value)}</dd></div>`).join('')}
-          </dl>
+          <figure class="about-portrait">
+            <div class="frame"><img data-portrait src="${portraitSrc()}" alt="${esc(h.headshotAlt || D.meta.name)}" width="1400" height="1400"></div>
+            ${h.headshotCaption ? `<figcaption>${esc(h.headshotCaption)}</figcaption>` : ''}
+          </figure>
+          ${now.length ? `
+          <div class="now panel">
+            <h2>Right now</h2>
+            <dl>${now.map(([k, v]) => `<div><dt>${esc(k)}</dt><dd>${esc(v)}</dd></div>`).join('')}</dl>
+          </div>` : ''}
         </aside>
       </div>
     </section>
