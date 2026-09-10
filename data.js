@@ -68,8 +68,8 @@ window.siteData = {
       {label:"Beyond Code", items:["Human-Computer Interaction","Public Relations","Live Commentary","Music Production","Video Production"]}
     ],
     liveSignals:{
-      currentlyListening:"It Soothes Me · Beach Vacation",
-      listeningLabel:"last played",
+      currentlyListening:"Another Stone · Men I Trust",
+      listeningLabel:"listening",
       recentlyWatched:"Obsession · ★★★★½",
       currentlyInto:"Human behavior systems, interactive storytelling, and audio tooling"
     },
