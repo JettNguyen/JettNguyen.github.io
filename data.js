@@ -68,8 +68,8 @@ window.siteData = {
       {label:"Beyond Code", items:["Human-Computer Interaction","Public Relations","Live Commentary","Music Production","Video Production"]}
     ],
     liveSignals:{
-      currentlyListening:"TOO LATE FOR YOU · alan vuong",
-      listeningLabel:"last played",
+      currentlyListening:"Really Truly · No Vacation, Okey Dokey",
+      listeningLabel:"listening",
       recentlyWatched:"Obsession · ★★★★½",
       currentlyInto:"Human behavior systems, interactive storytelling, and audio tooling"
     },
