@@ -68,8 +68,8 @@ window.siteData = {
       {label:"Beyond Code", items:["Human-Computer Interaction","Public Relations","Live Commentary","Music Production","Video Production"]}
     ],
     liveSignals:{
-      currentlyListening:"Passionfruit · Drake",
-      listeningLabel:"last played",
+      currentlyListening:"One Night · Lil Yachty",
+      listeningLabel:"listening",
       recentlyWatched:"Obsession · ★★★★½",
       currentlyInto:"Human behavior systems, interactive storytelling, and audio tooling"
     },
