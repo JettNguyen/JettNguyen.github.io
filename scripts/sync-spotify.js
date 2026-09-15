@@ -23,6 +23,18 @@ function credentials() {
   return { id, secret, refresh };
 }
 
+// Spotify explains itself in the body, and that body holds no secrets. Without
+// it a failure is just a status code, and 400 covers both a revoked refresh
+// token and a bad client secret.
+async function reason(res) {
+  try {
+    const body = await res.json();
+    return body.error_description || body.error || 'no reason given';
+  } catch {
+    return 'no reason given';
+  }
+}
+
 async function accessToken() {
   const { id, secret, refresh } = credentials();
   const res = await fetch(TOKEN_URL, {
@@ -33,7 +45,7 @@ async function accessToken() {
     },
     body: new URLSearchParams({ grant_type: 'refresh_token', refresh_token: refresh }),
   });
-  if (!res.ok) throw new Error(`token exchange returned ${res.status}`);
+  if (!res.ok) throw new Error(`token exchange returned ${res.status}: ${await reason(res)}`);
   return (await res.json()).access_token;
 }
 
@@ -48,11 +60,11 @@ async function currentTrack(token) {
     const body = await now.json();
     if (body.is_playing && body.item?.name) return { label: 'listening', value: format(body.item) };
   } else if (now.status !== 204) {
-    throw new Error(`currently-playing returned ${now.status}`);
+    throw new Error(`currently-playing returned ${now.status}: ${await reason(now)}`);
   }
 
   const recent = await fetch(RECENT_URL, { headers });
-  if (!recent.ok) throw new Error(`recently-played returned ${recent.status}`);
+  if (!recent.ok) throw new Error(`recently-played returned ${recent.status}: ${await reason(recent)}`);
   const item = (await recent.json()).items?.[0]?.track;
   if (!item?.name) return null;
   return { label: 'last played', value: format(item) };
