@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Nightlink — A dream journal and social network</title>
+<meta name="description" content="Nightlink is a dream journal with an AI analysis layer and a social feed you control per entry. Private, mutuals, anonymous, or public. Free on the App Store and the web.">
+<link rel="canonical" href="https://jettnguyen.github.io/nightlink/">
+<meta name="theme-color" content="#0d0d11">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Nightlink — A dream journal and social network">
+<meta property="og:description" content="Log your dreams, get AI analysis, and share exactly as much as you want to.">
+<meta property="og:url" content="https://jettnguyen.github.io/nightlink/">
+<meta property="og:image" content="https://jettnguyen.github.io/assets/nightlink.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="../assets/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Prata&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="bar">
+  <div class="bar-inner">
+    <a class="mark" href="#top" aria-label="Nightlink home">
+      <svg class="mark-glyph" viewBox="0 0 1024 1024" aria-hidden="true">
+        <path fill="currentColor" d="M280 280h129l205 310V280h129v464H614L409 434v310H280z"/>
+      </svg>
+      <span>Nightlink</span>
+    </a>
+    <nav class="bar-nav" aria-label="Sections">
+      <a href="#journal">Journal</a>
+      <a href="#privacy">Privacy</a>
+      <a href="#analysis">Analysis</a>
+      <a href="#pro">Pro</a>
+    </nav>
+    <a class="btn btn-sm" href="https://apps.apple.com/us/app/nightlink-social/id6768789704?ppid=51e85a05-3f4b-4016-a6f3-34fd77ba46df" target="_blank" rel="noopener">Get the app</a>
+  </div>
+</header>
+
+<main id="main">
+
+<section class="hero" id="top">
+  <div class="hero-copy">
+    <p class="eyebrow">Dream journal &amp; social network</p>
+    <h1>Write down the<br><em>strange</em> part.</h1>
+    <p class="lede">Nightlink is a private dream journal with an AI layer that reads back what you wrote, and a social side you open one entry at a time. Keep it to yourself, share it with mutuals, post it anonymously, or let the whole feed see it.</p>
+    <div class="cta-row">
+      <a class="appstore" href="https://apps.apple.com/us/app/nightlink-social/id6768789704?ppid=51e85a05-3f4b-4016-a6f3-34fd77ba46df" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M17.05 20.28c-.98.95-2.05.8-3.08.35-1.09-.46-2.09-.48-3.24 0-1.44.62-2.2.44-3.06-.35C2.79 15.25 3.51 7.59 9.05 7.31c1.35.07 2.29.74 3.08.8 1.18-.24 2.31-.93 3.57-.84 1.51.12 2.65.72 3.4 1.8-3.12 1.87-2.38 5.98.48 7.13-.57 1.5-1.31 2.99-2.54 4.09zM12.03 7.25c-.15-2.23 1.66-4.07 3.74-4.25.29 2.58-2.34 4.5-3.74 4.25z"/></svg>
+        <span><small>Download on the</small><strong>App Store</strong></span>
+      </a>
+      <a class="btn btn-ghost" href="https://nightlink.dev" target="_blank" rel="noopener">Open on the web</a>
+    </div>
+  </div>
+  <div class="hero-shot">
+    <img src="../assets/screens/nightlink-1.webp" width="700" height="1441" alt="Nightlink dream journal listing entries with private, public, mutuals, and anonymous labels" fetchpriority="high">
+  </div>
+</section>
+
+<section class="journal" id="journal">
+  <div class="sec-head">
+    <h2>Catch it before it goes</h2>
+    <p>A dream starts dissolving the moment you sit up. Nightlink is built to be faster than that, so the entry exists before the details are gone.</p>
+  </div>
+  <ul class="feature-grid">
+    <li>
+      <h3>Write or speak it</h3>
+      <p>Type it out or dictate it with voice input while your eyes are still closed. AI drafts a title so you don't have to name it half-asleep.</p>
+    </li>
+    <li>
+      <h3>List or calendar</h3>
+      <p>Read your archive as a running list or spread across a calendar, so recurring nights are easy to spot.</p>
+    </li>
+    <li>
+      <h3>Search everything</h3>
+      <p>Full-text search across every entry you've ever written. Find the one with the airport, or the one with the ocean.</p>
+    </li>
+    <li>
+      <h3>Works offline</h3>
+      <p>Installable as a home-screen app on iOS and Android. Drafts hold even when the connection doesn't.</p>
+    </li>
+  </ul>
+</section>
+
+<section class="privacy" id="privacy">
+  <div class="sec-head">
+    <p class="eyebrow">Visibility</p>
+    <h2>Four settings, chosen per dream</h2>
+    <p>Nothing is public by default. Every entry carries its own visibility, and you can change it after the fact.</p>
+  </div>
+  <ol class="vis-list">
+    <li>
+      <span class="vis-tag vis-private">Private</span>
+      <p>Yours alone. It never appears in a feed and no one can search it.</p>
+    </li>
+    <li>
+      <span class="vis-tag vis-mutuals">Mutuals</span>
+      <p>Visible only to people you follow who follow you back.</p>
+    </li>
+    <li>
+      <span class="vis-tag vis-anon">Anonymous</span>
+      <p>Shared publicly with your name and profile stripped off the post.</p>
+    </li>
+    <li>
+      <span class="vis-tag vis-public">Public</span>
+      <p>Open to the whole feed, with your handle attached.</p>
+    </li>
+  </ol>
+</section>
+
+<section class="analysis" id="analysis">
+  <div class="analysis-shot">
+    <img src="../assets/screens/nightlink-2.webp" width="700" height="1441" alt="Nightlink AI analysis of a dream, with a privacy notice and remaining Pro credits" loading="lazy">
+  </div>
+  <div class="analysis-copy">
+    <p class="eyebrow">Analysis</p>
+    <h2>A second reading of your own night</h2>
+    <p class="lede">Ask for an analysis and Nightlink writes back a few paragraphs on the symbols, transitions, and moods in what you logged, folding in the moon phase the dream landed under.</p>
+    <ul class="notes">
+      <li>Your dreams are never used to train AI models.</li>
+      <li>Analyses are deleted according to your privacy settings.</li>
+      <li>Written for reflection, not as medical or mental health advice.</li>
+    </ul>
+  </div>
+</section>
+
+<section class="social">
+  <div class="social-copy">
+    <p class="eyebrow">The feed</p>
+    <h2>Other people's nights</h2>
+    <p class="lede">The feed collects public, anonymous, and mutuals-only dreams from the people you follow. React to entries, comment on them, search for people, and build a profile that looks like yours.</p>
+    <ul class="chips">
+      <li>Follow &amp; mutuals</li>
+      <li>Reactions</li>
+      <li>Comments</li>
+      <li>People search</li>
+      <li>Custom profiles</li>
+    </ul>
+  </div>
+  <div class="social-shot">
+    <img src="../assets/screens/nightlink-3.webp" width="700" height="1441" alt="Nightlink feed showing a public dream with its AI analysis underneath" loading="lazy">
+  </div>
+</section>
+
+<section class="pro" id="pro">
+  <div class="pro-card">
+    <p class="eyebrow">Nightlink Pro</p>
+    <h2>When one analysis a month isn't enough</h2>
+    <p class="lede">The journal, the feed, and the privacy controls are all free forever. Pro is for people who want the AI layer working every night.</p>
+    <div class="pro-cols">
+      <div>
+        <h3>Free</h3>
+        <ul>
+          <li>Unlimited dream entries</li>
+          <li>All four visibility settings</li>
+          <li>Full social feed and profile</li>
+          <li>One AI analysis a month</li>
+        </ul>
+      </div>
+      <div class="pro-col-paid">
+        <h3>Pro</h3>
+        <ul>
+          <li>30 AI analyses per billing cycle</li>
+          <li>Every analysis style unlocked</li>
+          <li>Custom analysis instructions</li>
+          <li>Dream memory that builds over time</li>
+          <li>Extra credits available any time</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="closer">
+  <h2>You'll forget it by breakfast.</h2>
+  <div class="cta-row cta-center">
+    <a class="appstore" href="https://apps.apple.com/us/app/nightlink-social/id6768789704?ppid=51e85a05-3f4b-4016-a6f3-34fd77ba46df" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M17.05 20.28c-.98.95-2.05.8-3.08.35-1.09-.46-2.09-.48-3.24 0-1.44.62-2.2.44-3.06-.35C2.79 15.25 3.51 7.59 9.05 7.31c1.35.07 2.29.74 3.08.8 1.18-.24 2.31-.93 3.57-.84 1.51.12 2.65.72 3.4 1.8-3.12 1.87-2.38 5.98.48 7.13-.57 1.5-1.31 2.99-2.54 4.09zM12.03 7.25c-.15-2.23 1.66-4.07 3.74-4.25.29 2.58-2.34 4.5-3.74 4.25z"/></svg>
+      <span><small>Download on the</small><strong>App Store</strong></span>
+    </a>
+    <a class="btn btn-ghost" href="https://nightlink.dev" target="_blank" rel="noopener">Open on the web</a>
+  </div>
+</section>
+
+</main>
+
+<footer class="foot">
+  <p class="foot-by">Built by <a href="https://jettnguyen.github.io/">Jett Nguyen</a></p>
+  <nav class="foot-links" aria-label="Footer">
+    <a href="https://nightlink.dev" target="_blank" rel="noopener">nightlink.dev</a>
+    <a href="https://github.com/JettNguyen/NightLink" target="_blank" rel="noopener">GitHub</a>
+    <a href="https://nightlink.dev/privacy" target="_blank" rel="noopener">Privacy</a>
+    <a href="https://nightlink.dev/terms" target="_blank" rel="noopener">Terms</a>
+  </nav>
+</footer>
+
+</body>
+</html>
