@@ -39,7 +39,15 @@
 
 <main id="app" tabindex="-1"></main>
 
-<footer class="site-foot" id="siteFoot"></footer>
+<footer class="site-foot" id="siteFoot">
+  <!-- app.js replaces this once it renders. It stays here so the product
+       pages have a real link in the HTML that is served, not just one the
+       router builds after you click through to a project. -->
+  <nav aria-label="Product pages">
+    <a href="/nightlink/">Nightlink</a>
+    <a href="/tempify/">Tempify</a>
+  </nav>
+</footer>
 
 <nav class="tnav" id="touchNav" aria-label="Sections">
   <div class="tnav-track" id="tnavTrack"></div>
