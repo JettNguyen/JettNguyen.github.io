@@ -51,7 +51,7 @@ window.siteData = {
       {label:"Beyond Code", items:["Human-Computer Interaction","Public Relations","Live Commentary","Music Production","Video Production"]}
     ],
     liveSignals:{
-      currentlyListening:"3 Deep · Oliver Francis",
+      currentlyListening:"Maria I'm Drunk (feat. Justin Bieber & Young Thug) · Travis Scott, Justin Bieber, Young Thug",
       listeningLabel:"listening",
       recentlyWatched:"Obsession · ★★★★½",
       currentlyInto:"Human behavior systems, interactive storytelling, and audio tooling"
