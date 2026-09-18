@@ -365,7 +365,7 @@ PAGES.work = () => {
         <li class="index-row${up ? ' child' : ''}" data-reveal style="--i:${Math.min(i, 8)};--tint:${p.tint || 'transparent'}">
           <a href="#/project/${p.slug}">
             <span class="idx-n">${up ? '<span class="idx-under" aria-hidden="true">&#8627;</span>' : pad2(n)}</span>
-            <span class="idx-title">${up ? `<span class="sr-only">Part of ${esc(up.title)}: </span>` : ''}${p.logo ? `<img class="idx-logo" src="${p.logo}" alt="" loading="lazy">` : ''}${esc(p.title)}${p.status ? `<span class="flag">${esc(p.status)}</span>` : ''}</span>
+            <span class="idx-title">${up ? `<span class="sr-only">Part of ${esc(up.title)}: </span>` : ''}${p.logo ? `<img class="idx-logo" src="${p.logo}" alt="" loading="lazy">` : ''}${esc(p.title)}${p.status ? `<span class="flag" data-status="${esc(p.status.toLowerCase())}">${esc(p.status)}</span>` : ''}</span>
             <span class="idx-sum">${esc(p.summary)}</span>
             <span class="idx-type">${esc(kind(p))}${p.origin === 'school' ? ', coursework' : ''}</span>
             <span class="idx-year">${esc(year(p))}</span>
@@ -401,7 +401,7 @@ PAGES.project = slug => {
     <article${p.tint ? ` style="--tint:${p.tint}"` : ''}>
       <div class="proj-band"><header class="proj-head wrap">
         <a class="arrow-link crumb" href="#/work">All work</a>
-        <h1>${p.logo ? `<img src="${p.logo}" alt="">` : ''}${esc(p.title)}${p.status ? `<span class="status">${esc(p.status)}</span>` : ''}</h1>
+        <h1>${p.logo ? `<img src="${p.logo}" alt="">` : ''}${esc(p.title)}${p.status ? `<span class="status" data-status="${esc(p.status.toLowerCase())}">${esc(p.status)}</span>` : ''}</h1>
         <p class="proj-summary">${esc(p.summary)}</p>
         <dl class="proj-meta">
           <div><dt>Year</dt><dd>${esc(p.date)}</dd></div>
