@@ -446,9 +446,10 @@ strong { font-weight: 600; }
 
 /* A project that sits under another one: no number, an arrow, a step in.
    Only the title moves, so the other columns stay in line with every row. */
+.index-row.child a { padding-block: 11px; }
 .index-row.child .idx-n { text-align: right; }
 .index-row.child .idx-title { padding-left: 24px; font-size: 1.15rem; }
-.index-row.child .idx-logo { width: 30px; height: 30px; border-radius: 7px; vertical-align: -8px; margin-right: 10px; }
+.index-row.child .idx-logo { width: 26px; height: 26px; border-radius: 6px; vertical-align: -6px; margin-right: 9px; }
 .idx-under { color: var(--muted); }
 
 @media (width <= 820px) {
