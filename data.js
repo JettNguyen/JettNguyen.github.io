@@ -51,8 +51,8 @@ window.siteData = {
       {label:"Beyond Code", items:["Human-Computer Interaction","Public Relations","Live Commentary","Music Production","Video Production"]}
     ],
     liveSignals:{
-      currentlyListening:"Maria I'm Drunk (feat. Justin Bieber & Young Thug) · Travis Scott, Justin Bieber, Young Thug",
-      listeningLabel:"listening",
+      currentlyListening:"Lonely Heart's Club A · Otto Sieben, David Bell",
+      listeningLabel:"last played",
       recentlyWatched:"Obsession · ★★★★½",
       currentlyInto:"Human behavior systems, interactive storytelling, and audio tooling"
     },
