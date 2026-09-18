@@ -7,7 +7,8 @@ Personal portfolio site for projects, coursework, reports, presentations, and re
 - `#/` is one scrolling page: hero, four selected projects, a pull quote from the bio, experience, and the contact footer.
 - `#/work` is the index of every project, split into Highlights and Also built. A project is a highlight when it
   carries `featured:true` in `data.js`; a child project follows whichever list its parent is in. The numbers run
-  straight through both lists so the count in the lede still adds up.
+  straight through both lists so the count in the lede still adds up. The headers carry the split; the lede does
+  not explain it.
 - `#/project/<slug>` is the write-up: summary, stack, links, screenshots, the problem-to-reflection sections, and the user study where one exists.
 - `#/about` carries the full bio, every post under `writing` in `data.js`, skills, and the music, film, vintage
   clothing, and objects shelves. The home page shows the three most recent posts and links out to the rest.

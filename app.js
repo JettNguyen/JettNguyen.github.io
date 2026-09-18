@@ -407,7 +407,7 @@ PAGES.work = () => {
   <section class="wrap">
     <header class="page-head">
       <h1>Work</h1>
-      <p class="lede">${word(projects.length).replace(/^\w/, c => c.toUpperCase())} projects since ${esc(String(Math.min(...projects.map(year))))}, roughly newest first. The first group is the work I would point at. The rest is coursework and things I built to learn one specific thing, kept here because I would rather show the whole record than a curated slice.</p>
+      <p class="lede">${word(projects.length).replace(/^\w/, c => c.toUpperCase())} projects since ${esc(String(Math.min(...projects.map(year))))}, roughly newest first. Each row opens to a write-up with screenshots where I have them.</p>
     </header>
     <h2 class="idx-label">Highlights</h2>
     <ol class="index">${head}${rows(top)}</ol>

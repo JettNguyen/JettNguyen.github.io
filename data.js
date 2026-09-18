@@ -142,7 +142,7 @@ window.siteData = {
   writing:{
     sectionLabel:"writing",
     sectionTitle:["Writing."],
-    intro:"I write for the Otian blog, mostly about what goes wrong between a person and an agent and why it goes wrong there.",
+    intro:"I write for the Otian blog, mostly about what goes wrong between a person and an agent.",
     url:"https://otianai.com/blog/",
     urlLabel:"the Otian blog",
     items:[
