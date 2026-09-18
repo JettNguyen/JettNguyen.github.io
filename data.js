@@ -51,8 +51,8 @@ window.siteData = {
       {label:"Beyond Code", items:["Human-Computer Interaction","Public Relations","Live Commentary","Music Production","Video Production"]}
     ],
     liveSignals:{
-      currentlyListening:"No Wok · LUCKI",
-      listeningLabel:"last played",
+      currentlyListening:"3 Deep · Oliver Francis",
+      listeningLabel:"listening",
       recentlyWatched:"Obsession · ★★★★½",
       currentlyInto:"Human behavior systems, interactive storytelling, and audio tooling"
     },
