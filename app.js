@@ -20,6 +20,8 @@ const year     = p => (p.date || '').slice(0, 4);
 const ongoing  = p => /ongoing/i.test(p.date || '');
 const kind     = p => p.categories?.[0] || '';
 const originOf = p => p.origin === 'school' ? 'Coursework' : 'Independent';
+const parentOf = p => p.parent ? bySlug(p.parent) : null;
+const kidsOf   = p => projects.filter(k => k.parent === p.slug);
 const teamOf   = p => p.collaboration === 'team' ? 'Team' : 'Solo';
 
 /* ------------------------------------------------------------------ */
@@ -344,7 +346,11 @@ function workItem(p, i) {
 
 function stripTags(s) { return String(s).replace(/<[^>]+>/g, ''); }
 
-PAGES.work = () => frag(`
+PAGES.work = () => {
+  // Numbers count the top-level projects. A project that sits under another one
+  // takes no number of its own; it is indented under the row it belongs to.
+  let n = 0;
+  return frag(`
   <section class="wrap">
     <header class="page-head">
       <h1>Work</h1>
@@ -352,19 +358,24 @@ PAGES.work = () => frag(`
     </header>
     <ol class="index">
       <li class="idx-head" aria-hidden="true"><span>No.</span><span>Project</span><span>What it is</span><span>Kind</span><span style="text-align:right">Year</span></li>
-      ${projects.map((p, i) => `
-        <li class="index-row" data-reveal style="--i:${Math.min(i, 8)};--tint:${p.tint || 'transparent'}">
+      ${projects.map((p, i) => {
+        const up = parentOf(p);
+        if (!up) n++;
+        return `
+        <li class="index-row${up ? ' child' : ''}" data-reveal style="--i:${Math.min(i, 8)};--tint:${p.tint || 'transparent'}">
           <a href="#/project/${p.slug}">
-            <span class="idx-n">${pad2(i + 1)}</span>
-            <span class="idx-title">${p.logo ? `<img class="idx-logo" src="${p.logo}" alt="" loading="lazy">` : ''}${esc(p.title)}${p.status ? `<span class="flag">${esc(p.status)}</span>` : ''}</span>
+            <span class="idx-n">${up ? '<span class="idx-under" aria-hidden="true">&#8627;</span>' : pad2(n)}</span>
+            <span class="idx-title">${up ? `<span class="sr-only">Part of ${esc(up.title)}: </span>` : ''}${p.logo ? `<img class="idx-logo" src="${p.logo}" alt="" loading="lazy">` : ''}${esc(p.title)}${p.status ? `<span class="flag">${esc(p.status)}</span>` : ''}</span>
             <span class="idx-sum">${esc(p.summary)}</span>
             <span class="idx-type">${esc(kind(p))}${p.origin === 'school' ? ', coursework' : ''}</span>
             <span class="idx-year">${esc(year(p))}</span>
           </a>
-        </li>`).join('')}
+        </li>`;
+      }).join('')}
     </ol>
   </section>
 `);
+};
 
 PAGES.project = slug => {
   const p = bySlug(slug);
@@ -373,6 +384,8 @@ PAGES.project = slug => {
   const prev = projects[(i - 1 + projects.length) % projects.length];
   const next = projects[(i + 1) % projects.length];
   const d = p.details || {};
+  const up = parentOf(p);
+  const kids = kidsOf(p);
   const shots = p.screenshots || [];
   const links = [
     p.appStoreUrl && `<a class="store-link" href="${p.appStoreUrl}" target="_blank" rel="noopener">On the App Store ↗</a>`,
@@ -394,6 +407,8 @@ PAGES.project = slug => {
           <div><dt>Year</dt><dd>${esc(p.date)}</dd></div>
           <div><dt>Context</dt><dd>${originOf(p)}, ${p.collaboration === 'team' ? 'with a team' : 'solo'}</dd></div>
           <div><dt>Built with</dt><dd>${(p.techStack || []).map(esc).join(', ')}</dd></div>
+          ${up ? `<div><dt>Part of</dt><dd><a href="#/project/${up.slug}">${esc(up.title)}</a></dd></div>` : ''}
+          ${kids.length ? `<div><dt>Under it</dt><dd>${kids.map(k => `<a href="#/project/${k.slug}">${esc(k.title)}</a>`).join(', ')}</dd></div>` : ''}
           <div><dt>Links</dt><dd class="links">${links.join('') || '<span class="muted">No public link</span>'}</dd></div>
         </dl>
         <div class="embed-slot"></div>
