@@ -428,8 +428,32 @@ strong { font-weight: 600; }
 }
 @media (width <= 820px) { .foot-grid { grid-template-columns: 1fr; } }
 
+/* ---------- writing ---------- */
+.writing { display: grid; border-top: 1px solid var(--rule); }
+.writing-intro { max-width: 62ch; margin-bottom: 26px; color: var(--ink-2); font-size: var(--fs-small); line-height: 1.6; }
+.wr-row { border-bottom: 1px solid var(--rule); }
+.wr-row a {
+  display: grid; grid-template-columns: 116px minmax(0, 1fr); gap: clamp(16px, 3vw, 40px);
+  margin-inline: -14px; padding: 20px 14px; border-radius: 3px;
+  transition: background-color var(--d-fast) var(--ease);
+}
+.wr-row a:hover { background: var(--paper-2); }
+.wr-date { padding-top: 6px; }
+.wr-title {
+  display: block; font-family: var(--serif); font-size: 1.35rem; line-height: 1.15;
+  text-wrap: pretty; transition: color var(--d-fast);
+}
+.wr-row a:hover .wr-title { color: var(--accent); }
+.wr-excerpt { display: block; margin-top: 7px; max-width: 68ch; color: var(--ink-2); font-size: var(--fs-small); line-height: 1.55; }
+@media (width <= 640px) { .wr-row a { grid-template-columns: 1fr; gap: 6px; } .wr-date { padding-top: 0; } }
+
 /* ---------- index (work page) ---------- */
 .index { border-top: 1px solid var(--rule); }
+.idx-label {
+  font-family: var(--serif); font-weight: 400; font-size: 1.6rem; line-height: 1;
+  margin-bottom: 14px;
+}
+.index + .idx-label { margin-top: clamp(44px, 6vw, 76px); }
 .idx-head, .index-row a {
   display: grid; grid-template-columns: 44px minmax(0, 3fr) minmax(0, 5fr) minmax(0, 2fr) 64px;
   gap: 20px; align-items: center;

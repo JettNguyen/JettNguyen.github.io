@@ -24,6 +24,27 @@ const parentOf = p => p.parent ? bySlug(p.parent) : null;
 const kidsOf   = p => projects.filter(k => k.parent === p.slug);
 const teamOf   = p => p.collaboration === 'team' ? 'Team' : 'Solo';
 
+// Posts carry an ISO date; the page shows the month before the day.
+const MON = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+const postDate = s => {
+  const [y, m, d] = String(s || '').split('-');
+  return MON[+m - 1] ? (d ? `${MON[+m - 1]} ${+d}, ${y}` : `${MON[+m - 1]} ${y}`) : String(s || '');
+};
+
+// The writing lives on the Otian blog, so every row leaves the site.
+function writingRows(items) {
+  return items.map((w, i) => `
+    <li class="wr-row" data-reveal style="--i:${Math.min(i, 8)}">
+      <a href="${w.url}" target="_blank" rel="noopener">
+        <span class="mono wr-date">${esc(postDate(w.date))}</span>
+        <span>
+          <span class="wr-title">${esc(w.title)}</span>
+          ${w.excerpt ? `<span class="wr-excerpt">${esc(w.excerpt)}</span>` : ''}
+        </span>
+      </a>
+    </li>`).join('');
+}
+
 /* ------------------------------------------------------------------ */
 /* routing                                                             */
 /* ------------------------------------------------------------------ */
@@ -295,6 +316,15 @@ PAGES[''] = () => {
       </div>
     </section>` : ''}
 
+    ${D.writing?.items?.length ? `
+    <section class="section wrap" id="writing">
+      <header class="section-head" data-reveal>
+        <h2>Writing</h2>
+        <a class="arrow-link" href="${D.writing.url}" target="_blank" rel="noopener">All ${word(D.writing.items.length)} on ${esc(D.writing.urlLabel || 'the blog')}</a>
+      </header>
+      <ol class="writing">${writingRows(D.writing.items.slice(0, 3))}</ol>
+    </section>` : ''}
+
     <section class="section wrap" id="experience">
       <header class="section-head" data-reveal>
         <h2>Experience</h2>
@@ -347,32 +377,43 @@ function workItem(p, i) {
 function stripTags(s) { return String(s).replace(/<[^>]+>/g, ''); }
 
 PAGES.work = () => {
-  // Numbers count the top-level projects. A project that sits under another one
+  // Numbers count the top-level projects and run straight through both lists, so
+  // the count in the lede still adds up. A project that sits under another one
   // takes no number of its own; it is indented under the row it belongs to.
   let n = 0;
+
+  // A child follows its parent into whichever list the parent is in.
+  const tier = p => (parentOf(p) || p).featured === true;
+  const rows = list => list.map((p, i) => {
+    const up = parentOf(p);
+    if (!up) n++;
+    return `
+      <li class="index-row${up ? ' child' : ''}" data-reveal style="--i:${Math.min(i, 8)};--tint:${p.tint || 'transparent'}">
+        <a href="#/project/${p.slug}">
+          <span class="idx-n">${up ? '<span class="idx-under" aria-hidden="true">&#8627;</span>' : pad2(n)}</span>
+          <span class="idx-title">${up ? `<span class="sr-only">Part of ${esc(up.title)}: </span>` : ''}${p.logo ? `<img class="idx-logo" src="${p.logo}" alt="" loading="lazy">` : ''}${esc(p.title)}${p.status ? `<span class="flag" data-status="${esc(p.status.toLowerCase())}">${esc(p.status)}</span>` : ''}</span>
+          <span class="idx-sum">${esc(p.summary)}</span>
+          <span class="idx-type">${esc(kind(p))}${p.origin === 'school' ? ', coursework' : ''}</span>
+          <span class="idx-year">${esc(year(p))}</span>
+        </a>
+      </li>`;
+  }).join('');
+
+  const head = '<li class="idx-head" aria-hidden="true"><span>No.</span><span>Project</span><span>What it is</span><span>Kind</span><span style="text-align:right">Year</span></li>';
+  const top  = projects.filter(tier);
+  const rest = projects.filter(p => !tier(p));
+
   return frag(`
   <section class="wrap">
     <header class="page-head">
       <h1>Work</h1>
-      <p class="lede">${word(projects.length).replace(/^\w/, c => c.toUpperCase())} projects since ${esc(String(Math.min(...projects.map(year))))}, roughly newest first. Each row opens to a write-up with screenshots where I have them.</p>
+      <p class="lede">${word(projects.length).replace(/^\w/, c => c.toUpperCase())} projects since ${esc(String(Math.min(...projects.map(year))))}, roughly newest first. The first group is the work I would point at. The rest is coursework and things I built to learn one specific thing, kept here because I would rather show the whole record than a curated slice.</p>
     </header>
-    <ol class="index">
-      <li class="idx-head" aria-hidden="true"><span>No.</span><span>Project</span><span>What it is</span><span>Kind</span><span style="text-align:right">Year</span></li>
-      ${projects.map((p, i) => {
-        const up = parentOf(p);
-        if (!up) n++;
-        return `
-        <li class="index-row${up ? ' child' : ''}" data-reveal style="--i:${Math.min(i, 8)};--tint:${p.tint || 'transparent'}">
-          <a href="#/project/${p.slug}">
-            <span class="idx-n">${up ? '<span class="idx-under" aria-hidden="true">&#8627;</span>' : pad2(n)}</span>
-            <span class="idx-title">${up ? `<span class="sr-only">Part of ${esc(up.title)}: </span>` : ''}${p.logo ? `<img class="idx-logo" src="${p.logo}" alt="" loading="lazy">` : ''}${esc(p.title)}${p.status ? `<span class="flag" data-status="${esc(p.status.toLowerCase())}">${esc(p.status)}</span>` : ''}</span>
-            <span class="idx-sum">${esc(p.summary)}</span>
-            <span class="idx-type">${esc(kind(p))}${p.origin === 'school' ? ', coursework' : ''}</span>
-            <span class="idx-year">${esc(year(p))}</span>
-          </a>
-        </li>`;
-      }).join('')}
-    </ol>
+    <h2 class="idx-label">Highlights</h2>
+    <ol class="index">${head}${rows(top)}</ol>
+    ${rest.length ? `
+    <h2 class="idx-label">Also built</h2>
+    <ol class="index">${rows(rest)}</ol>` : ''}
   </section>
 `);
 };
@@ -518,6 +559,16 @@ PAGES.about = () => {
         </aside>
       </div>
     </section>
+
+    ${D.writing?.items?.length ? `
+    <section class="section wrap" id="writing">
+      <header class="section-head" data-reveal>
+        <h2>Writing</h2>
+        <a class="arrow-link" href="${D.writing.url}" target="_blank" rel="noopener">${esc(D.writing.urlLabel || 'the blog')}</a>
+      </header>
+      ${D.writing.intro ? `<p class="writing-intro" data-reveal>${esc(D.writing.intro)}</p>` : ''}
+      <ol class="writing">${writingRows(D.writing.items)}</ol>
+    </section>` : ''}
 
     <section class="section wrap">
       <header class="section-head" data-reveal><h2>Skills</h2></header>
