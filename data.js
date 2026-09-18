@@ -68,7 +68,7 @@ window.siteData = {
       {label:"Beyond Code", items:["Human-Computer Interaction","Public Relations","Live Commentary","Music Production","Video Production"]}
     ],
     liveSignals:{
-      currentlyListening:"That's a Rack · Lil Uzi Vert",
+      currentlyListening:"Put a Date On It (feat. Lil Baby) · Yo Gotti, Lil Baby",
       listeningLabel:"listening",
       recentlyWatched:"Obsession · ★★★★½",
       currentlyInto:"Human behavior systems, interactive storytelling, and audio tooling"
