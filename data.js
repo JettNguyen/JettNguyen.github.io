@@ -51,7 +51,7 @@ window.siteData = {
       {label:"Beyond Code", items:["Human-Computer Interaction","Public Relations","Live Commentary","Music Production","Video Production"]}
     ],
     liveSignals:{
-      currentlyListening:"NBAYOUNGBOAT · Lil Yachty, YoungBoy Never Broke Again",
+      currentlyListening:"Chaoz Fantasy · ParagonX9",
       listeningLabel:"last played",
       recentlyWatched:"Obsession · ★★★★½",
       currentlyInto:"Human behavior systems, interactive storytelling, and audio tooling"
