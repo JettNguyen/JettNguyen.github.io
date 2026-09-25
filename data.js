@@ -51,8 +51,8 @@ window.siteData = {
       {label:"Beyond Code", items:["Human-Computer Interaction","Public Relations","Live Commentary","Music Production","Video Production"]}
     ],
     liveSignals:{
-      currentlyListening:"No More (feat. Travis Scott, Kodak Black & 21 Savage) · Metro Boomin, Travis Scott, Kodak Black, 21 Savage",
-      listeningLabel:"listening",
+      currentlyListening:"Take My Breath - Instrumental · The Weeknd",
+      listeningLabel:"last played",
       recentlyWatched:"Obsession · ★★★★½",
       currentlyInto:"Human behavior systems, interactive storytelling, and audio tooling"
     },
