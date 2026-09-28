@@ -53,7 +53,7 @@ window.siteData = {
     liveSignals:{
       currentlyListening:"Today · RICEWINE",
       listeningLabel:"last played",
-      recentlyWatched:"Obsession · ★★★★½",
+      recentlyWatched:"Primetime · ★★★★",
       currentlyInto:"Human behavior systems, interactive storytelling, and audio tooling"
     },
     interestSections:[
