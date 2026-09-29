@@ -51,8 +51,8 @@ window.siteData = {
       {label:"Beyond Code", items:["Human-Computer Interaction","Public Relations","Live Commentary","Music Production","Video Production"]}
     ],
     liveSignals:{
-      currentlyListening:"That Should Be Me · Justin Bieber",
-      listeningLabel:"last played",
+      currentlyListening:"XO Tour Llif3 · Lil Uzi Vert",
+      listeningLabel:"listening",
       recentlyWatched:"Primetime · ★★★★",
       currentlyInto:"Human behavior systems, interactive storytelling, and audio tooling"
     },
