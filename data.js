@@ -51,7 +51,7 @@ window.siteData = {
       {label:"Beyond Code", items:["Human-Computer Interaction","Public Relations","Live Commentary","Music Production","Video Production"]}
     ],
     liveSignals:{
-      currentlyListening:"Under the Bridge · Red Hot Chili Peppers",
+      currentlyListening:"Come Out and Play · The Offspring",
       listeningLabel:"last played",
       recentlyWatched:"Primetime · ★★★★",
       currentlyInto:"Human behavior systems, interactive storytelling, and audio tooling"
