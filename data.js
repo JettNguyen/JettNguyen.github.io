@@ -51,7 +51,7 @@ window.siteData = {
       {label:"Beyond Code", items:["Human-Computer Interaction","Public Relations","Live Commentary","Music Production","Video Production"]}
     ],
     liveSignals:{
-      currentlyListening:"Take Me Back To LA · The Weeknd",
+      currentlyListening:"FEFE (feat. Nicki Minaj & Murda Beatz) · 6ix9ine, Nicki Minaj, Murda Beatz",
       listeningLabel:"last played",
       recentlyWatched:"Primetime · ★★★★",
       currentlyInto:"Human behavior systems, interactive storytelling, and audio tooling"
