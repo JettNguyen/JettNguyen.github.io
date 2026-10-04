@@ -43,12 +43,13 @@ window.siteData = {
       {label:"Email",value:"jettcameronnguyen@gmail.com",href:"mailto:jettcameronnguyen@gmail.com"}
     ],
     skillGroups:[
-      {label:"Languages", items:["TypeScript","JavaScript","Python","Rust","C++","C#"]},
-      {label:"Frontend", items:["React","React Native","Vite","Tailwind CSS","HTML / CSS"]},
-      {label:"Backend & Data", items:["Node.js","Express","MongoDB","Prisma","Firebase","Supabase"]},
+      {label:"Languages", items:["TypeScript","JavaScript","Python","Rust","Swift","C++","C#"]},
+      {label:"Frontend", items:["React","Vite","Tailwind CSS","HTML / CSS"]},
+      {label:"Mobile", items:["React Native","Expo","Capacitor","App Store and TestFlight releases"]},
+      {label:"Backend & Data", items:["Node.js","Express","PostgreSQL","Prisma","Supabase","Firebase","MongoDB"]},
       {label:"Desktop & Systems", items:["Tauri","Electron",".NET","Unity","Audio DSP"]},
-      {label:"Cloud & Tooling", items:["AWS S3","AWS Lambda","Docker","Stripe","GitHub Actions"]},
-      {label:"AI", items:["Agentic AI","LLM Integration","Prompt Engineering"]},
+      {label:"Cloud & Tooling", items:["AWS S3","AWS Lambda","Vercel","Docker","Stripe","RevenueCat","GitHub Actions"]},
+      {label:"AI", items:["Agentic AI","OpenClaw","Claude Code","LLM Integration","Prompt Engineering"]},
       {label:"Beyond Code", items:["Human-Computer Interaction","Public Relations","Live Commentary","Music Production","Video Production"]}
     ],
     liveSignals:{
@@ -194,15 +195,13 @@ window.siteData = {
     education:{institution:"University of Florida",logo:"assets/uf.webp",degree:"B.S. Computer Science, Minor in Public Relations",dates:"Aug 2022 - May 2026",gpa:"3.65",resumePoints:["3.65 GPA across a dual focus in computer science and public relations.","Senior project: Sideline, a mobile-first video app for youth soccer families."],highlights:["Graduated with a <span class='spec'>3.65 GPA</span> across a dual focus in <strong>Computer Science</strong> and <strong>Public Relations</strong>, pairing technical coursework with communication and audience-centered design training.","Senior project: <strong>Sideline</strong>, a mobile-first video app for youth soccer families, where I was <strong>frontend lead on a team of four</strong>."]},
     resumePdf:"assets/Jett_Nguyen_Resume_2026.pdf",
     resume:{
-      statement:"Computer science graduate with a public relations minor. I co-founded Otian AI and lead engineering on Archie, a desktop app that runs a personal AI agent on the user's own machine. I work across the stack and start from the person using it: what they expect, what they will actually do, and what they should never have to think about.",
+      statement:"Computer science graduate with a public relations minor. I co-founded Otian AI, where I am CTO and lead engineering on Archie, a desktop app that runs a personal AI agent on the user's own machine, and I build and run the agents behind Otian's back office and an artist's social media. I work across the stack and start from the person using it: what they expect, what they will actually do, and what they should never have to think about.",
       picks:[
-        {slug:"archie",note:"Lead engineer. Rust and Tauri desktop app, and I own the client work end to end."},
-        {slug:"hudson",note:"Built and run it. Otian's back office on one laptop, with every send behind a founder's tap."},
-        {slug:"studioflow",note:"Solo build on the web and iPhone, with an agent behind it built to one written contract."},
-        {slug:"tempify",note:"Solo build, live on the App Store and the web, with a paid archive on Stripe."},
-        {slug:"sideline",note:"Senior project. Frontend lead on a team of four, designed around one-handed phone use."},
+        {slug:"archie",note:"Lead engineer through the 0.3.4 public beta. Rust and Tauri desktop app, and I own the client work end to end."},
+        {slug:"hudson",note:"Built and run it: about thirty routes and thirty scheduled jobs, with a capabilities page generated from its own code."},
+        {slug:"studioflow",note:"Solo build on the web and iPhone. Its agent, Sable, is built to one written contract, with 476 tests across phone, web, and API."},
         {slug:"nightlink",note:"Solo build, live on the App Store, with per-dream privacy controls and voice entry on Supabase."},
-        {slug:"stackd",note:"Lead contributor. Import a deck from Quizlet or generate one with Gemini."},
+        {slug:"tempify",note:"Solo build, live on the App Store at 1.7, with Tempify Plus on Stripe and RevenueCat and puzzles written two weeks ahead."},
         {slug:"splitsy",note:"Measured against splitting the same bill by hand: ten students, both ways, in randomized order."}
       ],
       activities:[

@@ -618,12 +618,15 @@ strong { font-weight: 600; }
   .page-head .lede { margin-top: 6px; font-size: 9.2pt; line-height: 1.38; max-width: none; }
   .resume-head, .resume-grid { grid-template-columns: minmax(0, 1fr) 2.3in; gap: 0.28in; align-items: start; }
   .resume-grid { padding-bottom: 0; }
-  .resume-main { gap: 16px; }
-  .resume-side { gap: 12px; }
+  .resume-main, .resume-side { display: block; }
+  .resume-main > .rs + .rs { margin-top: 16px; }
+  .resume-side > .rs + .rs { margin-top: 12px; }
   .panel { background: none; border: 0; border-top: 1px solid var(--rule-2); border-radius: 0; padding: 0; padding-top: 8px; }
   .resume-head .panel { border-top: 0; padding-top: 0; }
   .resume-contact li { padding-block: 3px; gap: 8px; grid-template-columns: 48px minmax(0, 1fr); font-size: 7.8pt; }
-  .rs-h { font-size: 13pt; padding-bottom: 4px; margin-bottom: 2px; border-bottom-width: 1.5px; }
+  /* Chrome won't keep a heading with what follows it inside a grid, so the columns above print
+     as plain blocks and a section heading never sits alone at the foot of a page. */
+  .rs-h { font-size: 13pt; padding-bottom: 4px; margin-bottom: 2px; border-bottom-width: 1.5px; break-after: avoid; }
   .panel .rs-h { font-size: 10.5pt; }
   .rs-item { padding-block: 8px; grid-template-columns: 26px minmax(0, 1fr); gap: 10px; break-inside: avoid; }
   .rs-logo { width: 26px; height: 26px; border-radius: 5px; margin-top: 2px; }
