@@ -218,7 +218,7 @@ a { color: inherit; }
   margin: 0;
   padding: 0;
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   gap: 16px;
 }
 
@@ -252,7 +252,8 @@ a { color: inherit; }
 .game h3 { font-size: 21px; margin-bottom: 10px; }
 .game p { color: var(--muted); font-size: 15px; }
 
-.game-tomorrow { --g: #3f3f3f; background: transparent; border-style: dashed; }
+/* Four games fill a row; tomorrow sits under them at full width. */
+.game-tomorrow { --g: #3f3f3f; background: transparent; border-style: dashed; grid-column: 1 / -1; }
 .game-tomorrow h3, .game-tomorrow .game-num { color: var(--dim); }
 
 /* ---------- showcase ---------- */
