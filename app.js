@@ -633,12 +633,13 @@ PAGES.resume = () => {
   const lines = ['Email', 'GitHub', 'LinkedIn']
     .map(l => c.links.find(x => x.label === l)).filter(Boolean)
     .concat([{ label: 'Site', handle: 'jettnguyen.github.io', href: 'https://jettnguyen.github.io/' }]);
-  const picks = (r.picks || []).map(k => { const p = bySlug(k.slug); return p && { ...p, note: k.note }; }).filter(Boolean);
+  // A pick or activity with print:false stays on this page and off the one-page PDF.
+  const picks = (r.picks || []).map(k => { const p = bySlug(k.slug); return p && { ...p, note: k.note, print: k.print }; }).filter(Boolean);
   const points = a => a?.length ? `<ul class="rs-points">${a.map(x => `<li>${esc(x)}</li>`).join('')}</ul>` : '';
   const head = (title, aside) => `<h2 class="rs-h">${title}${aside ? `<span>${aside}</span>` : ''}</h2>`;
 
-  const row = ({ logo, title, date, org, body, tint }) => `
-    <article class="rs-item"${tint ? ` style="--tint:${tint}"` : ''}>
+  const row = ({ logo, title, date, org, body, tint, print }) => `
+    <article class="rs-item${print === false ? ' off-print' : ''}"${tint ? ` style="--tint:${tint}"` : ''}>
       ${logo ? `<img class="rs-logo" src="${logo}" alt="" loading="lazy">` : '<span class="rs-logo blank"></span>'}
       <div class="rs-body">
         <div class="rs-top"><h3>${title}</h3><span class="rs-date">${esc(date)}</span></div>
@@ -676,11 +677,11 @@ PAGES.resume = () => {
           <section class="rs" data-reveal>
             ${head('Selected projects', `<a href="#/work">all ${word(projects.length)}</a>`)}
             ${picks.map(p => row({
-              logo: p.logo, tint: p.tint,
+              logo: p.logo, tint: p.tint, print: p.print,
               title: `<a href="#/project/${p.slug}">${esc(p.title)}</a>${p.appStoreUrl ? '<span class="rs-flag">App Store</span>' : ''}`,
               date: `${year(p)}${ongoing(p) ? ' to now' : ''}`,
               org: `${originOf(p)}, ${teamOf(p).toLowerCase()} &middot; ${(p.techStack || []).slice(0, 5).map(esc).join(', ')}`,
-              body: `<ul class="rs-points"><li>${esc(p.summary)}</li><li>${esc(p.note)}</li></ul>`,
+              body: `<ul class="rs-points"><li>${esc(p.note)}</li></ul>`,
             })).join('')}
           </section>
         </div>
@@ -705,7 +706,7 @@ PAGES.resume = () => {
           <section class="rs panel" data-reveal>
             ${head('Activities')}
             ${r.activities.map(a => `
-              <div class="rs-act">
+              <div class="rs-act${a.print === false ? ' off-print' : ''}">
                 <div class="rs-act-org">${esc(a.org)}<span>${esc(a.place)}</span></div>
                 <ul>${a.roles.map(x => `<li><span class="t">${esc(x.title)}</span><span class="m">${esc(x.date)}</span><span class="n">${esc(x.note)}</span></li>`).join('')}</ul>
               </div>`).join('')}

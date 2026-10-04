@@ -12,6 +12,9 @@ Personal portfolio site for projects, coursework, reports, presentations, and re
 - `#/project/<slug>` is the write-up: summary, stack, links, screenshots, the problem-to-reflection sections, and the user study where one exists.
 - `#/about` carries the full bio, every post under `writing` in `data.js`, skills, and the music, film, vintage
   clothing, and objects shelves. The home page shows the three most recent posts and links out to the rest.
+- `#/resume` is the résumé, and printing it makes `assets/Jett_Nguyen_Resume_2026.pdf`: one traditional page, single
+  column, no logos. A pick or activity marked `print:false` in `data.js` shows on the page and stays off the PDF, so
+  check that the print still fits one page after adding anything.
 - `#/archive` holds presentations and coursework by semester. The old `#projects`, `#about`, and similar hashes still resolve.
 - Light paper by default, warm dark when the system asks for it, and a toggle in the header that remembers the choice.
 
