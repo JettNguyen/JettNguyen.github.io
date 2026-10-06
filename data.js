@@ -52,8 +52,8 @@ window.siteData = {
       {label:"Beyond Code", items:["Human-Computer Interaction","Public Relations","Live Commentary","Music Production","Video Production"]}
     ],
     liveSignals:{
-      currentlyListening:"Wesley's Theory · Kendrick Lamar, George Clinton, Thundercat",
-      listeningLabel:"listening",
+      currentlyListening:"Never Been Any Reason · Head East",
+      listeningLabel:"last played",
       recentlyWatched:"Primetime · ★★★★",
       currentlyInto:"Human behavior systems, interactive storytelling, and audio tooling"
     },
