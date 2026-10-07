@@ -2,7 +2,7 @@ window.siteData = {
   meta:{
     name:"Jett Nguyen",initials:"JN",
     logoUrl:"assets/jett.webp",
-    statusText:"taking on small-business clients"
+    statusText:"open to AI engineering roles"
   },
   nav:[
     {id:"home",label:"home"},
@@ -14,12 +14,12 @@ window.siteData = {
     {id:"contact",label:"contact"}
   ],
   home:{
-    // Written to a small-business owner since the October 7, 2026 advisor meeting: the back
-    // office first, Hudson as the proof, Archie second, and privacy as a supporting line.
-    headline:["AI agents that run the","back office of a small business."],
-    intro:"I'm Jett Nguyen, co-founder and CTO of Otian AI. I build AI agents that take the mail, the calendar, the follow-ups and the posts off an owner, and nothing goes to a customer until the owner says yes. Hudson runs Otian's own back office that way, and Archie, the app I lead, gives you an agent on your own computer that waits for your yes the same way.",
+    // Written to hiring teams and anyone looking at Jett's career (October 7, 2026): the agent
+    // engineering first, Archie and Hudson as the proof.
+    headline:["I build AI agents that are","safe to leave running."],
+    intro:"I'm Jett Nguyen, co-founder and CTO of Otian AI. I lead engineering on Archie, a Rust and Tauri desktop app that runs an AI agent on your own computer. Its approval gate lives in the code, so the model can't send an email or change a calendar on its own. I also run three agents of my own every day, including the one that runs Otian's back office.",
     facts:["Gainesville, Florida","B.S. Computer Science, PR minor, UF 2026","Co-founder & CTO, Otian AI"],
-    selected:["hudson","archie","studioflow","nightlink"],
+    selected:["archie","hudson","studioflow","nightlink"],
     headshotUrl:"assets/jett-portrait-light.webp",
     headshotUrlDark:"assets/jett-portrait-dark.webp",
     headshotAlt:"Jett Nguyen",
@@ -29,10 +29,9 @@ window.siteData = {
     sectionLabel:"about me",
     sectionTitle:["The story","so far."],
     bio: [
-      {text:"I'm <span class='bio-mark'>Jett Nguyen</span>. I build AI agents that take the back office off a small business: the mail, the calendar, the follow-ups and the posts. I graduated from the University of Florida in May 2026 with a B.S. in Computer Science and a minor in Public Relations. The PR half is why every agent I build has to be easy to explain."},
-      {label:"What I run",text:"<span class='bio-mark'>Hudson</span> runs Otian AI's back office for Jack and me: three mailboxes, two calendars, the leads, the blog and company social, with nothing going out until one of us taps. A plumbing shop or a salon has the same pile of work. Two more agents run on my laptop, for an artist's social media and a music game's daily puzzles."},
-      {label:"Working with us",text:"Jack and I set up AI for small businesses. We start with where the owner's hours go, then build the agent or automation that takes that work off them, one phase at a time and with the owner there for every build. It starts with a free call through <a href='https://www.otianai.com/services/' target='_blank' rel='noopener'>Otian AI</a>."},
-      {label:"What I'm building",text:"In 2026 I co-founded <span class='bio-mark'>Otian AI</span> with Jack Raney. We spent months setting up AI assistants by hand, one at a time, until we understood the friction well enough to build it away. That became <span class='bio-mark'>Archie</span>, a desktop app that runs an AI agent on your own computer, for one person or a small team. It drafts the email and stages the calendar change, then waits for your yes before either one happens."},
+      {text:"I'm <span class='bio-mark'>Jett Nguyen</span>. I graduated from the University of Florida in May 2026 with a B.S. in Computer Science and a minor in Public Relations. I'm looking for work where those two overlap: building AI agents, and being able to explain why people can trust them."},
+      {label:"What I'm building",text:"In 2026 I co-founded <span class='bio-mark'>Otian AI</span> with Jack Raney, and I lead engineering on <span class='bio-mark'>Archie</span>, a desktop app that runs an AI agent on your own computer. It's Rust, Tauri and React, with more than 3,600 automated tests. The model can draft an email or propose a calendar change, but it can't send the email or make the change until a person says yes, and the code enforces that."},
+      {label:"What I run",text:"I also run agents of my own, on OpenClaw on my laptop. <span class='bio-mark'>Hudson</span> runs Otian's back office for Jack and me: mail, calendars, leads, the blog, and company social, with nothing going out until one of us taps. <span class='bio-mark'>Sable</span>, the agent behind Studioflow, runs social media for SyWavy, the artist I produce for, and a third keeps Tempify's daily puzzles written two weeks ahead. Most of the work in all three was making them checkable, not clever."},
       {label:"How I got here",text:"It started with Lego sets when I was a kid, then spent years producing music. Both taught me the same thing, which is that the tool you work in shapes what you end up making. That's most of why I write software. The PR minor came later, after watching solid projects go nowhere because nobody could describe them in a sentence."},
       {label:"Outside of code",text:"Outside of code I shoot video, collect vintage clothing, and watch films when I get the chance. I played Rocket League for Gator Esports for two years, up around the top 3% of ranked players, and I still cast their top team's matches, which is the best public speaking practice I have had. Most of what I build borrows from one of them."}
     ],
@@ -56,7 +55,7 @@ window.siteData = {
       currentlyListening:"Escape From LA · The Weeknd",
       listeningLabel:"last played",
       recentlyWatched:"Primetime · ★★★★",
-      currentlyInto:"Small-business back offices, interactive storytelling, and audio tooling"
+      currentlyInto:"Human behavior systems, interactive storytelling, and audio tooling"
     },
     interestSections:[
       {
@@ -412,10 +411,9 @@ window.siteData = {
   contact:{
     sectionLabel:"get in touch",
     sectionTitle:["Let's talk."],
-    intro:"If you run a small business and the mail, the calendar or the follow-ups are eating your week, email me, or book a free call with Jack and me through Otian AI.",
+    intro:"I'm looking for full-time roles building AI agents and the products around them, in applied AI, agent engineering, or full-stack product work. I'd love to talk.",
     links:[
       {label:"Email",               handle:"jettcameronnguyen@gmail.com", href:"mailto:jettcameronnguyen@gmail.com",                       iconType:"fa",  iconValue:"fa-solid fa-envelope"},
-      {label:"Book a free call",    handle:"otianai.com/services",         href:"https://www.otianai.com/services/",                         iconType:"fa",  iconValue:"fa-solid fa-calendar-check"},
       {label:"GitHub",              handle:"github.com/JettNguyen",       href:"https://github.com/JettNguyen",                            iconType:"fa",  iconValue:"fa-brands fa-github"},
       {label:"LinkedIn",            handle:"linkedin.com/in/jett-nguyen", href:"https://linkedin.com/in/jett-nguyen",                      iconType:"fa",  iconValue:"fa-brands fa-linkedin", iconColor:"#0077B5"},
       {label:"Otian AI",            handle:"otianai.com",                  href:"https://www.otianai.com/",                                  iconType:"img", iconValue:"assets/otian-logo.webp"},
