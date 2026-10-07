@@ -763,7 +763,6 @@ strong { font-weight: 600; }
 }
 .bio-block p { color: var(--ink-2); line-height: 1.65; max-width: 60ch; font-size: 1.05rem; }
 .bio-mark { color: var(--ink); font-weight: 500; }
-.bio-block a { color: var(--ink); text-decoration: underline; text-underline-offset: .2em; }
 
 .about-side { position: sticky; top: calc(var(--head-h) + 24px); display: grid; gap: 22px; }
 .about-portrait .frame { aspect-ratio: 1; border-radius: 50%; }
