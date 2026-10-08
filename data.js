@@ -418,6 +418,7 @@ window.siteData = {
       {label:"GitHub",              handle:"github.com/JettNguyen",       href:"https://github.com/JettNguyen",                            iconType:"fa",  iconValue:"fa-brands fa-github"},
       {label:"LinkedIn",            handle:"linkedin.com/in/jett-nguyen", href:"https://linkedin.com/in/jett-nguyen",                      iconType:"fa",  iconValue:"fa-brands fa-linkedin", iconColor:"#0077B5"},
       {label:"Otian AI",            handle:"otianai.com",                  href:"https://www.otianai.com/",                                  iconType:"img", iconValue:"assets/otian-logo.webp"},
+      {label:"Otian AI Consulting", handle:"consulting.otianai.com",       href:"https://consulting.otianai.com/",                           iconType:"img", iconValue:"assets/otian-logo.webp"},
       {label:"Production Portfolio",handle:"Spotify Playlist",            href:"https://open.spotify.com/playlist/3A7pDOj3iWVYk1KKR8LjWJ", iconType:"fa",  iconValue:"fa-brands fa-spotify", iconColor:"#1DB954"},
       {label:"Jett2Fly",            handle:"jett2fly.com",                href:"https://jett2fly.com",                                     iconType:"img", iconValue:"assets/jett2fly.png"},
       {label:"Mercari",             handle:"7jettster7",                  href:"https://www.mercari.com/u/7jettster7",                     iconType:"img", iconValue:"assets/mercari.jpeg"},
