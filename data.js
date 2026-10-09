@@ -52,8 +52,8 @@ window.siteData = {
       {label:"Beyond Code", items:["Human-Computer Interaction","Public Relations","Live Commentary","Music Production","Video Production"]}
     ],
     liveSignals:{
-      currentlyListening:"I Can't Stop The Rain · David Ruffin",
-      listeningLabel:"last played",
+      currentlyListening:"Sacrifice · The Weeknd",
+      listeningLabel:"listening",
       recentlyWatched:"Primetime · ★★★★",
       currentlyInto:"Human behavior systems, interactive storytelling, and audio tooling"
     },
