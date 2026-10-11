@@ -708,7 +708,7 @@ PAGES.resume = () => {
             ${r.activities.map(a => `
               <div class="rs-act${a.print === false ? ' off-print' : ''}">
                 <div class="rs-act-org">${esc(a.org)}<span>${esc(a.place)}</span></div>
-                <ul>${a.roles.map(x => `<li><span class="t">${esc(x.title)}</span><span class="m">${esc(x.date)}</span><span class="n">${esc(x.note)}</span></li>`).join('')}</ul>
+                <ul>${a.roles.map(x => `<li><span class="t">${esc(x.title)}</span>${x.date ? `<span class="m">${esc(x.date)}</span>` : ''}<span class="n">${esc(x.note)}</span></li>`).join('')}</ul>
               </div>`).join('')}
           </section>` : ''}
 
