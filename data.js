@@ -53,7 +53,7 @@ window.siteData = {
       {label:"Beyond Code", items:["Human-Computer Interaction","Public Relations","Live Commentary","Music Production","Video Production"]}
     ],
     liveSignals:{
-      currentlyListening:"Reflections Laughing (feat. Travis Scott, Florence + The Machine) · The Weeknd, Travis Scott, Florence + The Machine",
+      currentlyListening:"Yam Yam · No Vacation",
       listeningLabel:"last played",
       recentlyWatched:"Primetime · ★★★★",
       currentlyInto:"Human behavior systems, interactive storytelling, and audio tooling"
