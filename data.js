@@ -53,7 +53,7 @@ window.siteData = {
       {label:"Beyond Code", items:["Human-Computer Interaction","Public Relations","Live Commentary","Music Production","Video Production"]}
     ],
     liveSignals:{
-      currentlyListening:"Something in Water · Men I Trust",
+      currentlyListening:"Traffic · SyWavy",
       listeningLabel:"last played",
       recentlyWatched:"Primetime · ★★★★",
       currentlyInto:"Human behavior systems, interactive storytelling, and audio tooling"
