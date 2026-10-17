@@ -564,9 +564,9 @@ PAGES.about = () => {
     <section class="section wrap" id="writing">
       <header class="section-head" data-reveal>
         <h2>Writing</h2>
+        ${D.writing.intro ? `<p class="head-sub">${esc(D.writing.intro)}</p>` : ''}
         <a class="arrow-link" href="${D.writing.url}" target="_blank" rel="noopener">${esc(D.writing.urlLabel || 'the blog')}</a>
       </header>
-      ${D.writing.intro ? `<p class="writing-intro" data-reveal>${esc(D.writing.intro)}</p>` : ''}
       <ol class="writing">${writingRows(D.writing.items)}</ol>
     </section>` : ''}
 

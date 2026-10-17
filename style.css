@@ -240,12 +240,20 @@ strong { font-weight: 600; }
 .section { padding-block: clamp(56px, 9vw, 128px); }
 .section + .section { padding-top: 0; }
 .section-head {
-  display: flex; align-items: baseline; justify-content: space-between; gap: 24px;
+  display: flex; align-items: baseline; align-items: last baseline; justify-content: space-between; gap: 24px;
   padding-bottom: 20px; margin-bottom: clamp(28px, 4vw, 56px);
   border-bottom: 1px solid var(--rule);
 }
 .section-head h2 { font-family: var(--serif); font-weight: 400; font-size: var(--fs-h2); line-height: 1; letter-spacing: -0.01em; }
 .section-head .aside { font-size: var(--fs-small); color: var(--muted); white-space: nowrap; }
+.section-head .head-sub { margin-right: auto; color: var(--ink-2); font-size: var(--fs-small); max-width: 56ch; }
+@media (width <= 640px) {
+  .section-head:has(.head-sub) { flex-wrap: wrap; row-gap: 8px; }
+  .section-head .head-sub { order: 1; flex-basis: 100%; }
+}
+/* A ruled list right under a section head uses the head's rule as its top line. */
+.section-head:has(+ .writing, + .skills) { margin-bottom: 0; }
+.section-head + .writing, .section-head + .skills { border-top: 0; }
 
 .page-head { padding-block: clamp(40px, 7vw, 96px) clamp(28px, 4vw, 56px); }
 .page-head h1 { font-family: var(--serif); font-weight: 400; font-size: var(--fs-h1); line-height: 0.98; letter-spacing: -0.015em; }
@@ -430,7 +438,6 @@ strong { font-weight: 600; }
 
 /* ---------- writing ---------- */
 .writing { display: grid; border-top: 1px solid var(--rule); }
-.writing-intro { max-width: 62ch; margin-bottom: 26px; color: var(--ink-2); font-size: var(--fs-small); line-height: 1.6; }
 .wr-row { border-bottom: 1px solid var(--rule); }
 .wr-row a {
   display: grid; grid-template-columns: 116px minmax(0, 1fr); gap: clamp(16px, 3vw, 40px);
@@ -788,7 +795,7 @@ strong { font-weight: 600; }
 @media (width <= 640px) { .skills div { grid-template-columns: 1fr; gap: 4px; } }
 
 .essay { display: grid; gap: clamp(48px, 7vw, 96px); }
-.essay-head { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 24px; align-items: baseline; margin-bottom: 28px; }
+.essay-head { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 24px; align-items: baseline; align-items: last baseline; margin-bottom: 28px; }
 .essay-head h3 { font-family: var(--serif); font-weight: 400; font-size: var(--fs-h2); line-height: 1; letter-spacing: -0.01em; }
 .essay-head p { color: var(--ink-2); font-size: var(--fs-small); max-width: 56ch; }
 @media (width <= 640px) { .essay-head { grid-template-columns: 1fr; gap: 8px; } }
