@@ -114,8 +114,13 @@ window.siteData = {
         key:"objects", imageAspect:"square", title:"Objects & Tech",
         intro:"Tools and physical systems that influence how I evaluate product quality and craft.",
         items:[
-          {slug:"omnisphere",title:"Omnisphere in FL Studio",subtitle:"Sound Design Plugin",imageUrl:"https://images.musicstore.de/images/1280/spectrasonics-omnisphere-2-_1_PCM0013600-000.jpg",tags:["Audio","Production"],description:"Has everything anyone could need for music production."},
+          {slug:"macbook-pro",title:"MacBook Pro 16-inch",subtitle:"M4 Max, 36 GB",imageUrl:"assets/macbook-pro.webp",tags:["Laptop","Hardware"],description:"Where I build Archie and run my agents."},
+          {slug:"custom-pc",title:"Custom PC",subtitle:"i7-12700KF and RTX 5070",imageUrl:"assets/pc-build.webp",tags:["Desktop","Hardware"],description:"32 GB of RAM and 2 TB of storage in an NZXT H5 Elite case."},
           {slug:"unicomp-model-m",title:"Unicomp Model M",subtitle:"Buckling Spring Keyboard",imageUrl:"assets/unicomp.webp",tags:["Keyboard","Hardware"],description:"Vintage design. Timeless experience."},
+          {slug:"logitech-g502",title:"Logitech G502 Lightspeed",subtitle:"Wireless Mouse",imageUrl:"assets/g502.webp",tags:["Mouse","Hardware"],description:"Heavy, with plenty of buttons and a scroll wheel that spins free."},
+          {slug:"stream-deck",title:"Elgato Stream Deck MK.2",subtitle:"15-Key Control Pad",imageUrl:"assets/stream-deck.webp",tags:["Controls","Hardware"],description:"Fifteen keys I set up myself, Spotify controls included."},
+          {slug:"dualsense",title:"Sony DualSense",subtitle:"PS5 Controller",imageUrl:"assets/dualsense.webp",tags:["Controller","Gaming"],description:"What I play Rocket League on, and I still play a lot."},
+          {slug:"omnisphere",title:"Omnisphere in FL Studio",subtitle:"Sound Design Plugin",imageUrl:"https://images.musicstore.de/images/1280/spectrasonics-omnisphere-2-_1_PCM0013600-000.jpg",tags:["Audio","Production"],description:"Has everything anyone could need for music production."},
           {slug:"bic-pencils",title:"BIC Mechanical Pencils (clear case)",subtitle:"Simple Daily Writing Tool",imageUrl:"https://m.media-amazon.com/images/I/51OYgSP+1FL.jpg",tags:["Stationery","Daily"],description:"The best mechanical pencils I've ever used."}
         ]
       }
