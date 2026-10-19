@@ -32,14 +32,14 @@ const postDate = s => {
 };
 
 // The writing lives on the Otian blog, so every row leaves the site.
-function writingRows(items) {
+function writingRows(items, compact = false) {
   return items.map((w, i) => `
     <li class="wr-row" data-reveal style="--i:${Math.min(i, 8)}">
       <a href="${w.url}" target="_blank" rel="noopener">
         <span class="mono wr-date">${esc(postDate(w.date))}</span>
         <span>
           <span class="wr-title">${esc(w.title)}</span>
-          ${w.excerpt ? `<span class="wr-excerpt">${esc(w.excerpt)}</span>` : ''}
+          ${!compact && w.excerpt ? `<span class="wr-excerpt">${esc(w.excerpt)}</span>` : ''}
         </span>
       </a>
     </li>`).join('');
@@ -69,45 +69,28 @@ const app = $('#app');
 let current = null;          // { head, arg }
 let pushed  = false;         // set by navigate(); cleared by the hashchange it causes
 const scrollMemory = new Map();
-
-function navigate(hash, vtEl) {
-  if (vtEl && document.startViewTransition && !RM.matches) vtEl.style.viewTransitionName = 'work-image';
+function navigate(hash) {
   pushed = true;
   location.hash = hash;
 }
 
 function render() {
   const next = parseHash();
-  const key  = next.head + '/' + (next.arg || '');
+  const key = next.head + '/' + (next.arg || '');
   const sameDoc = current && current.head === next.head && (next.head !== 'project' || current.arg === next.arg);
-
-  if (sameDoc) {                       // only an anchor changed
+  if (sameDoc) {
     if (next.arg) scrollToAnchor(next.arg);
     current = next; pushed = false; setNav(next);
     return;
   }
-
   if (current) scrollMemory.set(current.head + '/' + (current.arg || ''), window.scrollY);
   const restore = !pushed && scrollMemory.has(key) ? scrollMemory.get(key) : null;
-
-  const build = PAGES[next.head] || PAGES[''];
-  const update = () => {
-    app.innerHTML = '';
-    app.appendChild(build(next.arg));
-    document.title = pageTitle(next);
-    setNav(next);
-    if (next.arg && next.head !== 'project') scrollToAnchor(next.arg, true);
-    else window.scrollTo(0, restore ?? 0);
-    afterRender();
-  };
-
-  if (document.startViewTransition && !RM.matches && current) {
-    document.startViewTransition(update).finished.finally(() => {
-      $$('[style*="view-transition-name"]').forEach(e => { e.style.viewTransitionName = ''; });
-    });
-  } else {
-    update();
-  }
+  app.replaceChildren((PAGES[next.head] || PAGES[''])(next.arg));
+  document.title = pageTitle(next);
+  setNav(next);
+  if (next.arg && next.head !== 'project') scrollToAnchor(next.arg, true);
+  else window.scrollTo({ top: restore ?? 0, behavior: 'instant' });
+  afterRender();
   current = next; pushed = false;
 }
 
@@ -125,7 +108,7 @@ function scrollToAnchor(id, instant) {
   const el = document.getElementById(id);
   if (!el) return;
   const top = el.getBoundingClientRect().top + window.scrollY - 72;
-  window.scrollTo({ top, behavior: instant || RM.matches ? 'auto' : 'smooth' });
+  window.scrollTo({ top, behavior: instant ? 'instant' : RM.matches ? 'auto' : 'smooth' });
 }
 
 window.addEventListener('hashchange', render);
@@ -236,31 +219,21 @@ function centreDrum(el) {
 }
 
 function buildFooter() {
-  const c = D.contact, ls = D.about.liveSignals || {};
+  const c = D.contact;
   const email = c.links.find(l => l.href.startsWith('mailto:'));
   const others = c.links.filter(l => l !== email);
-  const now = [
-    ls.currentlyListening && [ls.listeningLabel || 'listening', ls.currentlyListening],
-    ls.recentlyWatched    && ['last watched', ls.recentlyWatched],
-    ls.currentlyInto      && ['into', ls.currentlyInto],
-  ].filter(Boolean);
-
   $('#siteFoot').innerHTML = `
     <div class="wrap foot-grid" id="contact">
       <div>
-        <p class="foot-kicker">${esc(c.availability?.title || D.meta.statusText)}</p>
-        ${email ? `<a class="foot-big" href="${email.href}">${esc(email.handle)}</a>` : ''}
-        <p class="foot-avail">${esc(c.availability?.text || c.intro)}</p>
-        ${now.length ? `<dl class="foot-now">${now.map(([k, v]) => `<div><dt>${esc(k)}</dt><dd>${esc(v)}</dd></div>`).join('')}</dl>` : ''}
+        <p class="foot-kicker"><span class="status-dot" aria-hidden="true"></span>${esc(D.meta.statusText)}</p>
+        ${email ? `<a class="foot-big" href="${email.href}">Let's make something.<span aria-hidden="true">↗</span></a>
+          <a class="foot-email" href="${email.href}">${esc(email.handle)}</a>` : ''}
       </div>
       <ul class="foot-links">
-        ${others.map(l => `<li><a href="${l.href}" target="_blank" rel="noopener"><span class="l">${esc(l.label)}</span><span class="h">${esc(l.handle)}</span></a></li>`).join('')}
-        ${D.experience.resumePdf ? `<li><a href="${D.experience.resumePdf}" target="_blank" rel="noopener"><span class="l">Résumé</span><span class="h">PDF</span></a></li>` : ''}
+        ${others.map(l => `<li><a href="${l.href}" target="_blank" rel="noopener"><span class="l">${esc(l.label)}</span><span aria-hidden="true">↗</span></a></li>`).join('')}
+        ${D.experience.resumePdf ? `<li><a href="${D.experience.resumePdf}" target="_blank" rel="noopener"><span class="l">Résumé PDF</span><span aria-hidden="true">↗</span></a></li>` : ''}
       </ul>
-      <p class="foot-colophon">
-        <span>Set in Instrument Serif and Instrument Sans. Plain HTML, CSS, and JavaScript, with no framework and no build step.</span>
-        <span>The listening and watching lines update on their own from Spotify and Letterboxd.</span>
-      </p>
+      <p class="foot-colophon"><span>Jett Nguyen</span><a href="#//hero">Back to the top ↑</a></p>
     </div>`;
 }
 
@@ -274,148 +247,101 @@ const frag = html => { const t = document.createElement('template'); t.innerHTML
 PAGES[''] = () => {
   const h = D.home;
   const selected = (h.selected || []).map(bySlug).filter(Boolean);
-  const bio = (D.about.bio || []).map(b => (typeof b === 'string' ? { text: b } : b));
   const xp = D.experience;
-
+  const interests = D.about.interestSections || [];
   const headline = (h.headline || h.nameLines).map((l, i) =>
     `<span class="line"><span style="--i:${i}">${i === (h.headline || h.nameLines).length - 1 ? `<em>${esc(l)}</em>` : esc(l)}</span></span>`).join('');
+  const jobs = xp.jobs.map(j => ({...j, title: j.company, subtitle: j.role}));
+  jobs.push({logo: xp.education.logo, title: xp.education.institution, subtitle: 'Computer Science + Public Relations', date: xp.education.dates});
 
   return frag(`
     <section class="hero wrap" id="hero">
       <div class="hero-grid">
-        <div class="hero-text" data-px="0" data-tilt="6">
+        <div class="hero-text">
+          <a class="hero-kicker" href="#//contact"><span class="status-dot" aria-hidden="true"></span>${esc(D.meta.statusText)}<span aria-hidden="true">↗</span></a>
           <h1 class="display">${headline}</h1>
           <p class="hero-intro">${esc(h.intro || h.description)}</p>
+          <div class="hero-actions"><a class="pill-link primary" href="#//work">Explore my work <span aria-hidden="true">↓</span></a><a class="pill-link" href="#/about">Meet Jett <span aria-hidden="true">↗</span></a></div>
           ${h.facts?.length ? `<ul class="hero-facts">${h.facts.map(f => `<li>${esc(f)}</li>`).join('')}</ul>` : ''}
         </div>
         <figure class="hero-portrait">
-          <div class="frame" data-px="0.10" data-px-mode="top" data-tilt="-14"><img data-portrait src="${portraitSrc()}" alt="${esc(h.headshotAlt || D.meta.name)}" width="1400" height="1400" fetchpriority="high"></div>
+          <div class="portrait-stage">
+            <span class="portrait-orbit" aria-hidden="true"></span>
+            <div class="frame" data-tilt="-8"><img data-portrait src="${portraitSrc()}" alt="${esc(h.headshotAlt || D.meta.name)}" width="1400" height="1400" fetchpriority="high"></div>
+            <a class="portrait-sticker sticker-one" href="#/project/archie"><img src="${bySlug('archie').logo}" alt=""><span>Building Archie <span aria-hidden="true">↗</span></span></a>
+            <a class="portrait-sticker sticker-two" href="#/project/studioflow"><img src="${bySlug('studioflow').logo}" alt=""><span>Making music <span aria-hidden="true">↗</span></span></a>
+            <svg class="hero-spark" viewBox="0 0 80 80" aria-hidden="true"><path d="M40 0 47 27 68 12 53 33 80 40 53 47 68 68 47 53 40 80 33 53 12 68 27 47 0 40 27 33 12 12 33 27Z" fill="currentColor"/></svg>
+          </div>
           <figcaption>${esc(h.headshotCaption || '')}</figcaption>
         </figure>
       </div>
     </section>
 
     <section class="section wrap" id="work">
-      <header class="section-head" data-reveal>
-        <h2>Selected work</h2>
-        <a class="arrow-link" href="#/work">All ${word(projects.length)} projects</a>
-      </header>
-      <ol class="work-list">
-        ${selected.map((p, i) => workItem(p, i)).join('')}
-      </ol>
+      <header class="section-head" data-reveal><h2>Selected work<span class="section-count" aria-hidden="true">${pad2(selected.length)}</span></h2><a class="arrow-link" href="#/work">All ${projects.length} projects</a></header>
+      <ol class="work-list">${selected.map((p, i) => workItem(p, i)).join('')}</ol>
     </section>
 
-    ${bio[1] ? `
     <section class="section wrap" id="about-teaser">
-      <div class="pull" data-reveal>
-        <blockquote>${stripTags(bio[1].text)}</blockquote>
-        <div class="pull-side">
-          <p>${stripTags(bio[2]?.text || '')}</p>
-          <a class="arrow-link" href="#/about">More about me</a>
-        </div>
+      <div class="off-clock" data-reveal>
+        <div><span class="eyebrow">A few other tabs open</span><h2>Away from<br>the keyboard.</h2><a class="arrow-link" href="#/about">A little more about me</a></div>
+        <div class="interest-deck">${interests.map((sec, i) => {
+          const it = sec.items[0];
+          return `<a class="interest-card" href="#/about/${sec.key}" style="--r:${[-10, 5, -5, 10][i]}deg;--i:${i}"><img src="${it.imageUrl}" alt="${esc(it.title)}" loading="lazy"><span>${esc(sec.title)} <span aria-hidden="true">↗</span></span></a>`;
+        }).join('')}</div>
       </div>
-    </section>` : ''}
-
-    ${D.writing?.items?.length ? `
-    <section class="section wrap" id="writing">
-      <header class="section-head" data-reveal>
-        <h2>Writing</h2>
-        <a class="arrow-link" href="${D.writing.url}" target="_blank" rel="noopener">All ${word(D.writing.items.length)} on ${esc(D.writing.urlLabel || 'the blog')}</a>
-      </header>
-      <ol class="writing">${writingRows(D.writing.items.slice(0, 3))}</ol>
-    </section>` : ''}
+    </section>
 
     <section class="section wrap" id="experience">
-      <header class="section-head" data-reveal>
-        <h2>Experience</h2>
-        <a class="arrow-link" href="#/resume">Full résumé</a>
-      </header>
-      <div class="xp">
-        ${xp.jobs.map((j, i) => `
-          <div class="xp-row" data-reveal style="--i:${i}">
-            <div class="xp-when">${j.logo ? `<img class="xp-logo" src="${j.logo}" alt="" loading="lazy">` : ''}<span>${esc(j.date)}</span></div>
-            <div class="xp-body">
-              <div class="xp-role">${esc(j.role)}</div>
-              <div class="xp-org">${j.url ? `<a href="${j.url}" target="_blank" rel="noopener">${esc(j.company)}</a>` : esc(j.company)}</div>
-              <ul class="xp-points">${j.highlights.map(x => `<li>${x}</li>`).join('')}</ul>
-            </div>
-          </div>`).join('')}
-        <div class="xp-row" data-reveal style="--i:${xp.jobs.length}">
-          <div class="xp-when">${xp.education.logo ? `<img class="xp-logo" src="${xp.education.logo}" alt="" loading="lazy">` : ''}<span>${esc(xp.education.dates)}</span></div>
-          <div class="xp-body">
-            <div class="xp-role">${esc(xp.education.degree)}</div>
-            <div class="xp-org">${esc(xp.education.institution)}</div>
-            <ul class="xp-points">${(xp.education.highlights || []).map(x => `<li>${x}</li>`).join('')}</ul>
-          </div>
-        </div>
-      </div>
+      <header class="section-head" data-reveal><h2>The path so far</h2><a class="arrow-link" href="#/resume">Full résumé</a></header>
+      <ol class="career-timeline">${jobs.map((j, i) => `<li data-reveal style="--i:${i}">${j.logo ? `<img src="${j.logo}" alt="" loading="lazy">` : ''}<div><h3>${j.url ? `<a href="${j.url}" target="_blank" rel="noopener">${esc(j.title)} ↗</a>` : esc(j.title)}</h3><p>${esc(j.subtitle)}</p></div><span class="mono">${esc(j.date)}</span></li>`).join('')}</ol>
     </section>
+
+    ${D.writing?.items?.length ? `<section class="section wrap" id="writing"><header class="section-head" data-reveal><h2>Notes from building</h2><a class="arrow-link" href="${D.writing.url}" target="_blank" rel="noopener">The blog</a></header><ol class="writing">${writingRows(D.writing.items.slice(0, 3), true)}</ol></section>` : ''}
   `);
 };
 
-function workItem(p, i) {
+function projectVisual(p, i = 1) {
   const shots = (p.screenshots || []).slice(0, 3);
-  // Each screenshot sits on its own plane: the middle one nearest, so it
-  // moves the most as the page scrolls.
-  const depth = [0.05, 0.11, 0.08];
-  const imgs = shots.length
-    ? shots.map((s, j) => `<img src="${s.src}" alt="${esc(s.alt)}" loading="${i === 0 ? 'eager' : 'lazy'}" decoding="async" data-px="${depth[j] ?? 0.07}"${j === 0 ? ' data-vt' : ''}>`).join('')
-    : `<img src="${p.logo}" alt="" data-vt data-px="0.06">`;
-  return `
-    <li class="work-item" data-reveal${p.tint ? ` style="--tint:${p.tint}"` : ''}>
-      <a class="work-frame" data-kind="${shots.length ? 'shots' : 'logo'}" href="#/project/${p.slug}" aria-label="${esc(p.title)}">
-        <div class="work-frame-inner" style="--n:${shots.length || 1}">${imgs}</div>
-      </a>
-      <div class="work-meta" data-px="-0.03">
-        <h3>${p.logo ? `<img class="work-logo" src="${p.logo}" alt="">` : ''}<a href="#/project/${p.slug}">${esc(p.title)}</a></h3>
-        <p>${esc(p.summary)}</p>
-        <span class="mono">${esc(year(p))}${ongoing(p) ? ' to now' : ''} · ${esc(kind(p))}</span>
-      </div>
-    </li>`;
+  if (shots.length) return `<div class="work-frame-inner" style="--n:${shots.length}">${shots.map((s, j) => `<img src="${s.src}" alt="${esc(s.alt)}" loading="${i === 0 && j === 0 ? 'eager' : 'lazy'}" decoding="async">`).join('')}</div>`;
+  if (p.slug === 'hudson') return `<div class="agent-map" aria-label="Hudson helps with mail, calendars, and leads"><span class="map-node node-one">Mail</span><span class="map-node node-two">Calendar</span><span class="map-node node-three">Leads</span><span class="map-ring" aria-hidden="true"></span><img src="${p.logo}" alt=""><span class="map-caption">A founder has the final say.</span></div>`;
+  return `<div class="work-frame-inner logo-art"><span class="art-ring" aria-hidden="true"></span><img src="${p.logo || D.meta.logoUrl}" alt="" loading="lazy">${p.slug === 'studioflow' ? `<span class="sound-wave" aria-hidden="true">${Array.from({length:25}, (_, j) => `<i style="--bar:${[18,32,48,25,60,40,72,50,90,64,42,78,100,67,40,85,60,35,70,48,28,50,30,20,12][j]}%;--i:${j}"></i>`).join('')}</span>` : ''}</div>`;
 }
 
-function stripTags(s) { return String(s).replace(/<[^>]+>/g, ''); }
+function workItem(p, i, gallery = false) {
+  const shots = p.screenshots || [];
+  return `<li class="work-item${gallery ? ' project-entry' : ''}" data-reveal${gallery ? ` data-group="${projectGroup(p)}"` : ''} style="--tint:${p.tint || '#9a2f22'};--i:${i % 2}">
+    <a class="work-card" href="#/project/${p.slug}" aria-label="${esc(p.title)}: ${esc(p.shortSummary || p.summary)}">
+      <div class="work-frame" data-kind="${shots.length ? 'shots' : 'logo'}">
+        <span class="work-number" aria-hidden="true">${pad2(i + 1)}</span>${p.status ? `<span class="work-status">${esc(p.status)}</span>` : ''}
+        ${projectVisual(p, i)}<span class="work-open" aria-hidden="true">↗</span>
+      </div>
+      <div class="work-meta"><div class="work-title-row"><h3>${esc(p.title)}</h3><span class="mono">${esc(kind(p))}</span></div><p>${esc(p.shortSummary || p.summary)}</p></div>
+    </a>
+  </li>`;
+}
+
+function projectGroup(p) {
+  const k = kind(p);
+  if (/agent/i.test(k)) return 'agents';
+  if (/game|puzzle/i.test(k)) return 'games';
+  if (/app/i.test(k)) return 'apps';
+  return 'other';
+}
 
 PAGES.work = () => {
-  // Numbers count the top-level projects and run straight through both lists, so
-  // the count in the lede still adds up. A project that sits under another one
-  // takes no number of its own; it is indented under the row it belongs to.
-  let n = 0;
-
-  // A child follows its parent into whichever list the parent is in.
-  const tier = p => (parentOf(p) || p).featured === true;
-  const rows = list => list.map((p, i) => {
-    const up = parentOf(p);
-    if (!up) n++;
-    return `
-      <li class="index-row${up ? ' child' : ''}" data-reveal style="--i:${Math.min(i, 8)};--tint:${p.tint || 'transparent'}">
-        <a href="#/project/${p.slug}">
-          <span class="idx-n">${up ? '<span class="idx-under" aria-hidden="true">&#8627;</span>' : pad2(n)}</span>
-          <span class="idx-title">${up ? `<span class="sr-only">Part of ${esc(up.title)}: </span>` : ''}${p.logo ? `<img class="idx-logo" src="${p.logo}" alt="" loading="lazy">` : ''}${esc(p.title)}${p.status ? `<span class="flag" data-status="${esc(p.status.toLowerCase())}">${esc(p.status)}</span>` : ''}</span>
-          <span class="idx-sum">${esc(p.summary)}</span>
-          <span class="idx-type">${esc(kind(p))}${p.origin === 'school' ? ', coursework' : ''}</span>
-          <span class="idx-year">${esc(year(p))}</span>
-        </a>
-      </li>`;
-  }).join('');
-
-  const head = '<li class="idx-head" aria-hidden="true"><span>No.</span><span>Project</span><span>What it is</span><span>Kind</span><span style="text-align:right">Year</span></li>';
-  const top  = projects.filter(tier);
-  const rest = projects.filter(p => !tier(p));
-
+  const top = projects.filter(p => p.featured && !p.parent);
+  const rest = projects.filter(p => !top.includes(p));
   return frag(`
-  <section class="wrap">
-    <header class="page-head">
-      <h1>Work</h1>
-      <p class="lede">${word(projects.length).replace(/^\w/, c => c.toUpperCase())} projects since ${esc(String(Math.min(...projects.map(year))))}, roughly newest first. Each row opens to a write-up with screenshots where I have them.</p>
-    </header>
-    <h2 class="idx-label">Highlights</h2>
-    <ol class="index">${head}${rows(top)}</ol>
-    ${rest.length ? `
-    <h2 class="idx-label">Also built</h2>
-    <ol class="index">${rows(rest)}</ol>` : ''}
-  </section>
-`);
+    <section class="wrap work-page">
+      <header class="page-head work-page-head"><div><span class="eyebrow">Agents, apps, and experiments</span><h1>Made by me<span class="title-period">.</span></h1></div><p class="work-total"><strong>${projects.length}</strong><span>projects & counting</span></p></header>
+      <div class="work-toolbar"><div class="work-filters" role="group" aria-label="Filter projects">${[['all','Everything'],['agents','Agents'],['apps','Apps'],['games','Games'],['other','Other']].map(([k,l], i) => `<button type="button" data-filter="${k}" aria-pressed="${i === 0}">${l}</button>`).join('')}</div><p class="mono filter-result" role="status" aria-live="polite">${projects.length} projects</p></div>
+      <section class="project-group"><h2 class="idx-label">Highlights</h2><ol class="work-list project-gallery">${top.map((p, i) => workItem(p, i, true)).join('')}</ol></section>
+      <section class="project-group more-projects"><h2 class="idx-label">More to explore</h2><ol class="index compact-index">${rest.map(p => {
+        const up = parentOf(p);
+        return `<li class="index-row project-entry${up ? ' child' : ''}" data-group="${projectGroup(p)}" data-reveal style="--tint:${p.tint || '#9a2f22'}"><a href="#/project/${p.slug}"><span class="idx-title">${p.logo ? `<img class="idx-logo" src="${p.logo}" alt="" loading="lazy">` : ''}<span>${esc(p.title)}${up ? `<small>Part of ${esc(up.title)}</small>` : ''}</span></span><span class="idx-sum">${esc(p.shortSummary || p.summary)}</span><span class="idx-type">${esc(kind(p))}</span><span class="idx-arrow" aria-hidden="true">↗</span></a></li>`;
+      }).join('')}</ol></section>
+    </section>`);
 };
 
 PAGES.project = slug => {
@@ -436,20 +362,20 @@ PAGES.project = slug => {
     p.embedUrl  && `<button class="text-link" type="button" data-embed="${p.embedUrl}">Play it here</button>`,
   ].filter(Boolean);
 
-  const sec = (label, body) => body ? `<section class="proj-sec" data-reveal><h2>${label}</h2><div>${body}</div></section>` : '';
+  const sec = (label, body) => body ? `<section class="proj-sec"><h2>${label}</h2><div>${body}</div></section>` : '';
 
   return frag(`
     <article${p.tint ? ` style="--tint:${p.tint}"` : ''}>
       <div class="proj-band"><header class="proj-head wrap">
         <a class="arrow-link crumb" href="#/work">All work</a>
         <h1>${p.logo ? `<img src="${p.logo}" alt="">` : ''}${esc(p.title)}${p.status ? `<span class="status" data-status="${esc(p.status.toLowerCase())}">${esc(p.status)}</span>` : ''}</h1>
-        <p class="proj-summary">${esc(p.summary)}</p>
+        <p class="proj-summary">${esc(p.shortSummary || p.summary)}</p>
         <dl class="proj-meta">
           <div><dt>Year</dt><dd>${esc(p.date)}</dd></div>
           <div><dt>Context</dt><dd>${originOf(p)}, ${p.collaboration === 'team' ? 'with a team' : 'solo'}</dd></div>
-          <div><dt>Built with</dt><dd>${(p.techStack || []).map(esc).join(', ')}</dd></div>
+          <div><dt>Built with</dt><dd><ul class="tech-tags">${(p.techStack || []).map(t => `<li>${esc(t)}</li>`).join('')}</ul></dd></div>
           ${up ? `<div><dt>Part of</dt><dd><a href="#/project/${up.slug}">${esc(up.title)}</a></dd></div>` : ''}
-          ${kids.length ? `<div><dt>Under it</dt><dd>${kids.map(k => `<a href="#/project/${k.slug}">${esc(k.title)}</a>`).join(', ')}</dd></div>` : ''}
+          ${kids.length ? `<div><dt>Related</dt><dd>${kids.map(k => `<a href="#/project/${k.slug}">${esc(k.title)}</a>`).join(', ')}</dd></div>` : ''}
           <div><dt>Links</dt><dd class="links">${links.join('') || '<span class="muted">No public link</span>'}</dd></div>
         </dl>
         <div class="embed-slot"></div>
@@ -466,13 +392,16 @@ PAGES.project = slug => {
       </div>` : ''}
 
       <div class="proj-body">
-        ${sec('Problem', d.problem && `<p>${esc(d.problem)}</p>`)}
-        ${sec('Observation', d.observation && `<p>${esc(d.observation)}</p>`)}
-        ${sec('Hypothesis', d.hypothesis && `<p>${esc(d.hypothesis)}</p>`)}
-        ${sec('Experiment', d.experiment && `<p>${esc(d.experiment)}</p>`)}
-        ${sec('Outcome', d.outcome && `<p>${esc(d.outcome)}</p>`)}
-        ${p.study ? sec('User study', studyHtml(p.study)) : ''}
-        ${sec('Reflection', d.reflection && `<p>${esc(d.reflection)}</p>`)}
+        ${sec('The idea', d.problem && `<p>${esc(d.problem)}</p>`)}
+        ${sec('The result', d.outcome && `<p>${esc(d.outcome)}</p>`)}
+        ${p.study ? sec('By the numbers', studyHtml(p.study)) : ''}
+        ${[p.summary, d.observation, d.hypothesis, d.experiment, d.reflection].some(Boolean) ? `<details class="build-story"><summary>Behind the build<span aria-hidden="true">+</span></summary><div class="build-story-body">
+          ${sec('Overview', p.summary && `<p>${esc(p.summary)}</p>`)}
+          ${sec('Observation', d.observation && `<p>${esc(d.observation)}</p>`)}
+          ${sec('Hypothesis', d.hypothesis && `<p>${esc(d.hypothesis)}</p>`)}
+          ${sec('The build', d.experiment && `<p>${esc(d.experiment)}</p>`)}
+          ${sec('Looking back', d.reflection && `<p>${esc(d.reflection)}</p>`)}
+        </div></details>` : ''}
         ${p.posterUrl ? sec('Poster', `<figure class="poster" tabindex="0" role="button" aria-label="Enlarge research poster"><img src="${p.posterUrl}" alt="${esc(p.title)} research poster" loading="lazy"></figure>`) : ''}
       </div>
 
@@ -520,99 +449,45 @@ function studyHtml(st) {
 
 PAGES.about = () => {
   const a = D.about, h = D.home;
-  const facts = (a.infoFields || []).filter(f => f.label !== 'GPA');
+  const facts = (a.infoFields || []).filter(f => !['GPA', 'Email', 'Degree'].includes(f.label));
   const bio = (a.bio || []).map(b => (typeof b === 'string' ? { text: b } : b));
   const ls = a.liveSignals || {};
   const now = [
     ls.currentlyListening && [ls.listeningLabel || 'listening', ls.currentlyListening],
-    ls.recentlyWatched    && ['last watched', ls.recentlyWatched],
-    ls.currentlyInto      && ['into', ls.currentlyInto],
+    ls.recentlyWatched && ['last watched', ls.recentlyWatched],
   ].filter(Boolean);
 
   return frag(`
-    <section class="wrap">
-      <header class="page-head about-head">
-        <h1>About</h1>
-        ${bio[0] ? `<p class="about-lede">${bio[0].text}</p>` : ''}
-        <ul class="about-facts">
-          ${facts.map(f => `<li><span>${esc(f.label)}</span>${f.href ? `<a href="${f.href}">${esc(f.value)}</a>` : esc(f.value)}</li>`).join('')}
-        </ul>
-      </header>
+    <section class="wrap" id="story">
+      <header class="page-head about-head"><span class="eyebrow">The person behind the projects</span><h1>A little more human<span class="title-period">.</span></h1><nav class="collection-nav" aria-label="About sections"><a href="#/about/story">My story</a>${a.interestSections.map(sec => `<a href="#/about/${sec.key}">${esc(sec.title)}</a>`).join('')}</nav></header>
       <div class="about-grid">
         <div class="about-bio">
-          ${bio.slice(1).map((b, i) => `
-            <section class="bio-block" data-reveal style="--i:${i}">
-              ${b.label ? `<h2>${esc(b.label)}</h2>` : ''}
-              <p>${b.text}</p>
-            </section>`).join('')}
+          ${bio[0] ? `<p class="about-lede">${bio[0].text}</p>` : ''}
+          <ul class="about-facts">${facts.map(f => `<li><span>${esc(f.label)}</span>${esc(f.value)}</li>`).join('')}</ul>
+          <div class="bio-stories">${bio.slice(1).map((b, i) => `<details class="bio-block"${i === 0 ? ' open' : ''}><summary>${esc(b.label || 'More about me')}<span aria-hidden="true">+</span></summary><p>${b.text}</p></details>`).join('')}</div>
         </div>
         <aside class="about-side">
-          <figure class="about-portrait">
-            <div class="frame"><img data-portrait src="${portraitSrc()}" alt="${esc(h.headshotAlt || D.meta.name)}" width="1400" height="1400"></div>
-            ${h.headshotCaption ? `<figcaption>${esc(h.headshotCaption)}</figcaption>` : ''}
-          </figure>
-          ${now.length ? `
-          <div class="now panel">
-            <h2>Right now</h2>
-            <dl>${now.map(([k, v]) => `<div><dt>${esc(k)}</dt><dd>${esc(v)}</dd></div>`).join('')}</dl>
-          </div>` : ''}
+          <figure class="about-portrait"><div class="frame"><img data-portrait src="${portraitSrc()}" alt="${esc(h.headshotAlt || D.meta.name)}" width="1400" height="1400"></div></figure>
+          ${now.length ? `<div class="now panel"><h2>On rotation</h2><dl>${now.map(([k, v], i) => `<div><dt>${i === 0 ? '<span class="mini-wave" aria-hidden="true"><i></i><i></i><i></i><i></i></span>' : ''}${esc(k)}</dt><dd>${esc(v)}</dd></div>`).join('')}</dl></div>` : ''}
         </aside>
       </div>
     </section>
 
-    ${D.writing?.items?.length ? `
-    <section class="section wrap" id="writing">
-      <header class="section-head" data-reveal>
-        <h2>Writing</h2>
-        ${D.writing.intro ? `<p class="head-sub">${esc(D.writing.intro)}</p>` : ''}
-        <a class="arrow-link" href="${D.writing.url}" target="_blank" rel="noopener">${esc(D.writing.urlLabel || 'the blog')}</a>
-      </header>
-      <ol class="writing">${writingRows(D.writing.items)}</ol>
-    </section>` : ''}
-
-    <section class="section wrap">
-      <header class="section-head" data-reveal><h2>Skills</h2></header>
-      <dl class="skills" data-reveal>
-        ${(a.skillGroups || []).map(g => `<div><dt>${esc(g.label)}</dt><dd>${g.items.map(esc).join(', ')}</dd></div>`).join('')}
-      </dl>
-    </section>
-
     <section class="section wrap essay">
-      ${(a.interestSections || []).map(sec => `
-        <div>
-          <div class="essay-head" data-reveal>
-            <h3>${esc(sec.title)}</h3>
-            <p>${esc(sec.intro)}</p>
-          </div>
-          <div class="shelf" data-aspect="${sec.imageAspect || 'square'}">
-            ${sec.items.map((it, i) => piece(it, sec.key === 'vintage', i)).join('')}
-          </div>
-        </div>`).join('')}
-      ${a.curiosities?.length ? `
-        <div>
-          <div class="essay-head" data-reveal>
-            <h3>Curiosities</h3>
-            <p>Themes I keep coming back to across creation, interaction design, systems, and human behavior.</p>
-          </div>
-          <ol class="questions">
-            ${a.curiosities.map((c, i) => `
-              <li data-reveal style="--i:${i}">
-                <div>
-                  <h4>${esc(c.title)}</h4>
-                  <div class="sub">${esc(c.subtitle)}</div>
-                  <p>${esc(c.description)}</p>
-                </div>
-              </li>`).join('')}
-          </ol>
-        </div>` : ''}
+      ${(a.interestSections || []).map(sec => `<section id="${sec.key}" class="collection-section"><div class="essay-head" data-reveal><h2>${esc(sec.title)}<span class="section-count" aria-hidden="true">${pad2(sec.items.length)}</span></h2><p>${esc(sec.intro)}</p></div><div class="shelf" data-aspect="${sec.imageAspect || 'square'}">${sec.items.map((it, i) => piece(it, sec.key === 'vintage', i)).join('')}</div></section>`).join('')}
     </section>
+
+    <section class="section wrap"><details class="skills-disclosure"><summary>What I work with<span aria-hidden="true">+</span></summary><dl class="skills">${(a.skillGroups || []).map(g => `<div><dt>${esc(g.label)}</dt><dd class="skill-tags">${g.items.map(t => `<span>${esc(t)}</span>`).join('')}</dd></div>`).join('')}</dl></details></section>
+
+    ${D.writing?.items?.length ? `<section class="section wrap" id="writing"><header class="section-head" data-reveal><h2>Writing</h2><a class="arrow-link" href="${D.writing.url}" target="_blank" rel="noopener">${esc(D.writing.urlLabel || 'the blog')}</a></header><ol class="writing">${writingRows(D.writing.items, true)}</ol></section>` : ''}
+    ${a.curiosities?.length ? `<section class="section wrap"><details class="skills-disclosure"><summary>Questions I come back to<span aria-hidden="true">+</span></summary><ol class="questions">${a.curiosities.map(c => `<li><div><h4>${esc(c.title)}</h4><div class="sub">${esc(c.subtitle)}</div><p>${esc(c.description)}</p></div></li>`).join('')}</ol></details></section>` : ''}
   `);
 };
 
 function piece(it, isTee, i) {
   const back = isTee ? it.imageUrl.replace(/-front\.(\w+)$/, '-back.$1') : '';
   return `
-    <figure class="piece${isTee ? ' tee' : ''}" data-reveal style="--i:${Math.min(i, 8)}" tabindex="0" role="button"
+    <figure class="piece${isTee ? ' tee' : ''}" data-reveal style="--i:${Math.min(i, 8)}" tabindex="0" role="button" aria-label="View ${esc(it.title)}${isTee ? ' (front and back)' : ''}"
       data-src="${it.imageUrl}" ${back ? `data-back="${back}"` : ''} data-title="${esc(it.title)}" data-sub="${esc(it.subtitle || '')}" data-desc="${esc(it.description || '')}">
       <div class="piece-img">
         <img class="front" src="${it.imageUrl}" alt="${esc(it.title)}" loading="lazy" decoding="async">
@@ -621,7 +496,6 @@ function piece(it, isTee, i) {
       <figcaption>
         <div class="piece-title">${esc(it.title)}</div>
         ${it.subtitle ? `<div class="piece-sub">${esc(it.subtitle)}</div>` : ''}
-        ${it.description ? `<div class="piece-desc">${esc(it.description)}</div>` : ''}
       </figcaption>
     </figure>`;
 }
@@ -832,21 +706,37 @@ function afterRender() {
     $$('[data-reveal]').forEach(e => revealObserver.observe(e));
   }
 
-  // route links that carry an image into the next page
+  // Keep project navigation at the top while browser back restores its scroll position.
   $$('a[href^="#/project/"]').forEach(a => {
     a.addEventListener('click', e => {
       if (e.metaKey || e.ctrlKey || e.shiftKey) return;
       e.preventDefault();
-      navigate(a.getAttribute('href'), a.querySelector('[data-vt]'));
+      navigate(a.getAttribute('href'));
     });
   });
 
   // A landscape first screenshot fills its frame alone; phones sit in a row.
   $$('.work-frame[data-kind="shots"]').forEach(f => {
     const img = f.querySelector('img');
-    const check = () => { if (img.naturalWidth > img.naturalHeight) { f.dataset.kind = 'landscape'; f.querySelector('.work-frame-inner').style.setProperty('--n', 1); img.dataset.px = '0.07'; } };
+    const check = () => { if (img.naturalWidth > img.naturalHeight) { f.dataset.kind = 'landscape'; f.querySelector('.work-frame-inner').style.setProperty('--n', 1);  } };
     if (img.complete && img.naturalWidth) check(); else img.addEventListener('load', check, { once: true });
   });
+
+  $$('[data-filter]').forEach(btn => btn.addEventListener('click', () => {
+    const filter = btn.dataset.filter;
+    $$('[data-filter]').forEach(b => b.setAttribute('aria-pressed', String(b === btn)));
+    let count = 0;
+    $$('.project-entry').forEach(entry => {
+      const show = filter === 'all' || entry.dataset.group === filter;
+      entry.hidden = !show;
+      if (show) { count++; entry.classList.add('in', 'settled'); }
+    });
+    $$('.project-group').forEach(group => { group.hidden = !$('.project-entry:not([hidden])', group); });
+    $('.filter-result').textContent = `${count} ${count === 1 ? 'project' : 'projects'}`;
+    measureParallax(); tickParallax();
+  }));
+  $$('details').forEach(el => el.addEventListener('toggle', () => { measureParallax(); tickParallax(); }));
+  $$('img', app).forEach(img => { if (!img.complete) img.addEventListener('load', () => { measureParallax(); tickParallax(); }, { once: true }); });
 
   initLightboxTargets();
   initEmbeds();
@@ -872,7 +762,7 @@ function measureParallax() {
   PX.items.forEach(it => {
     it.el.style.setProperty('--py', '0px');
     const r = it.el.getBoundingClientRect();
-    it.top = r.top + y; it.h = r.height;
+    it.top = r.top + y; it.h = r.height; it.last = null;
   });
 }
 function tickParallax() {
@@ -915,6 +805,11 @@ window.addEventListener('scroll', () => {
   if (!PX.raf) PX.raf = requestAnimationFrame(() => { PX.raf = 0; tickParallax(); });
 }, { passive: true });
 window.addEventListener('resize', () => { measureParallax(); tickParallax(); });
+RM.addEventListener('change', () => {
+  $$('[data-px], [data-tilt]').forEach(el => ['--py', '--mx', '--my'].forEach(k => el.style.removeProperty(k)));
+  initParallax(); initTilt();
+  if (RM.matches) { revealObserver?.disconnect(); $$('[data-reveal]').forEach(el => el.classList.add('in')); }
+});
 window.addEventListener('load', () => { measureParallax(); tickParallax(); });
 
 function initLightboxTargets() {
@@ -992,7 +887,14 @@ function openLightbox({ src, back, title = '', sub = '', desc = '' }) {
     document.removeEventListener('keydown', onKey);
     setTimeout(() => { box.remove(); document.body.style.overflow = ''; opener?.focus?.({ preventScroll: true }); }, 300);
   };
-  const onKey = e => { if (e.key === 'Escape') close(); };
+  const onKey = e => {
+    if (e.key === 'Escape') close();
+    if (e.key === 'Tab') {
+      const buttons = $$('button', box), first = buttons[0], last = buttons[buttons.length - 1];
+      if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+      else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+    }
+  };
   document.addEventListener('keydown', onKey);
   box.querySelector('.lightbox-close').onclick = close;
   box.addEventListener('click', e => { if (e.target === box) close(); });

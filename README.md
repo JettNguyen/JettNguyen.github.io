@@ -4,26 +4,30 @@ Personal portfolio site for projects, coursework, reports, presentations, and re
 
 ## Pages
 
-- `#/` is one scrolling page: hero, four selected projects, a pull quote from the bio, experience, and the contact footer.
-- `#/work` is the index of every project, split into Highlights and Also built. A project is a highlight when it
-  carries `featured:true` in `data.js`; a child project follows whichever list its parent is in. The numbers run
-  straight through both lists so the count in the lede still adds up. The headers carry the split; the lede does
-  not explain it.
-- `#/project/<slug>` is the write-up: summary, stack, links, screenshots, the problem-to-reflection sections, and the user study where one exists.
-- `#/about` carries the full bio, every post under `writing` in `data.js`, skills, and the music, film, vintage
-  clothing, and objects shelves. The home page shows the three most recent posts and links out to the rest.
+- `#/` is one scrolling page: a short intro, four visual project cards, interest previews, a compact career
+  timeline, recent writing, and the contact footer.
+- `#/work` shows a gallery of top-level projects marked `featured:true`, followed by the remaining projects.
+  Filters group all entries into agents, apps, games, and other work. Child entries link to their parent.
+- `#/project/<slug>` shows a short summary, tools, links, screenshots, the idea, and the result. The longer
+  overview, process, and reflection sit under “Behind the build.” User studies stay visible.
+- `#/about` carries expandable bio sections, music, film, vintage clothing, and objects shelves, plus writing
+  and skills. Shelf captions stay short; opening an image shows its full note. Links such as `#/about/vintage`
+  jump directly to a collection. The home page shows the three most recent posts.
 - `#/resume` is the résumé, and printing it makes `assets/Jett_Nguyen_Resume_2026.pdf`: one traditional page, single
   column, no logos. A pick or activity marked `print:false` in `data.js` shows on the page and stays off the PDF, so
   check that the print still fits one page after adding anything.
 - `#/archive` holds presentations and coursework by semester. The old `#projects`, `#about`, and similar hashes still resolve.
 - Light paper by default, warm dark when the system asks for it, and a toggle in the header that remembers the choice.
 
-## Copy and colour
+## Copy and color
 
 - Hero headline, intro, facts, and the four selected slugs live under `home` in `data.js`.
 - Posts under `writing` are hosted on the Otian blog, so every row leaves the site. Dates are ISO in the data and
   rendered month-first.
-- Each project has a `tint` in `data.js`, taken from its logo; it colours the frame on the home page, the band on its page, and the hover preview.
+- Each project has a `shortSummary` for previews and a longer `summary` under its build story. Its `tint`,
+  taken from its logo, colors the gallery frame and project header.
+- Motion includes scroll reveals, page entrances, pointer depth, and hover effects. Reduced motion is
+  honored on load and when the preference changes while the page is open.
 
 ## Tech Stack
 
