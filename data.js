@@ -53,8 +53,8 @@ window.siteData = {
       {label:"Beyond Code", items:["Human-Computer Interaction","Public Relations","Live Commentary","Music Production","Video Production"]}
     ],
     liveSignals:{
-      currentlyListening:"Kashmir - Remaster · Led Zeppelin",
-      listeningLabel:"listening",
+      currentlyListening:"Closer · The Chainsmokers, Halsey",
+      listeningLabel:"last played",
       recentlyWatched:"Primetime · ★★★★",
       currentlyInto:"Human behavior systems, interactive storytelling, and audio tooling"
     },
