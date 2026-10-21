@@ -54,7 +54,7 @@ window.siteData = {
     ],
     liveSignals:{
       currentlyListening:"No Ordinary Love · Sade",
-      listeningLabel:"listening",
+      listeningLabel:"last played",
       recentlyWatched:"Primetime · ★★★★",
       currentlyInto:"Human behavior systems, interactive storytelling, and audio tooling"
     },
