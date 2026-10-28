@@ -53,8 +53,8 @@ window.siteData = {
       {label:"Beyond Code", items:["Human-Computer Interaction","Public Relations","Live Commentary","Music Production","Video Production"]}
     ],
     liveSignals:{
-      currentlyListening:"The Last Remaining Light · Audioslave",
-      listeningLabel:"last played",
+      currentlyListening:"Superstition - Single Version · Stevie Wonder",
+      listeningLabel:"listening",
       recentlyWatched:"Primetime · ★★★★",
       currentlyInto:"Human behavior systems, interactive storytelling, and audio tooling"
     },
