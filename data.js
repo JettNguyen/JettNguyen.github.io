@@ -53,8 +53,8 @@ window.siteData = {
       {label:"Beyond Code", items:["Human-Computer Interaction","Public Relations","Live Commentary","Music Production","Video Production"]}
     ],
     liveSignals:{
-      currentlyListening:"tv off (feat. lefty gunplay) · Kendrick Lamar, Lefty Gunplay",
-      listeningLabel:"last played",
+      currentlyListening:"American Pie · Don McLean",
+      listeningLabel:"listening",
       recentlyWatched:"Primetime · ★★★★",
       currentlyInto:"Human behavior systems, interactive storytelling, and audio tooling"
     },
