@@ -53,8 +53,8 @@ window.siteData = {
       {label:"Beyond Code", items:["Human-Computer Interaction","Public Relations","Live Commentary","Music Production","Video Production"]}
     ],
     liveSignals:{
-      currentlyListening:"Take My Breath - Extended Version · The Weeknd",
-      listeningLabel:"listening",
+      currentlyListening:"Hello DC! · DC THE DON",
+      listeningLabel:"last played",
       recentlyWatched:"Primetime · ★★★★",
       currentlyInto:"Human behavior systems, interactive storytelling, and audio tooling"
     },
