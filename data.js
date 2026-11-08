@@ -55,7 +55,7 @@ window.siteData = {
     liveSignals:{
       currentlyListening:"DJ Got Us Fallin' In Love (feat. Pitbull) · USHER, Pitbull",
       listeningLabel:"last played",
-      recentlyWatched:"Primetime · ★★★★",
+      recentlyWatched:"Soulm8te · ★★★½",
       currentlyInto:"Human behavior systems, interactive storytelling, and audio tooling"
     },
     interestSections:[
