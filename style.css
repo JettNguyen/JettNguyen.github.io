@@ -515,7 +515,7 @@ strong { font-weight: 600; }
 .panel { background: var(--paper-2); border: 1px solid var(--rule); border-radius: 6px; padding: 22px 24px; }
 .resume-aside { display: grid; gap: 18px; align-content: start; }
 .resume-contact { display: grid; }
-.resume-contact li { display: grid; grid-template-columns: 54px minmax(0, 1fr); gap: 10px; padding-block: 9px; border-bottom: 1px solid var(--rule); font-size: var(--fs-small); }
+.resume-contact li { display: grid; grid-template-columns: 62px minmax(0, 1fr); gap: 10px; padding-block: 9px; border-bottom: 1px solid var(--rule); font-size: var(--fs-small); }
 .resume-contact li:last-child { border-bottom: 0; padding-bottom: 0; }
 .resume-contact li:first-child { padding-top: 0; }
 .resume-contact span { font-family: var(--mono); font-size: var(--fs-mono); color: var(--muted); padding-top: 3px; }
