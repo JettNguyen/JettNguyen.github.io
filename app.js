@@ -314,9 +314,14 @@ PAGES[''] = () => {
   `);
 };
 
+// A card shows a wide (wide:true) first screenshot alone, so only that one is
+// loaded. Phone screenshots load their 400px copies from assets/screens/small/,
+// and fall back to the full file if a copy is missing.
+const cardShot = s => s.wide ? s.src : s.src.replace(/^assets\/screens\//, 'assets/screens/small/');
 function projectVisual(p, i = 1) {
-  const shots = (p.screenshots || []).slice(0, 3);
-  if (shots.length) return `<div class="work-frame-inner" style="--n:${shots.length}">${shots.map((s, j) => `<img src="${s.src}" alt="${esc(s.alt)}" loading="${i === 0 && j === 0 ? 'eager' : 'lazy'}" decoding="async">`).join('')}</div>`;
+  const all = p.screenshots || [];
+  const shots = all.slice(0, all[0]?.wide ? 1 : 3);
+  if (shots.length) return `<div class="work-frame-inner" style="--n:${shots.length}">${shots.map((s, j) => `<img src="${cardShot(s)}"${cardShot(s) !== s.src ? ` onerror="this.onerror=null;this.src='${s.src}'"` : ''} alt="${esc(s.alt)}" loading="${i === 0 && j === 0 ? 'eager' : 'lazy'}" decoding="async">`).join('')}</div>`;
   if (p.slug === 'hudson') return `<div class="agent-map" aria-label="Hudson helps with mail, calendars, and leads"><span class="map-node node-one">Mail</span><span class="map-node node-two">Calendar</span><span class="map-node node-three">Leads</span><span class="map-ring" aria-hidden="true"></span><img src="${p.logo}" alt=""><span class="map-caption">A founder has the final say.</span></div>`;
   return `<div class="work-frame-inner logo-art"><span class="art-ring" aria-hidden="true"></span><img src="${p.logo || D.meta.logoUrl}" alt="" loading="lazy">${p.slug === 'studioflow' ? `<span class="sound-wave" aria-hidden="true">${Array.from({length:25}, (_, j) => `<i style="--bar:${[18,32,48,25,60,40,72,50,90,64,42,78,100,67,40,85,60,35,70,48,28,50,30,20,12][j]}%;--i:${j}"></i>`).join('')}</span>` : ''}</div>`;
 }
@@ -325,7 +330,7 @@ function workItem(p, i, gallery = false) {
   const shots = p.screenshots || [];
   return `<li class="work-item${gallery ? ' project-entry' : ''}" data-reveal${gallery ? ` data-group="${projectGroup(p)}"` : ''} style="--tint:${p.tint || '#9a2f22'};--i:${i % 2}">
     <a class="work-card" href="#/project/${p.slug}" aria-label="${esc(p.title)}: ${esc(p.shortSummary || p.summary)}">
-      <div class="work-frame" data-kind="${shots.length ? 'shots' : 'logo'}">
+      <div class="work-frame" data-kind="${shots[0]?.wide ? 'landscape' : shots.length ? 'shots' : 'logo'}">
         <span class="work-number" aria-hidden="true">${pad2(i + 1)}</span>${p.status ? `<span class="work-status">${esc(p.status)}</span>` : ''}
         ${projectVisual(p, i)}<span class="work-open" aria-hidden="true">↗</span>
       </div>
