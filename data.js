@@ -205,7 +205,7 @@ window.siteData = {
       picks:[
         {slug:"archie",print:false,note:"Desktop app that runs a personal AI agent on the user's own machine, reachable from five chat apps and its own phone app, now on the App Store. Lead engineer through the 0.3.7 public beta, and I own the client work end to end."},
         {slug:"hudson",print:false,note:"The agent that runs Otian's back office for both founders, with about thirty routes, thirty scheduled jobs, and a capabilities page generated from its own code."},
-        {slug:"studioflow",note:"Music collaboration app on the web and iPhone, built solo, with Sable, an agent that finds the moments in an artist's footage and writes each platform's captions, built to one written contract and 476 tests."},
+        {slug:"studioflow",note:"Music collaboration app on the web and iPhone, built solo to one written contract with 476 tests, plus Sable, an agent that finds the moments in an artist's footage and writes each platform's captions."},
         {slug:"nightlink",note:"Dream journal and social network on the App Store, with AI dream summaries, voice entry, and per-dream privacy on Supabase."},
         {slug:"tempify",note:"Five daily music games on the App Store, with Tempify Plus on Stripe and RevenueCat and puzzles made two weeks ahead."},
         {slug:"sideline",print:false,note:"Video app for youth soccer families. Senior project, frontend lead on a team of four, designed around one-handed phone use."},
