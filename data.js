@@ -41,7 +41,7 @@ window.siteData = {
       {label:"Graduated",value:"May 2026"},
       {label:"Degree",value:"B.S. Computer Science, Minor in Public Relations"},
       {label:"GPA",value:"3.65"},
-      {label:"Email",value:"jettcameronnguyen@gmail.com",href:"mailto:jettcameronnguyen@gmail.com"}
+      {label:"Email",value:"jettuf26@gmail.com",href:"mailto:jettuf26@gmail.com"}
     ],
     skillGroups:[
       {label:"Languages", items:["TypeScript","JavaScript","Python","Rust","Swift","C++","C#"]},
@@ -420,7 +420,7 @@ window.siteData = {
     sectionTitle:["Let's talk."],
     intro:"I'm looking for full-time roles building AI agents and the products around them, in applied AI, agent engineering, or full-stack product work. I'd love to talk.",
     links:[
-      {label:"Email",               handle:"jettcameronnguyen@gmail.com", href:"mailto:jettcameronnguyen@gmail.com",                       iconType:"fa",  iconValue:"fa-solid fa-envelope"},
+      {label:"Email",               handle:"jettuf26@gmail.com", href:"mailto:jettuf26@gmail.com",                                         iconType:"fa",  iconValue:"fa-solid fa-envelope"},
       {label:"GitHub",              handle:"github.com/JettNguyen",       href:"https://github.com/JettNguyen",                            iconType:"fa",  iconValue:"fa-brands fa-github"},
       {label:"LinkedIn",            handle:"linkedin.com/in/jett-nguyen", href:"https://linkedin.com/in/jett-nguyen",                      iconType:"fa",  iconValue:"fa-brands fa-linkedin", iconColor:"#0077B5"},
       {label:"Otian AI",            handle:"otianai.com",                  href:"https://www.otianai.com/",                                  iconType:"img", iconValue:"assets/otian-logo.webp"},
