@@ -571,7 +571,7 @@ PAGES.resume = () => {
             ${picks.map(p => row({
               logo: p.logo, tint: p.tint, print: p.print,
               title: `<a href="#/project/${p.slug}">${esc(p.title)}</a>${p.appStoreUrl ? '<span class="rs-flag">App Store</span>' : ''}`,
-              date: `${year(p)}${ongoing(p) ? ' to now' : ''}`,
+              date: `${year(p)}${ongoing(p) ? ' - Present' : ''}`,
               org: `${originOf(p)}, ${teamOf(p).toLowerCase()} &middot; ${(p.techStack || []).slice(0, 5).map(esc).join(', ')}`,
               body: `<ul class="rs-points"><li>${esc(p.note)}</li></ul>`,
             })).join('')}
