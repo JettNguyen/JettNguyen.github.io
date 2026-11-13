@@ -124,7 +124,10 @@ const isDark = () => {
   return t ? t === 'dark' : window.matchMedia('(prefers-color-scheme: dark)').matches;
 };
 const portraitSrc = () => (isDark() && D.home.headshotUrlDark) || D.home.headshotUrl;
-const syncPortraits = () => { $$('img[data-portrait]').forEach(i => { const s = portraitSrc(); if (i.getAttribute('src') !== s) i.src = s; }); };
+// Each portrait has 600px and 1000px copies beside it, so a phone showing a
+// 180px circle does not download the full 1400px file.
+const portraitSet = () => { const s = portraitSrc(); return `${s.replace(/\.webp$/, '-600.webp')} 600w, ${s.replace(/\.webp$/, '-1000.webp')} 1000w, ${s} 1400w`; };
+const syncPortraits = () => { $$('img[data-portrait]').forEach(i => { const s = portraitSrc(); if (i.getAttribute('src') !== s) { i.srcset = portraitSet(); i.src = s; } }); };
 window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
   if (!document.documentElement.dataset.theme) syncPortraits();
 });
@@ -267,7 +270,7 @@ PAGES[''] = () => {
         <figure class="hero-portrait">
           <div class="portrait-stage">
             <span class="portrait-orbit" aria-hidden="true"></span>
-            <div class="frame" data-tilt="-8"><img data-portrait src="${portraitSrc()}" alt="${esc(h.headshotAlt || D.meta.name)}" width="1400" height="1400" fetchpriority="high"></div>
+            <div class="frame" data-tilt="-8"><img data-portrait src="${portraitSrc()}" srcset="${portraitSet()}" sizes="(max-width: 600px) 180px, (max-width: 820px) 34vw, 470px" alt="${esc(h.headshotAlt || D.meta.name)}" width="1400" height="1400" fetchpriority="high"></div>
             <a class="portrait-sticker sticker-one" href="#/project/archie" aria-label="Building Archie"><img src="${bySlug('archie').logo}" alt=""><span>Building Archie <span aria-hidden="true">↗</span></span></a>
             <a class="portrait-sticker sticker-two" href="#/project/studioflow" aria-label="Making music"><img src="${bySlug('studioflow').logo}" alt=""><span>Making music <span aria-hidden="true">↗</span></span></a>
             <svg class="hero-spark" viewBox="0 0 80 80" aria-hidden="true"><path d="M40 0 47 27 68 12 53 33 80 40 53 47 68 68 47 53 40 80 33 53 12 68 27 47 0 40 27 33 12 12 33 27Z" fill="currentColor"/></svg>
@@ -467,7 +470,7 @@ PAGES.about = () => {
           <div class="bio-stories">${bio.slice(1).map((b, i) => `<details class="bio-block"${i === 0 ? ' open' : ''}><summary>${esc(b.label || 'More about me')}<span aria-hidden="true">+</span></summary><p>${b.text}</p></details>`).join('')}</div>
         </div>
         <aside class="about-side">
-          <figure class="about-portrait"><div class="frame"><img data-portrait src="${portraitSrc()}" alt="${esc(h.headshotAlt || D.meta.name)}" width="1400" height="1400"></div></figure>
+          <figure class="about-portrait"><div class="frame"><img data-portrait src="${portraitSrc()}" srcset="${portraitSet()}" sizes="(max-width: 820px) 40vw, 410px" alt="${esc(h.headshotAlt || D.meta.name)}" width="1400" height="1400"></div></figure>
           ${now.length ? `<div class="now panel"><h2>On rotation</h2><dl>${now.map(([k, v], i) => `<div><dt>${i === 0 ? '<span class="mini-wave" aria-hidden="true"><i></i><i></i><i></i><i></i></span>' : ''}${esc(k)}</dt><dd>${esc(v)}</dd></div>`).join('')}</dl></div>` : ''}
         </aside>
       </div>
