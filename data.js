@@ -432,7 +432,7 @@ window.siteData = {
     ],
     availability:{
       title:"Available now",
-      text:"Open to full-time roles, internships, and interesting collaborations. Particularly interested in companies building at the intersection of technology and communication."
+      text:"Open to full-time roles and interesting collaborations. Particularly interested in companies building at the intersection of technology and communication."
     }
   }
 };
