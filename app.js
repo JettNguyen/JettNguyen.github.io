@@ -633,7 +633,7 @@ PAGES.archive = () => {
           const id = ytId(p.videoUrl);
           const thumb = id
             ? `<div class="pres-thumb playable" data-video="${p.videoUrl}" tabindex="0" role="button" aria-label="Play ${esc(p.title)}">
-                 <img src="https://img.youtube.com/vi/${id}/maxresdefault.jpg" alt="" loading="lazy" onerror="this.onerror=null;this.src='https://img.youtube.com/vi/${id}/mqdefault.jpg'">
+                 <img src="https://img.youtube.com/vi/${id}/hqdefault.jpg" alt="" loading="lazy" onerror="this.onerror=null;this.src='https://img.youtube.com/vi/${id}/mqdefault.jpg'">
                  <span class="play">Play</span>
                </div>`
             : p.thumbnailUrl
