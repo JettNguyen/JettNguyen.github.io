@@ -619,7 +619,9 @@ strong { font-weight: 600; }
     --fs-small: 8.9pt; --fs-mono: 7pt;
   }
   html, body { background: #fff; font-size: 10pt; }
-  body { padding-bottom: 0; }
+  /* No ligatures on paper, so the PDF's text reads "Officer", not one ffi glyph,
+     for anything that searches or parses it. */
+  body { padding-bottom: 0; font-variant-ligatures: none; font-feature-settings: 'kern'; }
   .site-head, .site-foot, .tnav, .skip, .off-print, .lightbox { display: none !important; }
   .on-print { display: inline; }
   .wrap { max-width: none; padding-inline: 0; }
