@@ -268,8 +268,8 @@ PAGES[''] = () => {
           <div class="portrait-stage">
             <span class="portrait-orbit" aria-hidden="true"></span>
             <div class="frame" data-tilt="-8"><img data-portrait src="${portraitSrc()}" alt="${esc(h.headshotAlt || D.meta.name)}" width="1400" height="1400" fetchpriority="high"></div>
-            <a class="portrait-sticker sticker-one" href="#/project/archie"><img src="${bySlug('archie').logo}" alt=""><span>Building Archie <span aria-hidden="true">↗</span></span></a>
-            <a class="portrait-sticker sticker-two" href="#/project/studioflow"><img src="${bySlug('studioflow').logo}" alt=""><span>Making music <span aria-hidden="true">↗</span></span></a>
+            <a class="portrait-sticker sticker-one" href="#/project/archie" aria-label="Building Archie"><img src="${bySlug('archie').logo}" alt=""><span>Building Archie <span aria-hidden="true">↗</span></span></a>
+            <a class="portrait-sticker sticker-two" href="#/project/studioflow" aria-label="Making music"><img src="${bySlug('studioflow').logo}" alt=""><span>Making music <span aria-hidden="true">↗</span></span></a>
             <svg class="hero-spark" viewBox="0 0 80 80" aria-hidden="true"><path d="M40 0 47 27 68 12 53 33 80 40 53 47 68 68 47 53 40 80 33 53 12 68 27 47 0 40 27 33 12 12 33 27Z" fill="currentColor"/></svg>
           </div>
           <figcaption>${esc(h.headshotCaption || '')}</figcaption>
