@@ -100,6 +100,9 @@ body {
 }
 
 main { flex: 1 0 auto; outline: none; }
+/* Until app.js renders a page, hold a screen's height so the footer that is
+   served in the HTML starts below the fold instead of being pushed out of view. */
+#app:empty { min-height: 100vh; }
 
 img { max-width: 100%; display: block; }
 a { color: inherit; text-decoration: none; }
