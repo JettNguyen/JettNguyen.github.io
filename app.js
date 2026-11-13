@@ -247,6 +247,16 @@ function buildFooter() {
 const PAGES = {};
 const frag = html => { const t = document.createElement('template'); t.innerHTML = html.trim(); return t.content; };
 
+// Shelves and cards show pictures small. Letterboxd posters carry their size in
+// the URL and can run past a megabyte at full size, so shelves ask for 460 by 690
+// and the lightbox for 1000 by 1500. Tee photos have 500px copies in
+// assets/tees/small/, and the lightbox keeps the 900px originals. If a small copy
+// is missing, fallback() loads the original instead.
+const poster = (url, w, h) => String(url || '').replace(/(ltrbxd\.com\/resized\/.+)-0-\d+-0-\d+-crop\./, `$1-0-${w}-0-${h}-crop.`);
+const small = url => poster(url, 460, 690).replace(/^assets\/tees\/(?!small\/)/, 'assets/tees/small/');
+const large = url => poster(url, 1000, 1500);
+const fallback = url => small(url) !== url ? ` onerror="this.onerror=null;this.src='${url}'"` : '';
+
 PAGES[''] = () => {
   const h = D.home;
   const selected = (h.selected || []).map(bySlug).filter(Boolean);
@@ -290,7 +300,7 @@ PAGES[''] = () => {
         <div><span class="eyebrow">A few other tabs open</span><h2>Away from<br>the keyboard.</h2><a class="arrow-link" href="#/about">A little more about me</a></div>
         <div class="interest-deck">${interests.map((sec, i) => {
           const it = sec.items[0];
-          return `<a class="interest-card" href="#/about/${sec.key}" style="--r:${[-10, 5, -5, 10][i]}deg;--i:${i}"><img src="${it.imageUrl}" alt="${esc(it.title)}" loading="lazy"><span>${esc(sec.title)} <span aria-hidden="true">↗</span></span></a>`;
+          return `<a class="interest-card" href="#/about/${sec.key}" style="--r:${[-10, 5, -5, 10][i]}deg;--i:${i}"><img src="${small(it.imageUrl)}"${fallback(it.imageUrl)} alt="${esc(it.title)}" loading="lazy"><span>${esc(sec.title)} <span aria-hidden="true">↗</span></span></a>`;
         }).join('')}</div>
       </div>
     </section>
@@ -491,10 +501,10 @@ function piece(it, isTee, i) {
   const back = isTee ? it.imageUrl.replace(/-front\.(\w+)$/, '-back.$1') : '';
   return `
     <figure class="piece${isTee ? ' tee' : ''}" data-reveal style="--i:${Math.min(i, 8)}" tabindex="0" role="button" aria-label="View ${esc(it.title)}${isTee ? ' (front and back)' : ''}"
-      data-src="${it.imageUrl}" ${back ? `data-back="${back}"` : ''} data-title="${esc(it.title)}" data-sub="${esc(it.subtitle || '')}" data-desc="${esc(it.description || '')}">
+      data-src="${large(it.imageUrl)}" ${back ? `data-back="${back}"` : ''} data-title="${esc(it.title)}" data-sub="${esc(it.subtitle || '')}" data-desc="${esc(it.description || '')}">
       <div class="piece-img">
-        <img class="front" src="${it.imageUrl}" alt="${esc(it.title)}" loading="lazy" decoding="async">
-        ${back ? `<img class="back" src="${back}" alt="" loading="lazy" decoding="async" onerror="this.remove()">` : ''}
+        <img class="front" src="${small(it.imageUrl)}"${fallback(it.imageUrl)} alt="${esc(it.title)}" loading="lazy" decoding="async">
+        ${back ? `<img class="back" src="${small(back)}" alt="" loading="lazy" decoding="async" onerror="${small(back) !== back ? `this.onerror=()=>this.remove();this.src='${back}'` : 'this.remove()'}">` : ''}
       </div>
       <figcaption>
         <div class="piece-title">${esc(it.title)}</div>
