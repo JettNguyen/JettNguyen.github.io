@@ -53,7 +53,7 @@ window.siteData = {
       {label:"Beyond Code", items:["Human-Computer Interaction","Public Relations","Live Commentary","Music Production","Video Production"]}
     ],
     liveSignals:{
-      currentlyListening:"Can't Hold Us (feat. Ray Dalton) · Macklemore, Ryan Lewis, Macklemore & Ryan Lewis, Ray Dalton",
+      currentlyListening:"Del Rey · SyWavy",
       listeningLabel:"last played",
       recentlyWatched:"Soulm8te · ★★★½",
       currentlyInto:"Human behavior systems, interactive storytelling, and audio tooling"
