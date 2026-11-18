@@ -53,7 +53,7 @@ window.siteData = {
       {label:"Beyond Code", items:["Human-Computer Interaction","Public Relations","Live Commentary","Music Production","Video Production"]}
     ],
     liveSignals:{
-      currentlyListening:"I Heard You’re Married (feat. Lil Wayne) · The Weeknd, Lil Wayne",
+      currentlyListening:"Red Lights · SyWavy",
       listeningLabel:"last played",
       recentlyWatched:"Soulm8te · ★★★½",
       currentlyInto:"Human behavior systems, interactive storytelling, and audio tooling"
