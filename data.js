@@ -53,8 +53,8 @@ window.siteData = {
       {label:"Beyond Code", items:["Human-Computer Interaction","Public Relations","Live Commentary","Music Production","Video Production"]}
     ],
     liveSignals:{
-      currentlyListening:"Gone Hollywood - Remastered 2010 · Supertramp",
-      listeningLabel:"last played",
+      currentlyListening:"Far Behind · Candlebox",
+      listeningLabel:"listening",
       recentlyWatched:"Soulm8te · ★★★½",
       currentlyInto:"Human behavior systems, interactive storytelling, and audio tooling"
     },
