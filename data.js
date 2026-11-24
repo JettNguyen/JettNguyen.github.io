@@ -53,7 +53,7 @@ window.siteData = {
       {label:"Beyond Code", items:["Human-Computer Interaction","Public Relations","Live Commentary","Music Production","Video Production"]}
     ],
     liveSignals:{
-      currentlyListening:"GOSHA · $NOT",
+      currentlyListening:"Bounce Out With That · YBN Nahmir",
       listeningLabel:"last played",
       recentlyWatched:"Soulm8te · ★★★½",
       currentlyInto:"Human behavior systems, interactive storytelling, and audio tooling"
