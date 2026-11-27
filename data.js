@@ -55,7 +55,7 @@ window.siteData = {
     liveSignals:{
       currentlyListening:"Baptized In Fear · The Weeknd",
       listeningLabel:"last played",
-      recentlyWatched:"Soulm8te · ★★★½",
+      recentlyWatched:"The Mosquito Bowl · ★★★½",
       currentlyInto:"Human behavior systems, interactive storytelling, and audio tooling"
     },
     interestSections:[
