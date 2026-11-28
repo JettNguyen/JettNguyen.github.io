@@ -53,7 +53,7 @@ window.siteData = {
       {label:"Beyond Code", items:["Human-Computer Interaction","Public Relations","Live Commentary","Music Production","Video Production"]}
     ],
     liveSignals:{
-      currentlyListening:"Baptized In Fear · The Weeknd",
+      currentlyListening:"Gone Hollywood - Remastered 2010 · Supertramp",
       listeningLabel:"last played",
       recentlyWatched:"The Mosquito Bowl · ★★★½",
       currentlyInto:"Human behavior systems, interactive storytelling, and audio tooling"
